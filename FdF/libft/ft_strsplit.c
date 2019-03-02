@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 10:22:58 by sdurgan           #+#    #+#             */
-/*   Updated: 2018/12/03 15:00:59 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/02 14:23:24 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char				**ft_strsplit(char const *s, char c)
 
 	if (!s)
 		return (NULL);
-	if (!(ret = (char **)malloc(sizeof(char *) * (word_count(s, c) + 1))))
+	if (!(ret = (char **)malloc(sizeof(char *) * word_count(s, c))))
 		return (NULL);
 	i = 0;
 	j = 0;
@@ -64,7 +64,7 @@ char				**ft_strsplit(char const *s, char c)
 	{
 		k = 0;
 		if (!(ret[i] = (char *)malloc(sizeof(char) * word_len(&s[j], c))))
-			return (ft_delarr(&ret, i) == 0) ? (NULL) : (NULL);
+			return (ft_delarr(&ret) == 0) ? (NULL) : (NULL);
 		while (s[j] == c)
 			j++;
 		while (s[j] != c && s[j] != '\0')

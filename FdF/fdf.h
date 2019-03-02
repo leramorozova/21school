@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_delarr.c                                        :+:      :+:    :+:   */
+/*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/02 17:03:43 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/02 14:24:09 by sdurgan          ###   ########.fr       */
+/*   Created: 2019/03/02 12:00:10 by sdurgan           #+#    #+#             */
+/*   Updated: 2019/03/02 15:12:50 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef FDF_H
+# define FDF_H
+# include <fcntl.h>
+# include <stdio.h>
+# include <math.h>
+# include "mlx.h"
+# include "libft/libft.h"
 
-int		ft_delarr(char ***arr)
+typedef struct		s_map
 {
-	int		t;
+	int				x;
+	int				y;
+	int				z;
+	int				colour;
+	struct s_map	*next;
+}					t_map;
 
-	t = 0;
-	while ((*arr)[t])
-	{
-		ft_strdel(&((*arr)[t]));
-		t++;
-	}
-	free(*arr);
-	arr = NULL;
-	return (0);
-}
+t_map				*read_map(char *filename, t_map *map);
+void				del_map(t_map **map);
+
+#endif

@@ -6,11 +6,11 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/26 02:11:57 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/01/06 18:36:05 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/02 12:46:12 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
 int		ft_strchr_idx(char *str)
 {
