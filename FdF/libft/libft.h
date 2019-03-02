@@ -6,12 +6,13 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 16:42:47 by sdurgan           #+#    #+#             */
-/*   Updated: 2018/12/02 17:26:29 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/02 11:36:13 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+# define BUFF_SIZE 3
 
 # include <string.h>
 # include <unistd.h>
@@ -94,5 +95,6 @@ void				ft_lstfree(t_list **alst);
 int					ft_delarr(char ***arr, int t);
 void				ft_swap(int *a, int *b);
 int					ft_sqrt(int nb);
+int					get_next_line(const int fd, char **line);
 
 #endif
