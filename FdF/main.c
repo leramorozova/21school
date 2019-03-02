@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 17:50:57 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/02 15:57:42 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/02 16:47:17 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int		main(int argc, char **argv)
 	void	*window;
 	t_map	*map;
 
-	if (argc == 2)
+/* 	if (argc == 2)
 	{
 		map = NULL;
 		map = read_map(argv[1], map);
@@ -56,10 +56,8 @@ int		main(int argc, char **argv)
 			//чтобы окно закрывалось на крестик
 			//mlx_hook(window, 17, 0, close_window, 0);
 			//mlx_loop(mlx_ptr);
+			mlx_destroy_window(mlx_ptr, window);
 		}
-	}
-//	window = mlx_new_window(mlx_ptr, 500, 500, "title");
-//	mlx_pixel_put(mlx_ptr, window, 250, 250, 0xFFFFFF);
-//	mlx_hook(window, 2, 0, key_press, 0);
+	} */
 	return (0);
 }
