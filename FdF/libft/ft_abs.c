@@ -1,34 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   ft_abs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/02 12:00:10 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/04 16:23:24 by sdurgan          ###   ########.fr       */
+/*   Created: 2019/03/04 13:51:51 by sdurgan           #+#    #+#             */
+/*   Updated: 2019/03/04 14:08:08 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
-# include <fcntl.h>
-# include <stdio.h>
-# include <math.h>
-# include "mlx.h"
-# include "libft/libft.h"
+#include "libft.h"
 
-typedef struct		s_map
+float	ft_abs(float a)
 {
-	int				x;
-	int				y;
-	int				z;
-	int				colour;
-	struct s_map	*next;
-}					t_map;
-
-t_map				*read_map(char *filename, t_map *map);
-void				del_map(t_map **map);
-void				line(void *mlx_ptr, void *win_ptr, float x0, float y0, float x1, float y1);
-
-#endif
+	return (a < 0 ? -a : a);
+}

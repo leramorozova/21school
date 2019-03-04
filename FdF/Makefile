@@ -6,7 +6,7 @@
 #    By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/08 15:57:11 by sdurgan           #+#    #+#              #
-#    Updated: 2019/03/02 14:35:38 by sdurgan          ###   ########.fr        #
+#    Updated: 2019/03/04 16:17:41 by sdurgan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 NAME = fdf
 
-SRCS = main.c map_processing.c
+SRCS = main.c map_processing.c drawing.c
 
 INCS = /usr/local/include
 LIB = minilibx_macos/libmlx.a -lmlx -framework OpenGL -framework AppKit

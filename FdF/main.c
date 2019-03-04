@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 17:50:57 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/02 16:47:17 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/04 16:43:45 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,15 @@ int		key_press(int key, void *param)
 int		main(int argc, char **argv)
 {
 	void	*mlx_ptr;
-	void	*window;
+	void	*mlx_win;
 	t_map	*map;
 
+	mlx_ptr = mlx_init();
+	mlx_win = mlx_new_window(mlx_ptr, 500, 500, "test");
+	line(mlx_ptr, mlx_win, 250, 0, 250, 500);
+	mlx_hook(mlx_win, 2, 0, key_press, 0);
+	mlx_hook(mlx_win, 17, 0, close_window, 0);
+	mlx_loop(mlx_ptr);
 /* 	if (argc == 2)
 	{
 		map = NULL;

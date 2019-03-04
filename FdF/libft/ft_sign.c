@@ -1,34 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   ft_sign.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/02 12:00:10 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/04 16:23:24 by sdurgan          ###   ########.fr       */
+/*   Created: 2019/03/04 14:24:10 by sdurgan           #+#    #+#             */
+/*   Updated: 2019/03/04 16:12:15 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
-# include <fcntl.h>
-# include <stdio.h>
-# include <math.h>
-# include "mlx.h"
-# include "libft/libft.h"
+#include "libft.h"
 
-typedef struct		s_map
+int		ft_sign(float a)
 {
-	int				x;
-	int				y;
-	int				z;
-	int				colour;
-	struct s_map	*next;
-}					t_map;
-
-t_map				*read_map(char *filename, t_map *map);
-void				del_map(t_map **map);
-void				line(void *mlx_ptr, void *win_ptr, float x0, float y0, float x1, float y1);
-
-#endif
+	if (a == 0)
+		return (0);
+	else if (a > 0)
+		return (1);
+	else
+		return (-1);
+}

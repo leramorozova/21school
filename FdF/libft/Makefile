@@ -6,7 +6,7 @@
 #    By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/20 17:12:54 by sdurgan           #+#    #+#              #
-#    Updated: 2019/03/02 11:39:39 by sdurgan          ###   ########.fr        #
+#    Updated: 2019/03/04 14:26:42 by sdurgan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ ft_putendl.c ft_strlcat.c ft_lstdel.c ft_putendl_fd.c ft_strlen.c \
 print_char_arr.c ft_lstdelone.c ft_putnbr.c ft_strmap.c print_list.c \
 ft_lstiter.c ft_putnbr_fd.c ft_strmapi.c ft_lstmap.c ft_putstr.c \
 ft_strncat.c ft_lstfree.c ft_lstfreeone.c ft_delarr.c ft_swap.c ft_sqrt.c \
-get_next_line.c
+get_next_line.c ft_abs.c ft_sign.c
 
 OBJC = $(SRCS:%.c=%.o)
 
