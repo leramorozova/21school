@@ -31,4 +31,6 @@
   
   [Про images](https://github.com/keuhdall/images_example/blob/master/README.md)
   
+  > В дополнение к этой статье совет от Рушика: чтобы можно было присваивать img_data по индексу цвет в шестнадцатиричном формате, нужно преобразовать переменную из `void *` в `int *`.
+  
   [Установка MLX на убунте](https://forum.intra.42.fr/topics/15866/messages/last)
