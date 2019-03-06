@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 12:00:10 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/06 17:03:14 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/06 17:43:26 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ typedef struct		s_map
 	int				x;
 	int				y;
 	int				z;
-	int				zoom;
 	int				colour;
 	struct s_map	*next;
 }					t_map;

@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 13:47:54 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/06 17:12:02 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/06 17:41:30 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,29 +22,34 @@ static void	vertical_line(t_mlx **mlx, float x0, float y0, float x1, float y1)
 	}
 }
 
-static void		put_line(t_mlx **mlx, float x0, float y0, float x1, float y1)
+static void		put_line(t_mlx **mlx, t_map *dot0, t_map *dot1)
 {
 	float	deltax;
 	float	deltay;
 	float	deltaerr;
 	float	error;
+	t_map	*dot_cur;
 
-	if (x0 == x1)
-		return (vertical_line(mlx, x0, y0, x1, y1));
-	deltax = x1 - x0;
-	deltay = y1 - y0;
+	if (dot0->x == dot1->x)
+		return (vertical_line(mlx, dot0->x, dot0->y, dot1->x, dot1->y));
+	dot_cur = (t_map *)malloc(sizeof(t_map));
+	dot_cur->x = dot0->x;
+	dot_cur->y = dot0->y;
+	deltax = dot1->x - dot0->x;
+	deltay = dot1->y - dot0->y;
 	error = 0;
 	deltaerr = ft_abs(deltay / deltax);
-	while (x0 != x1)
+	while (dot_cur->x != dot1->x)
 	{
-		(*mlx)->int_data[(int)x0 + (*mlx)->line_size * (int)y0] = 0xFFFFFF;
+		(*mlx)->int_data[(int)(dot_cur->x) + (*mlx)->line_size *
+			(int)(dot_cur->y)] = 0xFFFFFF;
 		error += deltaerr;
 		if (error >= 0.5)
 		{
-			y0 += ft_sign(deltay) * 1;
+			dot_cur->y += ft_sign(deltay) * 1;
 			error -= 1.0;
 		}
-		x0++;
+		dot_cur->x++;
 	}
 }
 
@@ -59,7 +64,9 @@ void			put_map(t_mlx **mlx, t_map *map, int zoom)
 	{
 		dot0 = map;
 		dot1 = map->next;
-		put_line()
+ 		dot1->x *= zoom;
+		dot1->y *= zoom;
+		put_line(mlx, dot0, dot1);
 		map = map->next;
 	}
 }
