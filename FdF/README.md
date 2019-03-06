@@ -30,3 +30,5 @@
   [Полный man к MiniLibX на русском](https://forum.intra.42.fr/topics/20307/messages/last)
   
   [Про images](https://github.com/keuhdall/images_example/blob/master/README.md)
+  
+  [Установка MLX на убунте](https://forum.intra.42.fr/topics/15866/messages/last)
