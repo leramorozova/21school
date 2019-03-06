@@ -28,3 +28,5 @@
   [CookBook](https://forum.intra.42.fr/topics/19254/messages)
   
   [Полный man к MiniLibX на русском](https://forum.intra.42.fr/topics/20307/messages/last)
+  
+  [Про images](https://github.com/keuhdall/images_example/blob/master/README.md)
