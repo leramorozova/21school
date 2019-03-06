@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 17:50:57 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/06 15:20:29 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/06 16:54:33 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_mlx	*init_mlx(int x, int y, char *filename)
 	return (mlx);
 }
 
-// idx = X position * 4 + 4 * Line size * Y position
+// idx = X position + Line size * Y position
 int		main(int argc, char **argv)
 {
 	t_mlx	*mlx;
@@ -68,9 +68,10 @@ int		main(int argc, char **argv)
 	{
 		map = NULL;
 		map = read_map(argv[1], map);
-		mlx = init_mlx(800, 600, "test");
-		mlx->int_data[10 * 4 + 4 * 800 * 5] = 0xFFFFFF;
-		mlx_put_image_to_window(mlx->init_ptr, mlx->win_ptr, mlx->img_ptr, 0, 0);
+		mlx = init_mlx(800, 600, argv[1]);
+		put_map(&mlx, map, 50);
+		//put_line(&mlx, 10, 0, 10, 600);
+		//mlx_put_image_to_window(mlx->init_ptr, mlx->win_ptr, mlx->img_ptr, 0, 0);
 		mlx_hook(mlx->win_ptr, 2, 0, key_press, map);
 		mlx_hook(mlx->win_ptr, 17, 0, close_window, map);
 		mlx_loop(mlx->init_ptr);

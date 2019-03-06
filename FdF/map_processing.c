@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 11:59:31 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/02 16:02:18 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/06 16:49:16 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ static void		map_constructor(t_map **map, char *line, int y)
 		end->x = counter;
 		end->y = y;
 		end->z = ft_atoi(row[counter]);
+		end->zoom = 10;
 		counter++;
 	}
 	ft_delarr(&row);
