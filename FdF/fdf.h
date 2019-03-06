@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 12:00:10 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/04 16:23:24 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/06 15:20:31 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,18 @@ typedef struct		s_map
 	struct s_map	*next;
 }					t_map;
 
+typedef struct		s_mlx
+{
+	void			*init_ptr;
+	void			*win_ptr;
+	void			*img_ptr;
+	void			*img_data;
+	int				*int_data;
+	int				line_size;
+}					t_mlx;
+
 t_map				*read_map(char *filename, t_map *map);
 void				del_map(t_map **map);
-void				line(void *mlx_ptr, void *win_ptr, float x0, float y0, float x1, float y1);
+void				line(t_mlx *mlx, float x0, float y0, float x1, float y1);
 
 #endif

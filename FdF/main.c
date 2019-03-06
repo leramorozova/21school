@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 17:50:57 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/04 16:43:45 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/06 15:20:29 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 int close_window(void *param)
 {
-	(void)param;
+	del_map(param);
 	exit(0);
 	return (0);
 }
@@ -31,39 +31,49 @@ int close_window(void *param)
 int		key_press(int key, void *param)
 {
 	if (key == 53)
-		close_window(0);
+		close_window(param);
 	if (key == 18)
 		ft_putchar('X');
 	if (key == 19)
 		ft_putchar('y');
+	if (key == 125 || key == 126)
+		ft_putstr("UP-DOWN");
 	return (0);
 }
 
+t_mlx	*init_mlx(int x, int y, char *filename)
+{
+	t_mlx	*mlx;
+	int		bpp;
+	int		size_line;
+	int		endian;
+
+	mlx = (t_mlx *)malloc(sizeof(t_mlx));
+	mlx->init_ptr = mlx_init();
+	mlx->line_size = x;
+	mlx->win_ptr = mlx_new_window(mlx->init_ptr, x, y, filename);
+	mlx->img_ptr = mlx_new_image(mlx->init_ptr, x, y);
+	mlx->img_data = mlx_get_data_addr(mlx->img_ptr, &bpp, &size_line, &endian);
+	mlx->int_data = (int *)mlx->img_data;
+	return (mlx);
+}
+
+// idx = X position * 4 + 4 * Line size * Y position
 int		main(int argc, char **argv)
 {
-	void	*mlx_ptr;
-	void	*mlx_win;
+	t_mlx	*mlx;
 	t_map	*map;
 
-	mlx_ptr = mlx_init();
-	mlx_win = mlx_new_window(mlx_ptr, 500, 500, "test");
-	line(mlx_ptr, mlx_win, 250, 0, 250, 500);
-	mlx_hook(mlx_win, 2, 0, key_press, 0);
-	mlx_hook(mlx_win, 17, 0, close_window, 0);
-	mlx_loop(mlx_ptr);
-/* 	if (argc == 2)
+	if (argc == 2)
 	{
 		map = NULL;
 		map = read_map(argv[1], map);
-		if (map)
-		{
-			del_map(&map);
-			//mlx_ptr = mlx_init();
-			//чтобы окно закрывалось на крестик
-			//mlx_hook(window, 17, 0, close_window, 0);
-			//mlx_loop(mlx_ptr);
-			mlx_destroy_window(mlx_ptr, window);
-		}
-	} */
+		mlx = init_mlx(800, 600, "test");
+		mlx->int_data[10 * 4 + 4 * 800 * 5] = 0xFFFFFF;
+		mlx_put_image_to_window(mlx->init_ptr, mlx->win_ptr, mlx->img_ptr, 0, 0);
+		mlx_hook(mlx->win_ptr, 2, 0, key_press, map);
+		mlx_hook(mlx->win_ptr, 17, 0, close_window, map);
+		mlx_loop(mlx->init_ptr);
+	}
 	return (0);
 }
