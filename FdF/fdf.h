@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 12:00:10 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/06 17:43:26 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/09 13:59:35 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct		s_mlx
 	int				line_size;
 }					t_mlx;
 
+t_map				*add_dot(t_map **map);
 t_map				*read_map(char *filename, t_map *map);
 void				del_map(t_map **map);
 //void				put_line(t_mlx **mlx, float x0, float y0, float x1, float y1);

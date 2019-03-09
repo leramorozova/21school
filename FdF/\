@@ -6,13 +6,13 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 11:59:31 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/09 14:30:14 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/09 13:27:19 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_map		*add_dot(t_map **map)
+static t_map	*add_dot(t_map **map)
 {
 	t_map	*new_dot;
 	t_map	*head;
@@ -58,12 +58,13 @@ static int		validation(t_map **map, char **line, int len, const int fd)
 	row = ft_strsplit(*line, ' ');
 	while (row[counter])
 		counter++;
-//	ft_delarr(&row);
+	ft_delarr(&row);
+	write(1, "AAA\n", 4);
 	if (counter != len && len != 0)
 	{
 		perror("Map is not valid!\nProgramm has been aborted");
-//		ft_strdel(line);
-//		del_map(map);
+		//ft_strdel(line);
+		//del_map(map);
 		close(fd);
 		exit(0);
 	}
@@ -88,7 +89,7 @@ static void		map_constructor(t_map **map, char *line, int y)
 		end->z = ft_atoi(row[counter]);
 		counter++;
 	}
-	//ft_delarr(&row);
+	ft_delarr(&row);
 }
 
 t_map			*read_map(char *filename, t_map *map)
@@ -105,7 +106,7 @@ t_map			*read_map(char *filename, t_map *map)
 	while (get_next_line(fd, &line) > 0)
 	{
 		len = validation(&map, &line, len, fd);
-		map_constructor(&map, line, y);
+	//	map_constructor(&map, line, y);
 		ft_strdel(&line);
 		y += 1;
 	}

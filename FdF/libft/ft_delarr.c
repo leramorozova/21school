@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/02 17:03:43 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/02 14:24:09 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/09 13:45:28 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int		ft_delarr(char ***arr)
 		ft_strdel(&((*arr)[t]));
 		t++;
 	}
-	free(*arr);
+	if (**arr)
+		free(**arr);
 	arr = NULL;
 	return (0);
 }

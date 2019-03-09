@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 17:50:57 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/06 17:44:06 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/09 15:04:49 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int		main(int argc, char **argv)
 		map = NULL;
 		map = read_map(argv[1], map);
 		mlx = init_mlx(800, 600, argv[1]);
-		//put_line(&mlx, 10, 0, 10, 600);
+		put_map(&mlx, map, 20);
 		mlx_put_image_to_window(mlx->init_ptr, mlx->win_ptr, mlx->img_ptr, 0, 0);
 		mlx_hook(mlx->win_ptr, 2, 0, key_press, map);
 		mlx_hook(mlx->win_ptr, 17, 0, close_window, map);
