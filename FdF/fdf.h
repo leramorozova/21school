@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 12:00:10 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/10 17:28:03 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/10 18:25:50 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct		s_mlx
 	int				window_y;
 	int				offset_x;
 	int				offset_y;
+	int				edge;
 }					t_mlx;
 
 

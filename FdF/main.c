@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 17:50:57 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/10 18:06:55 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/10 18:25:42 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ static t_mlx	init_mlx(int x, int y, char *filename)
 	mlx.win_ptr = mlx_new_window(mlx.init_ptr, mlx.window_x, mlx.window_y, filename);
 	mlx.img_ptr = mlx_new_image(mlx.init_ptr, mlx.window_x, mlx.window_y);
 	mlx.img_data = mlx_get_data_addr(mlx.img_ptr, &bpp, &size_line, &endian);
+	mlx.edge = mlx.window_x * mlx.window_y;
 	mlx.int_data = (int *)mlx.img_data;
 	return (mlx);
 }

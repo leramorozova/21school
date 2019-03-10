@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 13:47:54 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/10 18:01:52 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/10 19:17:17 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,17 @@ static void	vertical_line(t_mlx *mlx, t_map dot0, t_map dot_cur, t_map dot1)
 {
 	while (dot_cur.y != dot1.y)
 	{
-		mlx->int_data[(int)(dot_cur.x) +
-			mlx->window_x * (int)(dot_cur.y)] = 0xFFFFFF;
+		if ((dot_cur.x + mlx->window_x * dot_cur.y < mlx->edge) &&
+				(dot_cur.x + mlx->window_x * dot_cur.y) >= 0)
+			mlx->int_data[dot_cur.x + mlx->window_x * dot_cur.y] = 0xFFFFFF;
+		else
+			break ;
 		dot_cur.y++;
 	}
 }
 
 static void		put_line(t_mlx *mlx, t_map dot0, t_map dot1)
 {
-	float	deltax;
 	float	deltay;
 	float	deltaerr;
 	float	error;
@@ -34,20 +36,21 @@ static void		put_line(t_mlx *mlx, t_map dot0, t_map dot1)
 	dot_cur.y = dot0.y;
 	if (!(error == 0) && dot0.x == dot1.x)
 		return (vertical_line(mlx, dot0, dot_cur, dot1));
-	deltax = dot1.x - dot0.x;
 	deltay = dot1.y - dot0.y;
-	deltaerr = ft_abs(deltay / deltax);
-	while (dot_cur.x != dot1.x)
+	deltaerr = ft_abs(deltay / dot1.x - dot0.x);
+	while (dot_cur.x++ != dot1.x)
 	{
-		mlx->int_data[(int)(dot_cur.x) + mlx->window_x *
-			(int)(dot_cur.y)] = 0xFFFFFF;
+		if (dot_cur.x + mlx->window_x * (dot_cur.y) < mlx->edge &&
+				(dot_cur.x + mlx->window_x * dot_cur.y) >= 0)
+			mlx->int_data[dot_cur.x + mlx->window_x * dot_cur.y] = 0xFFFFFF;
+		else
+			break ;
 		error += deltaerr;
 		if (error >= 0.5)
 		{
 			dot_cur.y += ft_sign(deltay) * 1;
 			error -= 1.0;
 		}
-		dot_cur.x++;
 	}
 }
 
