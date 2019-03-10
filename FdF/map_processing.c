@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 11:59:31 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/09 18:54:53 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/10 14:51:32 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,11 @@ void		del_map(t_map **map)
 {
 	t_map	*tmp;
 
-	if (map && *map)
+	if (*map)
 	{
 		while (*map)
 		{
 			tmp = (*map)->next;
-			ft_putnbr((*map)->x);
 			free(*map);
 			*map = tmp;
 		}
@@ -89,7 +88,7 @@ static void		map_constructor(t_map **map, char *line, int y)
 		end->z = ft_atoi(row[counter]);
 		counter++;
 	}
-	//ft_delarr(&row);
+//	ft_delarr(&row);
 }
 
 t_map			*read_map(char *filename, t_map *map)
@@ -107,7 +106,7 @@ t_map			*read_map(char *filename, t_map *map)
 	{
 		len = validation(&map, &line, len, fd);
 		map_constructor(&map, line, y);
-		ft_strdel(&line);
+	//	ft_strdel(&line);
 		y += 1;
 	}
 	close(fd);

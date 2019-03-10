@@ -6,51 +6,48 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 13:47:54 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/10 13:22:28 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/10 14:41:38 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
 
-static void	vertical_line(t_mlx *mlx, t_map *dot0, t_map *dot_cur, t_map *dot1)
+static void	vertical_line(t_mlx *mlx, t_map dot0, t_map dot_cur, t_map dot1)
 {
-	while (dot_cur->y != dot1->y)
+	while (dot_cur.y != dot1.y)
 	{
-		mlx->int_data[(int)(dot_cur->x) +
-			mlx->line_size * (int)(dot_cur->y)] = 0xFFFFFF;
-		dot_cur->y++;
+		mlx->int_data[(int)(dot_cur.x) +
+			mlx->line_size * (int)(dot_cur.y)] = 0xFFFFFF;
+		dot_cur.y++;
 	}
 }
 
-static void		put_line(t_mlx *mlx, t_map *dot0, t_map *dot1)
+static void		put_line(t_mlx *mlx, t_map dot0, t_map dot1)
 {
 	float	deltax;
 	float	deltay;
 	float	deltaerr;
 	float	error;
-	t_map	*dot_cur;
+	t_map	dot_cur;
 
-	dot_cur = (t_map *)malloc(sizeof(t_map));
-	dot_cur->x = dot0->x;
-	dot_cur->y = dot0->y;
-	if (dot0->x == dot1->x)
+	dot_cur.x = dot0.x;
+	dot_cur.y = dot0.y;
+	if (!(error == 0) && dot0.x == dot1.x)
 		return (vertical_line(mlx, dot0, dot_cur, dot1));
-	deltax = dot1->x - dot0->x;
-	deltay = dot1->y - dot0->y;
-	error = 0;
+	deltax = dot1.x - dot0.x;
+	deltay = dot1.y - dot0.y;
 	deltaerr = ft_abs(deltay / deltax);
-	while (dot_cur->x != dot1->x)
+	while (dot_cur.x != dot1.x)
 	{
-		mlx->int_data[(int)(dot_cur->x) + mlx->line_size *
-			(int)(dot_cur->y)] = 0xFFFFFF;
+		mlx->int_data[(int)(dot_cur.x) + mlx->line_size *
+			(int)(dot_cur.y)] = 0xFFFFFF;
 		error += deltaerr;
 		if (error >= 0.5)
 		{
-			dot_cur->y += ft_sign(deltay) * 1;
+			dot_cur.y += ft_sign(deltay) * 1;
 			error -= 1.0;
 		}
-		dot_cur->x++;
+		dot_cur.x++;
 	}
 }
 
@@ -79,45 +76,41 @@ static t_map	*map_bias(t_map *map)
 	return (begin);
 }
 
-static void		put_y(t_mlx *mlx, t_map *begin, int zoom)
+static void		put_y(t_mlx *mlx, t_map *begin)
 {
-	t_map	*dot0;
-	t_map	*dot1;
+	t_map	dot0;
+	t_map	dot1;
 	t_map	*parallel;
 
 	parallel = map_bias(begin);
 	while(parallel)
  	{
-		dot0 = begin;
-		dot1 = parallel;
-		dot0->x *= zoom;
-		dot0->y *= zoom;
-		dot1->x *= zoom;
-		dot1->y *= zoom;
+		dot0.x = begin->x * mlx->zoom;
+		dot0.y = begin->y * mlx->zoom;
+		dot1.x = parallel->x * mlx->zoom;
+		dot1.y = parallel->y * mlx->zoom;
 		put_line(mlx, dot0, dot1);
 		begin = begin->next;
 		parallel = parallel->next;
 	}
 }
 
-void			put_map(t_mlx *mlx, t_map *map, int zoom)
+void			put_map(t_mlx *mlx, t_map *map)
 {
 	t_map	*begin;
-	t_map	*dot0;
-	t_map	*dot1;
+	t_map	dot0;
+	t_map	dot1;
 
 	begin = map;
 	while(map->next)
  	{
-		map = map->y == map->next->y ? map : map->next;
-		dot0 = (t_map *)malloc(sizeof(t_map));
-		dot0->x = map->x * zoom;
-		dot0->y = map->y * zoom;
-		dot1 = (t_map *)malloc(sizeof(t_map));
- 		dot1->x = map->next->x * zoom;
-		dot1->y = map->next->y * zoom;
+		map = map->next && map->y == map->next->y ? map : map->next;
+		dot0.x = map->x * mlx->zoom;
+		dot0.y = map->y * mlx->zoom;
+ 		dot1.x = map->next->x * mlx->zoom;
+		dot1.y = map->next->y * mlx->zoom;
 		put_line(mlx, dot0, dot1);
 		map = map->next;
 	}
-	put_y(mlx, begin, zoom);
+	put_y(mlx, begin);
 }

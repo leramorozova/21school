@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 12:00:10 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/10 13:20:57 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/10 14:40:01 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ typedef struct		s_mlx
 t_map				*add_dot(t_map **map);
 t_map				*read_map(char *filename, t_map *map);
 void				del_map(t_map **map);
-//void				put_line(t_mlx **mlx, float x0, float y0, float x1, float y1);
-void				put_map(t_mlx *mlx, t_map *map, int zoom);
+void				put_map(t_mlx *mlx, t_map *map);
+int					close_window(t_mlx *param);
+int					mouse_press(int key, int x, int y, t_mlx *param);
 
 #endif

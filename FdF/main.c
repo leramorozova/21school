@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 17:50:57 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/10 13:22:50 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/10 15:01:52 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,15 @@
 // 12 - expose event??
 // 17 - нажатие крестика на всплывающем окне
 
-int close_window(void *param)
+int close_window(t_mlx *param)
 {
-	del_map(param);
-//	free(&((*param)->mlx));
-//	param = NULL;
+	del_map(&(param->map));
 	exit(0);
 	return (0);
 }
 
 int		key_press(int key, void *param)
 {
-	int		default_zoom;
-
 	if (key == 53)
 		close_window(param);
 	if (key == 18)
@@ -44,24 +40,9 @@ int		key_press(int key, void *param)
 	return (0);
 }
 
-void	put_param(t_mlx *param)
-{
-	printf("%d", param->zoom);
-}
+//void			redraw_image()
 
-int		mouse_press(int key, int x, int y, t_mlx *param)
-{
-	//put_param(param);
-	ft_putnbr(x);
-	ft_putchar(' ');
-	ft_putnbr(y);
-	ft_putchar('\n');
-	if (key == 5)
-		printf("UP");
-	return(0);
-}
-
-t_mlx	init_mlx(int x, int y, char *filename)
+static t_mlx	init_mlx(int x, int y, char *filename)
 {
 	t_mlx	mlx;
 	t_map	*map;
@@ -73,6 +54,7 @@ t_mlx	init_mlx(int x, int y, char *filename)
 	mlx.map = read_map(filename, map);
 	mlx.init_ptr = mlx_init();
 	mlx.line_size = x;
+	mlx.zoom = 2;
 	mlx.win_ptr = mlx_new_window(mlx.init_ptr, x, y, filename);
 	mlx.img_ptr = mlx_new_image(mlx.init_ptr, x, y);
 	mlx.img_data = mlx_get_data_addr(mlx.img_ptr, &bpp, &size_line, &endian);
@@ -88,8 +70,7 @@ int		main(int argc, char **argv)
 	if (argc == 2)
 	{
 		mlx = init_mlx(800, 600, argv[1]);
-		mlx.zoom = 10;
-		put_map(&mlx, mlx.map, 20);
+		put_map(&mlx, mlx.map);
 		mlx_put_image_to_window(mlx.init_ptr, mlx.win_ptr, mlx.img_ptr, 0, 0);
 		mlx_hook(mlx.win_ptr, 2, 0, key_press, &mlx);
 		mlx_mouse_hook(mlx.win_ptr, mouse_press, &mlx);
