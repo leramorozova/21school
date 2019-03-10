@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 17:50:57 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/10 17:12:26 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/10 18:06:55 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,21 @@ int		key_press(int key, void *param)
 	return (0);
 }
 
-//void			redraw_image()
+void			redraw_image(t_mlx *mlx)
+{
+	int		bpp;
+	int		size_line;
+	int		endian;
+
+	mlx->offset_x = mlx->window_x / 2 - (mlx->width * mlx->zoom) / 2;
+	mlx->offset_y = mlx->window_y / 2 - (mlx->height * mlx->zoom) / 2;
+	mlx_destroy_image(mlx->init_ptr, mlx->img_ptr);
+	mlx->img_ptr = mlx_new_image(mlx->init_ptr, mlx->window_x, mlx->window_y);
+	mlx->img_data = mlx_get_data_addr(mlx->img_ptr, &bpp, &size_line, &endian);
+	mlx->int_data = (int *)mlx->img_data;
+	put_map(mlx, mlx->map);
+	mlx_put_image_to_window(mlx->init_ptr, mlx->win_ptr, mlx->img_ptr, 0, 0);
+}
 
 static t_mlx	init_mlx(int x, int y, char *filename)
 {
@@ -53,10 +67,10 @@ static t_mlx	init_mlx(int x, int y, char *filename)
 	map = NULL;
 	mlx.map = read_map(filename, map, &mlx);
 	mlx.zoom = 600 / mlx.width;
-	mlx.window_x = mlx.width * mlx.zoom + 200 < 2500 ? mlx.width *
-		mlx.zoom + 300 : 2500;
-	mlx.window_y = mlx.height * mlx.zoom + 200 < 1400 ? mlx.height * mlx.zoom
-		+ 300 : 1400;
+	mlx.window_x = mlx.width * mlx.zoom + 500 < 2500 ? mlx.width *
+		mlx.zoom + 500 : 2500;
+	mlx.window_y = mlx.height * mlx.zoom + 500 < 1400 ? mlx.height * mlx.zoom
+		+ 500 : 1400;
 	mlx.offset_x = mlx.window_x / 2 - (mlx.width * mlx.zoom) / 2;
 	mlx.offset_y = mlx.window_y / 2 - (mlx.height * mlx.zoom) / 2;
 	mlx.init_ptr = mlx_init();

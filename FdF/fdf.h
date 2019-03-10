@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 12:00:10 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/10 17:11:24 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/10 17:28:03 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,6 @@ void				del_map(t_map **map);
 void				put_map(t_mlx *mlx, t_map *map);
 int					close_window(t_mlx *param);
 int					mouse_press(int key, int x, int y, t_mlx *param);
-void				centralize(t_mlx *mlx);
+void				redraw_image(t_mlx *mlx);
 
 #endif
