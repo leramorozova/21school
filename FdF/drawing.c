@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 13:47:54 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/10 14:41:38 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/10 17:18:40 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	vertical_line(t_mlx *mlx, t_map dot0, t_map dot_cur, t_map dot1)
 	while (dot_cur.y != dot1.y)
 	{
 		mlx->int_data[(int)(dot_cur.x) +
-			mlx->line_size * (int)(dot_cur.y)] = 0xFFFFFF;
+			mlx->window_x * (int)(dot_cur.y)] = 0xFFFFFF;
 		dot_cur.y++;
 	}
 }
@@ -39,7 +39,7 @@ static void		put_line(t_mlx *mlx, t_map dot0, t_map dot1)
 	deltaerr = ft_abs(deltay / deltax);
 	while (dot_cur.x != dot1.x)
 	{
-		mlx->int_data[(int)(dot_cur.x) + mlx->line_size *
+		mlx->int_data[(int)(dot_cur.x) + mlx->window_x *
 			(int)(dot_cur.y)] = 0xFFFFFF;
 		error += deltaerr;
 		if (error >= 0.5)
@@ -85,10 +85,10 @@ static void		put_y(t_mlx *mlx, t_map *begin)
 	parallel = map_bias(begin);
 	while(parallel)
  	{
-		dot0.x = begin->x * mlx->zoom;
-		dot0.y = begin->y * mlx->zoom;
-		dot1.x = parallel->x * mlx->zoom;
-		dot1.y = parallel->y * mlx->zoom;
+		dot0.x = begin->x * mlx->zoom + mlx->offset_x;;
+		dot0.y = begin->y * mlx->zoom + mlx->offset_y;
+		dot1.x = parallel->x * mlx->zoom + mlx->offset_x;
+		dot1.y = parallel->y * mlx->zoom + mlx->offset_y;
 		put_line(mlx, dot0, dot1);
 		begin = begin->next;
 		parallel = parallel->next;
@@ -105,10 +105,10 @@ void			put_map(t_mlx *mlx, t_map *map)
 	while(map->next)
  	{
 		map = map->next && map->y == map->next->y ? map : map->next;
-		dot0.x = map->x * mlx->zoom;
-		dot0.y = map->y * mlx->zoom;
- 		dot1.x = map->next->x * mlx->zoom;
-		dot1.y = map->next->y * mlx->zoom;
+		dot0.x = map->x * mlx->zoom + mlx->offset_x;
+		dot0.y = map->y * mlx->zoom + mlx->offset_y;
+ 		dot1.x = map->next->x * mlx->zoom + mlx->offset_x;
+		dot1.y = map->next->y * mlx->zoom + mlx->offset_y;
 		put_line(mlx, dot0, dot1);
 		map = map->next;
 	}

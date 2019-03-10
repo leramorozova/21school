@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 11:59:31 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/10 14:51:32 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/10 17:04:49 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ static int		validation(t_map **map, char **line, int len, const int fd)
 	if (counter != len && len != 0)
 	{
 		perror("Map is not valid!\nProgramm has been aborted");
-//		ft_strdel(line);
-//		del_map(map);
+		ft_strdel(line);
+		del_map(map);
 		close(fd);
 		exit(0);
 	}
@@ -72,7 +72,7 @@ static int		validation(t_map **map, char **line, int len, const int fd)
 	return (len);
 }
 
-static void		map_constructor(t_map **map, char *line, int y)
+static void		map_constructor(t_mlx *mlx, t_map **map, char *line, int y)
 {
 	char	**row;
 	int		counter;
@@ -88,10 +88,12 @@ static void		map_constructor(t_map **map, char *line, int y)
 		end->z = ft_atoi(row[counter]);
 		counter++;
 	}
+	mlx->width = counter;
+	mlx->height += 1;
 //	ft_delarr(&row);
 }
 
-t_map			*read_map(char *filename, t_map *map)
+t_map			*read_map(char *filename, t_map *map, t_mlx *mlx)
 {
 	char		*line;
 	size_t		len;
@@ -105,8 +107,8 @@ t_map			*read_map(char *filename, t_map *map)
 	while (get_next_line(fd, &line) > 0)
 	{
 		len = validation(&map, &line, len, fd);
-		map_constructor(&map, line, y);
-	//	ft_strdel(&line);
+		map_constructor(mlx, &map, line, y);
+		ft_strdel(&line);
 		y += 1;
 	}
 	close(fd);
