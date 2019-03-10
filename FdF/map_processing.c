@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 11:59:31 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/09 14:30:14 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/09 18:54:53 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void		del_map(t_map **map)
 		while (*map)
 		{
 			tmp = (*map)->next;
+			ft_putnbr((*map)->x);
 			free(*map);
 			*map = tmp;
 		}

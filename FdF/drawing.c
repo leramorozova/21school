@@ -6,24 +6,24 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 13:47:54 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/09 15:02:35 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/10 13:22:28 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <stdio.h>
 
-static void	vertical_line(t_mlx **mlx, t_map *dot0, t_map *dot_cur, t_map *dot1)
+static void	vertical_line(t_mlx *mlx, t_map *dot0, t_map *dot_cur, t_map *dot1)
 {
 	while (dot_cur->y != dot1->y)
 	{
-		(*mlx)->int_data[(int)(dot_cur->x) +
-			(*mlx)->line_size * (int)(dot_cur->y)] = 0xFFFFFF;
+		mlx->int_data[(int)(dot_cur->x) +
+			mlx->line_size * (int)(dot_cur->y)] = 0xFFFFFF;
 		dot_cur->y++;
 	}
 }
 
-static void		put_line(t_mlx **mlx, t_map *dot0, t_map *dot1)
+static void		put_line(t_mlx *mlx, t_map *dot0, t_map *dot1)
 {
 	float	deltax;
 	float	deltay;
@@ -42,7 +42,7 @@ static void		put_line(t_mlx **mlx, t_map *dot0, t_map *dot1)
 	deltaerr = ft_abs(deltay / deltax);
 	while (dot_cur->x != dot1->x)
 	{
-		(*mlx)->int_data[(int)(dot_cur->x) + (*mlx)->line_size *
+		mlx->int_data[(int)(dot_cur->x) + mlx->line_size *
 			(int)(dot_cur->y)] = 0xFFFFFF;
 		error += deltaerr;
 		if (error >= 0.5)
@@ -79,7 +79,7 @@ static t_map	*map_bias(t_map *map)
 	return (begin);
 }
 
-static void		put_y(t_mlx **mlx, t_map *begin, int zoom)
+static void		put_y(t_mlx *mlx, t_map *begin, int zoom)
 {
 	t_map	*dot0;
 	t_map	*dot1;
@@ -100,12 +100,11 @@ static void		put_y(t_mlx **mlx, t_map *begin, int zoom)
 	}
 }
 
-void			put_map(t_mlx **mlx, t_map *map, int zoom)
+void			put_map(t_mlx *mlx, t_map *map, int zoom)
 {
 	t_map	*begin;
 	t_map	*dot0;
 	t_map	*dot1;
-	t_map	*parallel;
 
 	begin = map;
 	while(map->next)
