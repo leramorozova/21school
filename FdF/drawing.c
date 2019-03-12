@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 13:47:54 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/12 14:04:42 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/12 14:38:19 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ void		put_line(t_mlx *mlx, t_map dot0, t_map dot1)
 	{
 		if (dot_cur.x + mlx->window_x * (dot_cur.y) < mlx->edge &&
 				(dot_cur.x + mlx->window_x * dot_cur.y) >= 0)
-			mlx->int_data[dot_cur.x + mlx->window_x * dot_cur.y] = get_color(dot_cur, dot0, dot1, delta);
+			mlx->int_data[dot_cur.x + mlx->window_x * dot_cur.y] =
+				get_color(dot_cur, dot0, dot1, delta);
 		error += delta.err;
 		if (error >= 0.5)
 		{
