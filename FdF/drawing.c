@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 13:47:54 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/10 19:17:17 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/12 14:04:42 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,13 @@ static void	vertical_line(t_mlx *mlx, t_map dot0, t_map dot_cur, t_map dot1)
 		if ((dot_cur.x + mlx->window_x * dot_cur.y < mlx->edge) &&
 				(dot_cur.x + mlx->window_x * dot_cur.y) >= 0)
 			mlx->int_data[dot_cur.x + mlx->window_x * dot_cur.y] = 0xFFFFFF;
-		else
-			break ;
 		dot_cur.y++;
 	}
 }
 
-static void		put_line(t_mlx *mlx, t_map dot0, t_map dot1)
+void		put_line(t_mlx *mlx, t_map dot0, t_map dot1)
 {
-	float	deltay;
-	float	deltaerr;
+	t_delta	delta;
 	float	error;
 	t_map	dot_cur;
 
@@ -36,19 +33,20 @@ static void		put_line(t_mlx *mlx, t_map dot0, t_map dot1)
 	dot_cur.y = dot0.y;
 	if (!(error == 0) && dot0.x == dot1.x)
 		return (vertical_line(mlx, dot0, dot_cur, dot1));
-	deltay = dot1.y - dot0.y;
-	deltaerr = ft_abs(deltay / dot1.x - dot0.x);
+	delta.y = dot1.y - dot0.y;
+	delta.x = dot1.x - dot0.x;
+	delta.err = ft_abs(delta.y / delta.x);
+	dot0.colour = 0xFFFFFF;
+	dot1.colour = 0xFF0000;
 	while (dot_cur.x++ != dot1.x)
 	{
 		if (dot_cur.x + mlx->window_x * (dot_cur.y) < mlx->edge &&
 				(dot_cur.x + mlx->window_x * dot_cur.y) >= 0)
-			mlx->int_data[dot_cur.x + mlx->window_x * dot_cur.y] = 0xFFFFFF;
-		else
-			break ;
-		error += deltaerr;
+			mlx->int_data[dot_cur.x + mlx->window_x * dot_cur.y] = get_color(dot_cur, dot0, dot1, delta);
+		error += delta.err;
 		if (error >= 0.5)
 		{
-			dot_cur.y += ft_sign(deltay) * 1;
+			dot_cur.y += ft_sign(delta.y) * 1;
 			error -= 1.0;
 		}
 	}
