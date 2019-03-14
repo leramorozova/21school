@@ -6,12 +6,16 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 11:59:31 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/10 17:04:49 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/14 11:36:00 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*  В этом файле происходит чтение, проверка на валидность и запись карты
+ *  в структуру */
+
 #include "fdf.h"
 
+// добавляю точку карты в конец структуры
 t_map		*add_dot(t_map **map)
 {
 	t_map	*new_dot;
@@ -33,6 +37,7 @@ t_map		*add_dot(t_map **map)
 	return (new_dot);
 }
 
+// удаление мапы - от утечек
 void		del_map(t_map **map)
 {
 	t_map	*tmp;
@@ -49,6 +54,7 @@ void		del_map(t_map **map)
 	}
 }
 
+// проверка карты на прямоугольность
 static int		validation(t_map **map, char **line, int len, const int fd)
 {
 	char	**row;
@@ -72,6 +78,7 @@ static int		validation(t_map **map, char **line, int len, const int fd)
 	return (len);
 }
 
+// заполняю структуру t_map информацией из карты
 static void		map_constructor(t_mlx *mlx, t_map **map, char *line, int y)
 {
 	char	**row;
@@ -93,6 +100,7 @@ static void		map_constructor(t_mlx *mlx, t_map **map, char *line, int y)
 //	ft_delarr(&row);
 }
 
+// главная функция, в которой все и происходит, здесь читаю из файла
 t_map			*read_map(char *filename, t_map *map, t_mlx *mlx)
 {
 	char		*line;

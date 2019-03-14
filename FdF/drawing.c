@@ -6,12 +6,14 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 13:47:54 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/12 14:38:19 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/14 13:18:20 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+// алгоритм следующей функции не справляется с вертикальными линиями,
+// это дополнение к нему
 static void	vertical_line(t_mlx *mlx, t_map dot0, t_map dot_cur, t_map dot1)
 {
 	while (dot_cur.y != dot1.y)
@@ -23,6 +25,7 @@ static void	vertical_line(t_mlx *mlx, t_map dot0, t_map dot_cur, t_map dot1)
 	}
 }
 
+// рисование линии без сглаживания с защитой от рисования точки за пределами карты
 void		put_line(t_mlx *mlx, t_map dot0, t_map dot1)
 {
 	t_delta	delta;
@@ -53,6 +56,7 @@ void		put_line(t_mlx *mlx, t_map dot0, t_map dot1)
 	}
 }
 
+// тут собственно делается параллельная структура для следующей функции
 static t_map	*map_bias(t_map *map)
 {
 	int		save;
@@ -78,6 +82,11 @@ static t_map	*map_bias(t_map *map)
 	return (begin);
 }
 
+/*
+ * Эта функция рисует вертикальные линии. Здесь создается вторая структура с картой,
+ * которая идентична изначальной, но сдвинута на второй ряд по Y. Двигаюсь по
+ * двум структурам одновременно и соединяю вертикальные точки.
+ */
 static void		put_y(t_mlx *mlx, t_map *begin)
 {
 	t_map	dot0;
@@ -97,6 +106,10 @@ static void		put_y(t_mlx *mlx, t_map *begin)
 	}
 }
 
+/* Конечная функция, рисующая карту - сначала она соединяет точки по горизонтали,
+ * а потом - по вертикали. Параллельно все сдвигается на посчитанный заранее оффсет
+ * с учетом зума. Дефолтный зум тоже от размера карты зависит
+ */
 void			put_map(t_mlx *mlx, t_map *map)
 {
 	t_map	*begin;

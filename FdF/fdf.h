@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 12:00:10 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/12 14:04:45 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/14 11:24:05 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "mlx.h"
 # include "libft/libft.h"
 
-typedef struct		s_map
+typedef struct		s_map // карта, вроде, все очевидно
 {
 	int				x;
 	int				y;
@@ -27,29 +27,30 @@ typedef struct		s_map
 	struct s_map	*next;
 }					t_map;
 
-typedef struct		s_delta
-{
+typedef struct		s_delta // структура для экономии переменных для рисования линий
+{							//  и градиента
 	float			x;
 	float			y;
 	float			err;
 }					t_delta;
 
-typedef struct		s_mlx
+typedef struct		s_mlx // основная структура, которая содержит всю возможную инфу
 {
-	t_map			*map;
-	void			*init_ptr;
+	t_map			*map; // карта тут
+	void			*init_ptr; // всякая ерунда для инифиализации
 	void			*win_ptr;
 	void			*img_ptr;
 	void			*img_data;
 	int				*int_data;
 	int				zoom;
-	int				width;
-	int				height;
-	int				window_x;
-	int				window_y;
-	int				offset_x;
-	int				offset_y;
-	int				edge;
+	int				width; // ширина карты
+	int				height; //  высота карты
+	int				volume; // выпуклость карты (типа высота по z)
+	int				window_x; // размер окна (для инициализации)
+	int				window_y; // размер окна (для инициализации)
+	int				offset_x; // переменная для рассчета смещения по х (для центрирования)
+	int				offset_y; // переменная для рассчета смещения по y (для центрирования)
+	int				edge;  // количество пикселей в изображении (для защиты зума0
 }					t_mlx;
 
 
