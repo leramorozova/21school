@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 13:47:54 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/14 13:18:20 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/15 15:54:52 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,17 @@
 
 // алгоритм следующей функции не справляется с вертикальными линиями,
 // это дополнение к нему
-static void	vertical_line(t_mlx *mlx, t_map dot0, t_map dot_cur, t_map dot1)
+static void	vertical_line(t_mlx *mlx, t_map dot0, t_map dot1)
 {
+	t_map	dot_cur;
+
+	dot_cur.x = dot0.x;
+	dot_cur.y = dot0.y;
 	while (dot_cur.y != dot1.y)
 	{
 		if ((dot_cur.x + mlx->window_x * dot_cur.y < mlx->edge) &&
 				(dot_cur.x + mlx->window_x * dot_cur.y) >= 0)
-			mlx->int_data[dot_cur.x + mlx->window_x * dot_cur.y] = 0xFFFFFF;
+			mlx->int_data[(int)dot_cur.x + mlx->window_x * (int)dot_cur.y] = 0xFFFFFF;
 		dot_cur.y++;
 	}
 }
@@ -32,10 +36,21 @@ void		put_line(t_mlx *mlx, t_map dot0, t_map dot1)
 	float	error;
 	t_map	dot_cur;
 
+	ft_putstr("\nx are: ");
 	dot_cur.x = dot0.x;
 	dot_cur.y = dot0.y;
+	ft_putnbr(dot0.x);
+	ft_putchar('\t');
+	ft_putnbr(dot1.x);
+	ft_putchar('\n');
+	ft_putstr("y are: ");
+	ft_putnbr(dot0.y);
+	ft_putchar('\t');
+	ft_putnbr(dot1.y);
+	ft_putchar('\n');
+
 	if (!(error == 0) && dot0.x == dot1.x)
-		return (vertical_line(mlx, dot0, dot_cur, dot1));
+		return (vertical_line(mlx, dot0, dot1));
 	delta.y = dot1.y - dot0.y;
 	delta.x = dot1.x - dot0.x;
 	delta.err = ft_abs(delta.y / delta.x);
@@ -45,8 +60,8 @@ void		put_line(t_mlx *mlx, t_map dot0, t_map dot1)
 	{
 		if (dot_cur.x + mlx->window_x * (dot_cur.y) < mlx->edge &&
 				(dot_cur.x + mlx->window_x * dot_cur.y) >= 0)
-			mlx->int_data[dot_cur.x + mlx->window_x * dot_cur.y] =
-				get_color(dot_cur, dot0, dot1, delta);
+			mlx->int_data[(int)dot_cur.x + mlx->window_x * (int)dot_cur.y] = 0xFFFFFF;
+				//get_color(dot_cur, dot0, dot1, delta);
 		error += delta.err;
 		if (error >= 0.5)
 		{
@@ -96,11 +111,14 @@ static void		put_y(t_mlx *mlx, t_map *begin)
 	parallel = map_bias(begin);
 	while(parallel)
  	{
-		dot0.x = begin->x * mlx->zoom + mlx->offset_x;;
-		dot0.y = begin->y * mlx->zoom + mlx->offset_y;
-		dot1.x = parallel->x * mlx->zoom + mlx->offset_x;
-		dot1.y = parallel->y * mlx->zoom + mlx->offset_y;
-		put_line(mlx, dot0, dot1);
+		dot0.x = begin->x * mlx->zoom;// + mlx->offset_x;;
+		dot0.y = begin->y * mlx->zoom;// + mlx->offset_y;
+		dot1.x = parallel->x * mlx->zoom;// + mlx->offset_x;
+		dot1.y = parallel->y * mlx->zoom;// + mlx->offset_y;
+		if (dot1.y < dot0.y	&& dot0.x == dot1.x)
+			put_line(mlx, dot1, dot0);
+		else
+			put_line(mlx, dot0, dot1);
 		begin = begin->next;
 		parallel = parallel->next;
 	}
@@ -115,17 +133,37 @@ void			put_map(t_mlx *mlx, t_map *map)
 	t_map	*begin;
 	t_map	dot0;
 	t_map	dot1;
+	int		count;
 
+	prj_iso(mlx);
 	begin = map;
+	count = 1;
+	mlx->zoom = 5;
 	while(map->next)
  	{
-		map = map->next && map->y == map->next->y ? map : map->next;
-		dot0.x = map->x * mlx->zoom + mlx->offset_x;
-		dot0.y = map->y * mlx->zoom + mlx->offset_y;
- 		dot1.x = map->next->x * mlx->zoom + mlx->offset_x;
-		dot1.y = map->next->y * mlx->zoom + mlx->offset_y;
-		put_line(mlx, dot0, dot1);
+		if (count == mlx->width && (count = 1))
+			map = map->next;
+		count++;
+		dot0.x = map->x * mlx->zoom;//+ mlx->offset_x;
+		dot0.y = map->y * mlx->zoom; //+ mlx->offset_y;
+ 		dot1.x = map->next->x * mlx->zoom;// + mlx->offset_x;
+		dot1.y = map->next->y * mlx->zoom;// + mlx->offset_y;
+		if (dot1.x < dot0.x)
+		{
+			ft_putstr("before y: ");
+			ft_putnbr(dot0.y);
+			ft_putchar('\t');
+			ft_putnbr(dot1.y);
+			ft_putchar('\n');
+			ft_putstr("swaped\n");
+			put_line(mlx, dot1, dot0);
+		}
+		else
+		{
+			ft_putstr("here!");
+			put_line(mlx, dot0, dot1);
+		}
 		map = map->next;
 	}
-	put_y(mlx, begin);
+//	put_y(mlx, begin);
 }

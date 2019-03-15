@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 12:00:10 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/14 11:24:05 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/15 15:54:23 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
 
 typedef struct		s_map // карта, вроде, все очевидно
 {
-	int				x;
-	int				y;
-	int				z;
-	int				colour;
+	float			x;
+	float			y;
+	float			z;
+	int 			colour;
 	struct s_map	*next;
 }					t_map;
 
@@ -65,5 +65,6 @@ int					get_color(t_map dot_curr, t_map dot0, t_map dot1,
 		t_delta delta);
 void				put_line(t_mlx *mlx, t_map dot0, t_map dot1);
 void				make_z_to_y(t_mlx *mlx);
+void				prj_iso(t_mlx *mlx);
 
 #endif

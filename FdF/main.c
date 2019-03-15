@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 17:50:57 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/12 14:41:09 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/15 15:51:51 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ int		key_press(int key, t_mlx *param)
 {
 	if (key == 53)
 		close_window(param);
-	if (key == 18)
-		make_z_to_y(param);
+	//if (key == 18)
 	if (key == 19)
 		ft_putchar('y');
 	return (0);
@@ -86,11 +85,18 @@ static t_mlx	init_mlx(int x, int y, char *filename)
 int		main(int argc, char **argv)
 {
 	t_mlx	mlx;
+	t_map	dot0;
+	t_map	dot1;
 
 	if (argc == 2)
 	{
 		mlx = init_mlx(800, 400, argv[1]);
 		put_map(&mlx, mlx.map);
+	//	dot0.x = 140;
+	//	dot0.y = 210;
+	//	dot1.x = 140;
+	//	dot1.y = 220;
+	//	put_line(&mlx, dot0, dot1);
 		mlx_put_image_to_window(mlx.init_ptr, mlx.win_ptr, mlx.img_ptr, 0, 0);
 		mlx_hook(mlx.win_ptr, 2, 0, key_press, &mlx);
 		mlx_mouse_hook(mlx.win_ptr, mouse_press, &mlx);

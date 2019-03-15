@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 16:42:47 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/04 16:13:28 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/15 14:47:33 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,6 @@ int					ft_sqrt(int nb);
 int					ft_sign(float a);
 float				ft_abs(float a);
 int					get_next_line(const int fd, char **line);
+void                ft_int_swap(int *a, int *b);
 
 #endif
