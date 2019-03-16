@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 13:47:54 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/16 15:39:06 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/16 15:50:28 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,34 @@ static void	vertical_line(t_mlx *mlx, t_map dot0, t_map dot1)
 // рисование линии без сглаживания с защитой от рисования точки за пределами карты
 void		put_line(t_mlx *mlx, t_map dot0, t_map dot1)
 {
-	t_delta	delta;
+	t_delta		delta;
+	t_map		dot_cur;
+	float		error;
+	int			dirty;
+
+	delta.x = ft_abs(dot1.x - dot0.x);
+	delta.y = ft_abs(dot1.y - dot0.y);
+	error = 0.0;
+	delta.err = delta.y / delta.x;
+	dot_cur.y = dot0.y;
+	dirty = y1 - y0;
+	if (dirty > 0)
+		dirty = 1;
+	if (dirty < 0)
+		dirty = -1;
+	while (dot0.x < dot1.x)
+	{
+		mlx->int_data[(int)dot0.x + mlx->window_x * (int)dot_cur.y] = 0xFFFFFF;
+		error += delta.err;
+		if (error >= 0.5)
+		{
+			dot_cur.y += dirty;
+			error -= 1.0;
+		}
+		dot0.x++;
+	}
+/*
+ * t_delta	delta;
 	float	error;
 	t_map	dot_cur;
 
@@ -69,7 +96,7 @@ void		put_line(t_mlx *mlx, t_map dot0, t_map dot1)
 			error -= 1.0;
 		}
 		printf("%f\n", error);
-	}
+	}*/
 }
 
 // тут собственно делается параллельная структура для следующей функции
