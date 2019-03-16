@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 17:50:57 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/16 13:33:43 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/16 15:30:43 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void			redraw_image(t_mlx *mlx)
 	mlx_put_image_to_window(mlx->init_ptr, mlx->win_ptr, mlx->img_ptr, 0, 0);
 }
 
-static t_mlx	init_mlx(int x, int y, char *filename)
+static t_mlx	init_mlx(char *filename)
 {
 	t_mlx	mlx;
 	t_map	*map;
@@ -90,7 +90,7 @@ int		main(int argc, char **argv)
 
 	if (argc == 2)
 	{
-		mlx = init_mlx(800, 400, argv[1]);
+		mlx = init_mlx(argv[1]);
 		put_map(&mlx, mlx.map);
 	//	dot0.x = 140.0;
 	//	dot0.y = 210.0;

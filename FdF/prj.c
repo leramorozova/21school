@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 12:15:48 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/15 15:53:55 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/16 15:30:02 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void    prj_iso(t_mlx *mlx)
 {
     float 	x0;
     float 	y0;
-	float		min;
+	float	min;
 	t_map	*begin;
 
 	begin = mlx->map;
@@ -52,7 +52,9 @@ void    prj_iso(t_mlx *mlx)
     	x0 = mlx->map->x;
     	y0 = mlx->map->y;
     	mlx->map->x = (x0 - y0) * cos(0.523599);
+    	//mlx->map->x = (x0 - y0) * cos(0.46365);
     	mlx->map->y = -(mlx->map->z) + (x0 + y0) * sin(0.523599);
+    	//mlx->map->y = -(mlx->map->z) + (x0 + y0) * sin(0.46365);
 		min = mlx->map->x < min ? mlx->map->x : min;
 		min = mlx->map->y < min ? mlx->map->y : min;
 		mlx->map = mlx->map->next;

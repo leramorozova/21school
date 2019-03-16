@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 13:47:54 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/16 13:43:02 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/16 15:39:06 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	vertical_line(t_mlx *mlx, t_map dot0, t_map dot1)
 
 	dot_cur.x = dot0.x;
 	dot_cur.y = dot0.y;
-	while (dot_cur.y != dot1.y)
+	while (dot_cur.y < dot1.y)
 	{
 		if ((dot_cur.x + mlx->window_x * dot_cur.y < mlx->edge) &&
 				(dot_cur.x + mlx->window_x * dot_cur.y) >= 0)
@@ -36,27 +36,27 @@ void		put_line(t_mlx *mlx, t_map dot0, t_map dot1)
 	float	error;
 	t_map	dot_cur;
 
-	ft_putstr("\n1 are: ");
+//	ft_putstr("\n1 are: ");
 	dot_cur.x = dot0.x;
 	dot_cur.y = dot0.y;
-	ft_putnbr(dot0.x);
-	ft_putchar('\t');
-	ft_putnbr(dot0.y);
-	ft_putchar('\n');
-	ft_putstr("2 are: ");
-	ft_putnbr(dot1.x);
-	ft_putchar('\t');
-	ft_putnbr(dot1.y);
-	ft_putchar('\n');
-
-	if (!(error == 0) && dot0.x == dot1.x)
+//	ft_putnbr(dot0.x);
+//	ft_putchar('\t');
+//	ft_putnbr(dot0.y);
+///	ft_putchar('\n');
+//	ft_putstr("2 are: ");
+//	ft_putnbr(dot1.x);
+//	ft_putchar('\t');
+//	ft_putnbr(dot1.y);
+//	ft_putchar('\n');
+	if (dot0.x == dot1.x)
 		return (vertical_line(mlx, dot0, dot1));
-	delta.y = dot1.y - dot0.y;
 	delta.x = dot1.x - dot0.x;
+	delta.y = dot1.y - dot0.y;
 	delta.err = ft_abs(delta.y / delta.x);
-	dot0.colour = 0xFFFFFF;
-	dot1.colour = 0xFF0000;
-	while (dot_cur.x++ <= dot1.x)
+	error = 0.0;
+	//dot0.colour = 0xFFFFFF;
+	//dot1.colour = 0xFF0000;
+	while (dot_cur.x++ < dot1.x)
 	{
 		if (dot_cur.x + mlx->window_x * (dot_cur.y) < mlx->edge &&
 				(dot_cur.x + mlx->window_x * dot_cur.y) >= 0)
@@ -65,23 +65,26 @@ void		put_line(t_mlx *mlx, t_map dot0, t_map dot1)
 		error += delta.err;
 		if (error >= 0.5)
 		{
-			dot_cur.y += ft_sign(delta.y) * 1;
+			dot_cur.y += ft_sign(delta.y) * delta.err;
 			error -= 1.0;
 		}
+		printf("%f\n", error);
 	}
 }
 
 // тут собственно делается параллельная структура для следующей функции
-static t_map	*map_bias(t_map *map)
+static t_map	*map_bias(t_map *map, int width)
 {
-	int		save;
+	int		i;
 	t_map	*ret;
 	t_map	*begin;
 
-	save = map->y;
-	while (map && map->y == save)
+	i = 0;
+	while (i < width)
+	{
 		map = map->next;
-	save = map->y;
+		i++;
+	}
 	ret = NULL;
 	begin = NULL;
 	while (map)
@@ -108,14 +111,14 @@ static void		put_y(t_mlx *mlx, t_map *begin)
 	t_map	dot1;
 	t_map	*parallel;
 
-	parallel = map_bias(begin);
+	parallel = map_bias(begin, mlx->width);
 	while(parallel)
  	{
 		dot0.x = begin->x * mlx->zoom;// + mlx->offset_x;;
 		dot0.y = begin->y * mlx->zoom;// + mlx->offset_y;
 		dot1.x = parallel->x * mlx->zoom;// + mlx->offset_x;
 		dot1.y = parallel->y * mlx->zoom;// + mlx->offset_y;
-		if (dot1.y < dot0.y	&& dot0.x == dot1.x)
+		if (dot1.x < dot0.x)
 			put_line(mlx, dot1, dot0);
 		else
 			put_line(mlx, dot0, dot1);
@@ -138,7 +141,7 @@ void			put_map(t_mlx *mlx, t_map *map)
 	prj_iso(mlx);
 	begin = map;
 	count = 1;
-	mlx->zoom = 20.0;
+	mlx->zoom = 30.0;
 	while(map->next)
  	{
 		if (count == mlx->width && (count = 1))
@@ -150,20 +153,17 @@ void			put_map(t_mlx *mlx, t_map *map)
 		dot1.y = map->next->y * mlx->zoom;// + mlx->offset_y;
 		if (dot1.x < dot0.x)
 		{
-			ft_putstr("before y: ");
-			ft_putnbr(dot0.y);
-			ft_putchar('\t');
-			ft_putnbr(dot1.y);
-			ft_putchar('\n');
-			ft_putstr("swaped\n");
+			//ft_putstr("before y: ");
+			//ft_putnbr(dot0.y);
+			//ft_putchar('\t');
+			//ft_putnbr(dot1.y);
+			//ft_putchar('\n');
+			//ft_putstr("swaped\n");
 			put_line(mlx, dot1, dot0);
 		}
 		else
-		{
-			ft_putstr("here!");
 			put_line(mlx, dot0, dot1);
-		}
 		map = map->next;
 	}
-//	put_y(mlx, begin);
+	put_y(mlx, begin);
 }
