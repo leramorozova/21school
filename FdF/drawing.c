@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 13:47:54 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/16 16:06:41 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/16 16:07:45 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void		put_line(t_mlx *mlx, t_map dot0, t_map dot1)
 	delta.x = dot1.x - dot0.x;
 	delta.y = dot1.y - dot0.y;
 	delta.err = ft_abs(delta.y / delta.x);
-	error = 0.0;
+//	error = 0.0;
 	while (dot0.x++ < dot1.x)
 	{
 		if (dot0.x + mlx->window_x * (dot_cur.y) < mlx->edge &&
