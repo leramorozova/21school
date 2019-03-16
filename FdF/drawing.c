@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 13:47:54 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/16 15:50:28 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/16 16:06:41 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,71 +32,29 @@ static void	vertical_line(t_mlx *mlx, t_map dot0, t_map dot1)
 // рисование линии без сглаживания с защитой от рисования точки за пределами карты
 void		put_line(t_mlx *mlx, t_map dot0, t_map dot1)
 {
-	t_delta		delta;
-	t_map		dot_cur;
-	float		error;
-	int			dirty;
-
-	delta.x = ft_abs(dot1.x - dot0.x);
-	delta.y = ft_abs(dot1.y - dot0.y);
-	error = 0.0;
-	delta.err = delta.y / delta.x;
-	dot_cur.y = dot0.y;
-	dirty = y1 - y0;
-	if (dirty > 0)
-		dirty = 1;
-	if (dirty < 0)
-		dirty = -1;
-	while (dot0.x < dot1.x)
-	{
-		mlx->int_data[(int)dot0.x + mlx->window_x * (int)dot_cur.y] = 0xFFFFFF;
-		error += delta.err;
-		if (error >= 0.5)
-		{
-			dot_cur.y += dirty;
-			error -= 1.0;
-		}
-		dot0.x++;
-	}
-/*
- * t_delta	delta;
+	t_delta	delta;
 	float	error;
 	t_map	dot_cur;
 
-//	ft_putstr("\n1 are: ");
-	dot_cur.x = dot0.x;
 	dot_cur.y = dot0.y;
-//	ft_putnbr(dot0.x);
-//	ft_putchar('\t');
-//	ft_putnbr(dot0.y);
-///	ft_putchar('\n');
-//	ft_putstr("2 are: ");
-//	ft_putnbr(dot1.x);
-//	ft_putchar('\t');
-//	ft_putnbr(dot1.y);
-//	ft_putchar('\n');
 	if (dot0.x == dot1.x)
 		return (vertical_line(mlx, dot0, dot1));
 	delta.x = dot1.x - dot0.x;
 	delta.y = dot1.y - dot0.y;
 	delta.err = ft_abs(delta.y / delta.x);
 	error = 0.0;
-	//dot0.colour = 0xFFFFFF;
-	//dot1.colour = 0xFF0000;
-	while (dot_cur.x++ < dot1.x)
+	while (dot0.x++ < dot1.x)
 	{
-		if (dot_cur.x + mlx->window_x * (dot_cur.y) < mlx->edge &&
-				(dot_cur.x + mlx->window_x * dot_cur.y) >= 0)
-			mlx->int_data[(int)dot_cur.x + mlx->window_x * (int)dot_cur.y] = 0xFFFFFF;
-				//get_color(dot_cur, dot0, dot1, delta);
+		if (dot0.x + mlx->window_x * (dot_cur.y) < mlx->edge &&
+				(dot0.x + mlx->window_x * dot_cur.y) >= 0)
+			mlx->int_data[(int)dot0.x + mlx->window_x * (int)dot_cur.y] = 0xFFFFFF;
 		error += delta.err;
 		if (error >= 0.5)
 		{
-			dot_cur.y += ft_sign(delta.y) * delta.err;
+			dot_cur.y = dot_cur.y + ft_sign(delta.y) * delta.err;
 			error -= 1.0;
 		}
-		printf("%f\n", error);
-	}*/
+	}
 }
 
 // тут собственно делается параллельная структура для следующей функции
@@ -178,18 +136,7 @@ void			put_map(t_mlx *mlx, t_map *map)
 		dot0.y = map->y * mlx->zoom; //+ mlx->offset_y;
  		dot1.x = map->next->x * mlx->zoom;// + mlx->offset_x;
 		dot1.y = map->next->y * mlx->zoom;// + mlx->offset_y;
-		if (dot1.x < dot0.x)
-		{
-			//ft_putstr("before y: ");
-			//ft_putnbr(dot0.y);
-			//ft_putchar('\t');
-			//ft_putnbr(dot1.y);
-			//ft_putchar('\n');
-			//ft_putstr("swaped\n");
-			put_line(mlx, dot1, dot0);
-		}
-		else
-			put_line(mlx, dot0, dot1);
+		dot1.x < dot0.x ? put_line(mlx, dot1, dot0) : put_line(mlx, dot0, dot1);
 		map = map->next;
 	}
 	put_y(mlx, begin);
