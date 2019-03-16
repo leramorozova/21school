@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 13:47:54 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/15 15:54:52 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/16 13:43:02 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,15 @@ void		put_line(t_mlx *mlx, t_map dot0, t_map dot1)
 	float	error;
 	t_map	dot_cur;
 
-	ft_putstr("\nx are: ");
+	ft_putstr("\n1 are: ");
 	dot_cur.x = dot0.x;
 	dot_cur.y = dot0.y;
 	ft_putnbr(dot0.x);
 	ft_putchar('\t');
-	ft_putnbr(dot1.x);
-	ft_putchar('\n');
-	ft_putstr("y are: ");
 	ft_putnbr(dot0.y);
+	ft_putchar('\n');
+	ft_putstr("2 are: ");
+	ft_putnbr(dot1.x);
 	ft_putchar('\t');
 	ft_putnbr(dot1.y);
 	ft_putchar('\n');
@@ -56,7 +56,7 @@ void		put_line(t_mlx *mlx, t_map dot0, t_map dot1)
 	delta.err = ft_abs(delta.y / delta.x);
 	dot0.colour = 0xFFFFFF;
 	dot1.colour = 0xFF0000;
-	while (dot_cur.x++ != dot1.x)
+	while (dot_cur.x++ <= dot1.x)
 	{
 		if (dot_cur.x + mlx->window_x * (dot_cur.y) < mlx->edge &&
 				(dot_cur.x + mlx->window_x * dot_cur.y) >= 0)
@@ -138,7 +138,7 @@ void			put_map(t_mlx *mlx, t_map *map)
 	prj_iso(mlx);
 	begin = map;
 	count = 1;
-	mlx->zoom = 5;
+	mlx->zoom = 20.0;
 	while(map->next)
  	{
 		if (count == mlx->width && (count = 1))
