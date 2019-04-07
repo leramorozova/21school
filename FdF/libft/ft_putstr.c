@@ -6,17 +6,18 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 09:45:41 by sdurgan           #+#    #+#             */
-/*   Updated: 2018/11/30 12:49:20 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/07 13:00:53 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr(const char *str)
+int		ft_putstr(const char *str)
 {
 	size_t	i;
 
 	i = 0;
 	while (str && str[i])
 		ft_putchar(str[i++]);
+	return (0);
 }

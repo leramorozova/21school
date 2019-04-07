@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/06 15:07:34 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/06 15:10:00 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/07 13:23:06 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int			draw_img(void *mlx, void *win, t_img img)
 			"left shift: change projection\n");
 	mlx_string_put(mlx, win, 10, 80, 0xFFFFFF,
 			"up, down, right, left: move figure");
+	mlx_string_put(mlx, win, 10, 105, 0xFFFFFF, "num pad up, down: change z");
 	return (0);
 }
 

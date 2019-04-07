@@ -6,15 +6,11 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/06 15:02:09 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/06 15:02:21 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/07 13:05:06 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "pixel.h"
-//#include "mapping.h"
 #include "fdf.h"
-//#include <fcntl.h>
-//#include <stdio.h>
 
 static char		**map_to_arr(char *filename)
 {
@@ -38,6 +34,8 @@ static char		**map_to_arr(char *filename)
 		line = ft_strjoin(tmp, buf);
 		free(tmp);
 	}
+	if (ft_strlen(line) == 0)
+		exit(ft_putstr("Programm has been aborted!\nIs map empty?\n"));
 	return (ft_strsplit(line, '\n'));
 }
 
@@ -109,7 +107,8 @@ t_pixel			*read_map(char *name, t_pixel *pixel, int *width, int *height)
 		colls = colls == 0 ? cur_colls : colls;
 		if (colls != cur_colls || (lines[rows + 1] &&
 				ft_wordscnt(lines[rows + 1], ' ') != cur_colls))
-			exit(0);
+			exit(ft_putstr(
+				"Program has been aborted!\nSorry! Map seems to be invalid\n"));
 		lines[rows + 1] ? map_constructor(&pixel, lines[rows],
 				lines[rows + 1], rows)
 			: map_constructor(&pixel, lines[rows], NULL, rows);

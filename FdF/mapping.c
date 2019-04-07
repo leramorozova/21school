@@ -6,13 +6,13 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/06 15:11:03 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/06 15:11:14 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/07 13:21:46 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_map   init_map(char *name)
+t_map   	init_map(char *name)
 {
     t_map   map;
 
@@ -32,7 +32,7 @@ t_map   init_map(char *name)
     return (map);
 }
 
-void	offset_x(t_map *map)
+void		offset_x(t_map *map)
 {
 	t_pixel *save;
 	float	min;
@@ -54,7 +54,7 @@ void	offset_x(t_map *map)
 			(max - min) / 2;
 }
 
-void	offset_y(t_map *map)
+void			offset_y(t_map *map)
 {
 	t_pixel *save;
 	double	min;
@@ -96,7 +96,7 @@ static int		autoscaling(t_map *map)
 	return scale;
 }
 
-void	fill_map(t_fdf *fdf, char *name)
+void			fill_map(t_fdf *fdf, char *name)
 {
 	fdf->prj = 3;
 	fdf->map = init_map(name);

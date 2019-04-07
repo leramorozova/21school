@@ -6,19 +6,11 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/23 13:12:07 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/06 15:01:28 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/07 13:29:56 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-//#include "pixel.h"
-//#include "isometry.h"
-
-int		close_window(t_fdf *param)
-{
-	// вставить удаление мапы
-	exit(0);
-}
 
 static void		move_figure(int key, t_fdf *fdf)
 {
@@ -33,7 +25,7 @@ static void		move_figure(int key, t_fdf *fdf)
 	redraw_image(fdf);
 }
 
-static	void	put_flatten(t_fdf *fdf)
+static void		put_flatten(t_fdf *fdf)
 {
 	static t_pixel		*temp;
 
@@ -52,7 +44,7 @@ static	void	put_flatten(t_fdf *fdf)
 	}
 }
 
-static void	plus_z(int key, t_fdf *fdf)
+static void		plus_z(int key, t_fdf *fdf)
 {
 	t_pixel			*begin;
 	t_pixel  		*save;
@@ -62,9 +54,9 @@ static void	plus_z(int key, t_fdf *fdf)
 	fdf->map.change_z += key == 116 ? 1 : -1;
 	while (fdf->map.flatten)
 	{
-		fdf->map.flatten->z += fdf->map.flatten->z == 0 ? 0 : fdf->map.change_z;
+		fdf->map.flatten->z *= fdf->map.flatten->z == 0 ? 0 : fdf->map.change_z;
 		if (fdf->map.flatten->down)
-			fdf->map.flatten->down->z += fdf->map.flatten->down->z == 0 ?
+			fdf->map.flatten->down->z *= fdf->map.flatten->down->z == 0 ?
 			   0 : fdf->map.change_z;
 		fdf->map.flatten = fdf->map.flatten->right;
 	}
@@ -75,10 +67,10 @@ static void	plus_z(int key, t_fdf *fdf)
 	fdf->map.flatten = save;
 }
 
-int		keyboard(int key, t_fdf *param)
+int				keyboard(int key, t_fdf *param)
 {
 	if (key == 53)
-		close_window(param);
+		exit(0);
 	if (key == 126 || key == 125 || key == 124 || key == 123)
 		move_figure(key, param);
 	if (key == 257)

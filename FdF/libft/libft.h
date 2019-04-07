@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 16:42:47 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/20 17:09:29 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/07 13:01:25 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int					ft_atoi(const char *nptr);
 int					ft_isdigit(int c);
 int					ft_isalpha(int c);
 void				ft_putchar(char c);
-void				ft_putstr(char const *s);
+int					ft_putstr(char const *s);
 void				ft_putnbr(int n);
 void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char const *s, int fd);
