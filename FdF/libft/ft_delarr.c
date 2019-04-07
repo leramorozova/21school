@@ -22,7 +22,7 @@ int		ft_delarr(char ***arr)
 		ft_strdel(&((*arr)[t]));
 		t++;
 	}
-	if (**arr)
+	if (*arr)
 		free(**arr);
 	arr = NULL;
 	return (0);

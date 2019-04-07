@@ -3,105 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/01 17:50:57 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/16 15:30:43 by sdurgan          ###   ########.fr       */
+/*   Created: 2019/03/20 14:49:28 by sdurgan           #+#    #+#             */
+/*   Updated: 2019/04/06 15:06:31 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
+//#include "mapping.h"
+//#include "draw.h"
 
-// x_event
-// 2 - нажатие клавиши клавы
-// 3 - разжатие клавиши клавы
-// 4 - нажатие мышки
-// 5 - разжатие мышки
-// 6 - движение мышки
-// 12 - expose event??
-// 17 - нажатие крестика на всплывающем окне
-
-int close_window(t_mlx *param)
+void	redraw_image(t_fdf *fdf)
 {
-	del_map(&(param->map));
-	exit(0);
-	return (0);
+	mlx_destroy_image(fdf->mlx.mlx_init, fdf->mlx.img.img);
+	fdf->mlx.img = init_img(fdf->mlx.mlx_init, fdf->mlx.win, fdf->mlx.width, fdf->mlx.height);
+	put_map(&(fdf->map), fdf);
+	draw_img(fdf->mlx.mlx_init, fdf->mlx.win, fdf->mlx.img);
 }
 
-int		key_press(int key, t_mlx *param)
+int main(int argc, char **argv)
 {
-	if (key == 53)
-		close_window(param);
-	//if (key == 18)
-	if (key == 19)
-		ft_putchar('y');
-	return (0);
-}
-
-void			redraw_image(t_mlx *mlx)
-{
-	int		bpp;
-	int		size_line;
-	int		endian;
-
-	mlx->offset_x = mlx->window_x / 2 - (mlx->width * mlx->zoom) / 2;
-	mlx->offset_y = mlx->window_y / 2 - (mlx->height * mlx->zoom) / 2;
-	mlx_destroy_image(mlx->init_ptr, mlx->img_ptr);
-	mlx->img_ptr = mlx_new_image(mlx->init_ptr, mlx->window_x, mlx->window_y);
-	mlx->img_data = mlx_get_data_addr(mlx->img_ptr, &bpp, &size_line, &endian);
-	mlx->int_data = (int *)mlx->img_data;
-	put_map(mlx, mlx->map);
-	mlx_put_image_to_window(mlx->init_ptr, mlx->win_ptr, mlx->img_ptr, 0, 0);
-}
-
-static t_mlx	init_mlx(char *filename)
-{
-	t_mlx	mlx;
-	t_map	*map;
-	int		bpp;
-	int		size_line;
-	int		endian;
-
-	map = NULL;
-	mlx.map = read_map(filename, map, &mlx);
-	mlx.zoom = 600 / mlx.width;
-	mlx.window_x = mlx.width * mlx.zoom + 500 < 2500 ? mlx.width *
-		mlx.zoom + 500 : 2500;
-	mlx.window_y = mlx.height * mlx.zoom + 500 < 1400 ? mlx.height * mlx.zoom
-		+ 500 : 1400;
-	mlx.offset_x = mlx.window_x / 2 - (mlx.width * mlx.zoom) / 2;
-	mlx.offset_y = mlx.window_y / 2 - (mlx.height * mlx.zoom) / 2;
-	mlx.init_ptr = mlx_init();
-	mlx.win_ptr = mlx_new_window(mlx.init_ptr, mlx.window_x, mlx.window_y, filename);
-	mlx.img_ptr = mlx_new_image(mlx.init_ptr, mlx.window_x, mlx.window_y);
-	mlx.img_data = mlx_get_data_addr(mlx.img_ptr, &bpp, &size_line, &endian);
-	mlx.edge = mlx.window_x * mlx.window_y;
-	mlx.int_data = (int *)mlx.img_data;
-	return (mlx);
-}
-
-// idx = X position + Line size * Y position
-int		main(int argc, char **argv)
-{
-	t_mlx	mlx;
-	t_map	dot0;
-	t_map	dot1;
+    t_fdf   fdf;
 
 	if (argc == 2)
 	{
-		mlx = init_mlx(argv[1]);
-		put_map(&mlx, mlx.map);
-	//	dot0.x = 140.0;
-	//	dot0.y = 210.0;
-	//	dot1.x = 500.0;
-	//	dot1.y = 500.0;
-	//	put_line(&mlx, dot0, dot1);
-		mlx_put_image_to_window(mlx.init_ptr, mlx.win_ptr, mlx.img_ptr, 0, 0);
-		mlx_hook(mlx.win_ptr, 2, 0, key_press, &mlx);
-		mlx_mouse_hook(mlx.win_ptr, mouse_press, &mlx);
-		mlx_hook(mlx.win_ptr, 17, 0, close_window, &mlx);
-		mlx_loop(mlx.init_ptr);
+    	fill_map(&fdf, argv[1]);
+		fdf.mlx = init_mlx(mlx_init(), WIN_W, WIN_H);
+    	init_win(&fdf.mlx, fdf.map.name, fdf.mlx.width, fdf.mlx.height);
+    	fdf.mlx.img = init_img(fdf.mlx.mlx_init, fdf.mlx.win, fdf.mlx.width, fdf.mlx.height);
+		put_map(&fdf.map, &fdf);
+		draw_img(fdf.mlx.mlx_init, fdf.mlx.win, fdf.mlx.img);
+		mlx_hook(fdf.mlx.win, 4, 0, mouse, &fdf);
+		mlx_hook(fdf.mlx.win, 2, 0, keyboard, &fdf);
+		mlx_hook(fdf.mlx.win, 17, 0, close_window, &fdf);
+    	mlx_loop(fdf.mlx.mlx_init);
 	}
-	return (0);
+	else
+		return (write(1, "\tUsage: ./fdf filename\n", 23));
 }

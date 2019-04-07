@@ -1,37 +1,27 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/01/08 15:57:11 by sdurgan           #+#    #+#              #
-#    Updated: 2019/03/18 15:54:41 by sdurgan          ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 .PHONY: all clean fclean re
 
 NAME = fdf
 
-SRCS = main.c map_processing.c drawing.c mouse.c gradient_maker.c prj.c \
-	   test.c
-
+SRCS = *.c
 INCS = /usr/local/include
-LIB = minilibx_macos/libmlx.a -lmlx -framework OpenGL -framework AppKit
+LFTDIR = /libft
+LFTFLAGS = -lft
+LMATHFLAG = -lmath
+MLXFLAGS = -lmlx -framework OpenGL -framework AppKit
+MLXDIR = /minilibx_macos
 GCC = gcc
 
 all: $(NAME)
 
 $(NAME): $(SRCS)
 	cd libft && $(MAKE)
-	$(GCC) $(SRCS) $(LIB)  -L./libft/ -lft -o $(NAME)
+	$(GCC) -g $(SRCS) -L.$(MLXDIR) $(MLXFLAGS)  -L.$(LFTDIR) $(LFTFLAGS) -o $(NAME)
 
 clean:
 	cd libft && make clean
 
 fclean: clean
-	/bin/rm -f $(NAME)
+	rm -f $(NAME)
 	cd libft && make fclean
 
 re: fclean all

@@ -3,74 +3,88 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rstracke <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/27 10:22:58 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/02 14:23:24 by sdurgan          ###   ########.fr       */
+/*   Created: 2018/12/08 20:13:05 by rstracke          #+#    #+#             */
+/*   Updated: 2019/03/20 17:16:13 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int			word_count(char const *s, char c)
+static int	wordscnt(char const *s, char c)
 {
-	int		word_count;
-	size_t	i;
+	int count;
+	int i;
 
 	i = 0;
-	word_count = 0;
-	if (ft_strlen(s) != 0)
-		word_count = s[0] != c ? 1 : 0;
-	while (s[i + 1] != '\0')
+	count = 0;
+	while (*(s + i))
 	{
-		if (s[i] == c && s[i + 1] != c)
-			word_count++;
-		i++;
+		while (*(s + i) == c)
+			i++;
+		if (*(s + i) != c && *(s + i) != '\0')
+			count++;
+		while (*(s + i) != c && *(s + i) != '\0')
+			i++;
 	}
-	return (word_count);
+	return (count);
 }
 
-static size_t		word_len(char const *s, char c)
+static void	ft_getwordptr(char const *s, char c, char **strt, char **nd)
 {
-	size_t	start;
-	int		len;
-
-	len = 0;
-	start = 0;
-	while (s[start] == c)
-		start++;
-	while (s[start] != c && s[start] != '\0')
-	{
-		start++;
-		len++;
-	}
-	return (len);
+	if (*s != c && *strt == NULL)
+		*strt = (char *)s;
+	if (*s == c && *strt != NULL && *nd == NULL)
+		*nd = (char *)s;
+	if (*s != c && *(s + 1) == '\0' && *strt != NULL && *nd == NULL)
+		*nd = (char *)(s + 1);
 }
 
-char				**ft_strsplit(char const *s, char c)
+static char	*ft_getword(char const *s, char **strt, char **nd)
+{
+	char	*str;
+
+	if (!(str = ft_strnew(*nd - *strt)))
+		return (NULL);
+	str = ft_strsub(s, *strt - s, *nd - *strt);
+	*strt = NULL;
+	*nd = NULL;
+	return (str);
+}
+
+static char	**ft_clear(char **s)
+{
+	char **str;
+
+	str = s;
+	while (*str)
+		ft_strdel(str++);
+	ft_strdel(s);
+	return (NULL);
+}
+
+char		**ft_strsplit(char const *s, char c)
 {
 	int		i;
+	char	*strt;
+	char	*nd;
+	char	**str;
 	int		j;
-	int		k;
-	char	**ret;
 
-	if (!s)
-		return (NULL);
-	if (!(ret = (char **)malloc(sizeof(char *) * word_count(s, c))))
-		return (NULL);
-	i = 0;
+	strt = NULL;
+	nd = NULL;
+	i = -1;
 	j = 0;
-	while (i < word_count(s, c))
+	if (!s || !(str = (char **)malloc(sizeof(str) * (wordscnt(s, c) + 1))))
+		return (NULL);
+	while (*(s + ++i))
 	{
-		k = 0;
-		if (!(ret[i] = (char *)malloc(sizeof(char) * word_len(&s[j], c))))
-			return (ft_delarr(&ret) == 0) ? (NULL) : (NULL);
-		while (s[j] == c)
-			j++;
-		while (s[j] != c && s[j] != '\0')
-			ret[i][k++] = s[j++];
-		ret[i++][k] = '\0';
+		ft_getwordptr(s + i, c, &strt, &nd);
+		if (strt && nd)
+			if (!(str[j++] = ft_getword(s, &strt, &nd)))
+				return (ft_clear(str));
 	}
-	ret[i] = NULL;
-	return (ret);
+	str[j] = NULL;
+	return (str);
 }

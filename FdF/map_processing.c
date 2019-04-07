@@ -5,120 +5,116 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/02 11:59:31 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/15 14:07:44 by sdurgan          ###   ########.fr       */
+/*   Created: 2019/04/06 15:02:09 by sdurgan           #+#    #+#             */
+/*   Updated: 2019/04/06 15:02:21 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*  В этом файле происходит чтение, проверка на валидность и запись карты
- *  в структуру */
-
+//#include "pixel.h"
+//#include "mapping.h"
 #include "fdf.h"
+//#include <fcntl.h>
+//#include <stdio.h>
 
-// добавляю точку карты в конец структуры
-t_map		*add_dot(t_map **map)
+static char		**map_to_arr(char *filename)
 {
-	t_map	*new_dot;
-	t_map	*head;
+	char	*line;
+	int		ret;
+	char	buf[BUFF_SIZE + 1];
+	char	*tmp;
+	int		fd;
 
-	if (!(new_dot = (t_map *)malloc(sizeof(t_map))))
+	fd = open(filename, O_RDONLY);
+	line = ft_strnew(0);
+	while((ret = read(fd, buf, BUFF_SIZE)))
+	{
+		if (ret == -1)
+		{
+			perror("ERROR map is nor valid");
+			exit(0);
+		}
+		buf[ret] = '\0';
+		tmp = line;
+		line = ft_strjoin(tmp, buf);
+		free(tmp);
+	}
+	return (ft_strsplit(line, '\n'));
+}
+
+static t_pixel	*add_dot(t_pixel **map)
+{
+	t_pixel	*new_dot;
+	t_pixel	*head;
+
+	if (!(new_dot = (t_pixel *)malloc(sizeof(t_pixel))))
 		return (NULL);
 	head = *map;
-	while (*map && (*map)->next)
-		*map = (*map)->next;
+	while (*map && (*map)->right)
+		*map = (*map)->right;
 	if (*map)
 	{
-		(*map)->next = new_dot;
+		(*map)->right = new_dot;
 		*map = head;
 	}
 	else
 		*map = new_dot;
-	new_dot->next = NULL;
+	new_dot->right = NULL;
 	return (new_dot);
 }
 
-// удаление мапы - от утечек
-void		del_map(t_map **map)
-{
-	t_map	*tmp;
-
-	if (*map)
-	{
-		while (*map)
-		{
-			tmp = (*map)->next;
-			free(*map);
-			*map = tmp;
-		}
-		*map = NULL;
-	}
-}
-
-// проверка карты на прямоугольность
-static int		validation(t_map **map, char **line, int len, const int fd)
+static void		map_constructor(t_pixel **map, char *line,
+		char *line_next, int y)
 {
 	char	**row;
+	char	**row_next;
 	int		counter;
-
-	counter = 0;
-	row = ft_strsplit(*line, ' ');
-	while (row[counter])
-		counter++;
-//	ft_delarr(&row);
-	if (counter != len && len != 0)
-	{
-		perror("Map is not valid!\nProgramm has been aborted");
-		ft_strdel(line);
-		del_map(map);
-		close(fd);
-		exit(0);
-	}
-	else
-		len = counter;
-	return (len);
-}
-
-// заполняю структуру t_map информацией из карты
-static void		map_constructor(t_mlx *mlx, t_map **map, char *line, int y)
-{
-	char	**row;
-	int		counter;
-	t_map	*end;
+	t_pixel	*end;
 
 	counter = 0;
 	row = ft_strsplit(line, ' ');
+	row_next = line_next ? ft_strsplit(line_next, ' ') : NULL;
 	while (row[counter])
 	{
 		end = add_dot(map);
 		end->x = counter;
 		end->y = y;
-		end->z = ft_atoi(row[counter]);
+		define_colour(end, row[counter]);
+		if (line_next)
+		{
+			end->down = (t_pixel *)malloc(sizeof(t_pixel));
+			end->down->x = counter;
+			end->down->y = y + 1.0;
+			define_colour(end->down, row_next[counter]);
+		}
+		else
+			end->down = NULL;
 		counter++;
 	}
-	mlx->width = counter;
-	mlx->height += 1;
-//	ft_delarr(&row);
 }
 
-// главная функция, в которой все и происходит, здесь читаю из файла
-t_map			*read_map(char *filename, t_map *map, t_mlx *mlx)
+t_pixel			*read_map(char *name, t_pixel *pixel, int *width, int *height)
 {
-	char		*line;
-	size_t		len;
-	int			fd;
-	int			y;
+	char 	**lines;
+	int 	rows;
+	int 	colls;
+	int 	cur_colls;
 
-	len = 0;
-	y = 0;
-	line = NULL;
-	fd = open(filename, O_RDONLY);
-	while (get_next_line(fd, &line) > 0)
+	cur_colls = 0;
+	colls = 0;
+	rows = -1;
+	lines = map_to_arr(name);
+	while (lines[++rows])
 	{
-		len = validation(&map, &line, len, fd);
-		map_constructor(mlx, &map, line, y);
-		ft_strdel(&line);
-		y += 1;
+		cur_colls = ft_wordscnt(lines[rows], ' ');
+		colls = colls == 0 ? cur_colls : colls;
+		if (colls != cur_colls || (lines[rows + 1] &&
+				ft_wordscnt(lines[rows + 1], ' ') != cur_colls))
+			exit(0);
+		lines[rows + 1] ? map_constructor(&pixel, lines[rows],
+				lines[rows + 1], rows)
+			: map_constructor(&pixel, lines[rows], NULL, rows);
 	}
-	close(fd);
-	return (map);
+	*width = colls;
+	*height = rows;
+	return (pixel);
 }

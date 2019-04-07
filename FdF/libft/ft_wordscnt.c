@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   ft_wordscnt.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/25 21:37:41 by sdurgan           #+#    #+#             */
-/*   Updated: 2018/12/01 15:59:29 by sdurgan          ###   ########.fr       */
+/*   Created: 2019/03/20 17:06:39 by sdurgan           #+#    #+#             */
+/*   Updated: 2019/04/01 14:40:10 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_memcmp(const void *s1, const void *s2, size_t n)
+int	ft_wordscnt(char const *s, char c)
 {
-	unsigned char	*copy_s1;
-	unsigned char	*copy_s2;
-	size_t			i;
+	int count;
+	int i;
 
 	i = 0;
-	copy_s1 = (unsigned char *)s1;
-	copy_s2 = (unsigned char *)s2;
-	while (i < n)
+	count = 0;
+	while (*(s + i))
 	{
-		if (copy_s1[i] != copy_s2[i])
-			return (copy_s1[i] - copy_s2[i]);
-		i++;
+		while (*(s + i) == c)
+			i++;
+		if (*(s + i) != c && *(s + i) != '\0')
+			count++;
+		while (*(s + i) != c && *(s + i) != '\0')
+			i++;
 	}
-	return (0);
+	return (count);
 }

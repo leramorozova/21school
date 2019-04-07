@@ -1,32 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mouse.c                                            :+:      :+:    :+:   */
+/*   keyboard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/10 13:59:43 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/14 13:19:52 by sdurgan          ###   ########.fr       */
+/*   Created: 2019/03/23 12:50:30 by sdurgan           #+#    #+#             */
+/*   Updated: 2019/03/29 14:39:57 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-/* Тут просто зум на колесико выши - функция в мейне ловит сигнал с мыши,
- * здесь я опознаю тип (вниз или вверх) и просто увеличиваю или уменьшаю зум.
- * В мейне карта перерисовывается опять.
- * */
-int		mouse_press(int key, int x, int y, t_mlx *param)
+static void		zoom(int key, int x, int y, t_fdf *param)
 {
-	if (key == 4 && param->zoom > 3)
+	if (key == 4)
 	{
-		param->zoom -= 2;
+		if (param->map.scale > 700)
+			return ;
+		if (param->map.scale > 30)
+			param->map.scale += 2;
+		else if (param->map.scale > 300)
+			param->map.scale += 6;
+		param->map.scale += 2;
 		redraw_image(param);
 	}
-	if (key == 5 && param->zoom < 200)
+	else if (key == 5)
 	{
-		param->zoom += 2;
+		if (param->map.scale - 2 < 1)
+			return ;
+		if (param->map.scale > 30)
+			param->map.scale -= 2;
+		else if (param->map.scale > 300)
+			param->map.scale -= 6;
+		param->map.scale -= 2;
 		redraw_image(param);
 	}
+}
+
+int		mouse(int key, int x, int y, t_fdf *param)
+{
+	if (key == 4 || key == 5)
+		zoom(key, x, y, param);
 	return (0);
 }

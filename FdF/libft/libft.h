@@ -6,13 +6,13 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 16:42:47 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/15 14:47:33 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/03/20 17:09:29 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# define BUFF_SIZE 3
+# define BUFF_SIZE 1000
 
 # include <string.h>
 # include <unistd.h>
@@ -98,6 +98,8 @@ int					ft_sqrt(int nb);
 int					ft_sign(float a);
 float				ft_abs(float a);
 int					get_next_line(const int fd, char **line);
-void                ft_int_swap(int *a, int *b);
+int					ft_wordscnt(char const *s, char c);
+char				*ft_itoa_base(int value, int base);
+int					ft_atoi_base(char *nb, int base);
 
 #endif

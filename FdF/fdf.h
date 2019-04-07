@@ -1,70 +1,103 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/02 12:00:10 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/16 13:27:25 by sdurgan          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef FDF_H
 # define FDF_H
-# include <fcntl.h>
-# include <stdio.h>
-# include <math.h>
-# include "mlx.h"
-# include "libft/libft.h"
 
-typedef struct		s_map // карта, вроде, все очевидно
+#include "libft/libft.h"
+#include "mlx.h"
+#include <fcntl.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <math.h>
+
+
+
+typedef struct      s_img
 {
-	float			x;
-	float			y;
-	float			z;
-	int 			colour;
-	struct s_map	*next;
-}					t_map;
+    void            *img;
+    unsigned int    *data;
+    int             size_line;
+    int             end;
+    int             bits_per_pixel;
+    int             width;
+    int             height;
+}                   t_img;
 
-typedef struct		s_delta // структура для экономии переменных для рисования линий
-{							//  и градиента
-	float			x;
-	float			y;
-	float			err;
-}					t_delta;
-
-typedef struct		s_mlx // основная структура, которая содержит всю возможную инфу
+typedef struct  s_mlx
 {
-	t_map			*map; // карта тут
-	void			*init_ptr; // всякая ерунда для инифиализации
-	void			*win_ptr;
-	void			*img_ptr;
-	void			*img_data;
-	int				*int_data;
-	int				zoom;
-	int				width; // ширина карты
-	int				height; //  высота карты
-	int				volume; // выпуклость карты (типа высота по z)
-	int				window_x; // размер окна (для инициализации)
-	int				window_y; // размер окна (для инициализации)
-	int				offset_x; // переменная для рассчета смещения по х (для центрирования)
-	int				offset_y; // переменная для рассчета смещения по y (для центрирования)
-	int				edge;  // количество пикселей в изображении (для защиты зума0
-}					t_mlx;
+    void        *mlx_init;
+    int         width; // window width
+    int         height;	// window height
+    char        *title;
+	t_img		img;
+    void        *win;
+}               t_mlx;
 
+typedef struct		  	s_pixel
+{
+    double				x;
+    double				y;
+    double				z;
+    unsigned int		color;
+	struct s_pixel		*right;
+	struct s_pixel		*down;
+}              			t_pixel;
 
-t_map				*add_dot(t_map **map);
-t_map				*read_map(char *filename, t_map *map, t_mlx *mlx);
-void				del_map(t_map **map);
-void				put_map(t_mlx *mlx, t_map *map);
-int					close_window(t_mlx *param);
-int					mouse_press(int key, int x, int y, t_mlx *param);
-void				redraw_image(t_mlx *mlx);
-int					get_color(t_map dot_curr, t_map dot0, t_map dot1,
-		t_delta delta);
-void				put_line(t_mlx *mlx, t_map dot0, t_map dot1);
-void				make_z_to_y(t_mlx *mlx);
-void				prj_iso(t_mlx *mlx);
+typedef struct  s_map
+{
+    char        *name;
+    int         width;
+    int         height;
+	int			min_volume;
+	int			max_volume;
+	t_pixel		*pixel;
+	t_pixel		*flatten;
+    float       scale;
+	int			offset_x;
+	int			offset_y;
+	int			move_x;
+	int			move_y;
+	int			change_z;
+}               t_map;
+
+typedef struct  s_fdf
+{
+    t_mlx       mlx;
+    t_map       map;
+    int       	prj;
+}               t_fdf;
+
+# define WIN_W 1920
+# define WIN_H 1080
+
+t_mlx           init_mlx(void *mlx, int width, int height);
+void			init_win(t_mlx *mlx, char *title, int width, int height);
+void			redraw_image(t_fdf *fdf);
+int				mouse(int key, int x, int y, t_fdf *param);
+int				keyboard(int key, t_fdf *param);
+int				close_window(t_fdf *param);
+void			fill_map(t_fdf *fdf, char *name);
+void			offset_x(t_map *map);
+void			offset_y(t_map *map);
+void    		define_colour(t_pixel *pixel, char *str);
+t_pixel         		init_pixel(double x, double y, double z,
+		unsigned int color);
+t_pixel					*copy_pixel(t_pixel *source);
+int						get_color(t_pixel dot_curr, t_pixel dot0, t_pixel
+		dot1, t_pixel delta);
+void					put_color(t_pixel **pixel, double min_volume, double
+		max_volume);
+t_img               init_img(void *mlx, void *win, int width, int height);
+int                 draw_img(void *mlx, void *win, t_img img);
+void                clear_img(t_img *img);
+int                 put_pix_img(void *mlx, void *mx, t_pixel p);
+int             validate_map(t_map *map);
+int             get_map(t_map *map);
+t_map           init_map(char *name);
+int             destroy_map(t_map *map);
+t_pixel    		*read_map(char *name, t_pixel *pixel, int *wigth, int *height);
+void	draw_line(t_pixel f, t_pixel s, t_fdf *fdf);
+void	put_map(t_map *map, t_fdf *fdf);
+t_mlx           init_mlx(void *mlx, int width, int height);
+void			init_win(t_mlx *mlx, char *title, int width, int height);
+void	prj_iso(t_map *map);
 
 #endif
