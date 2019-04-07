@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/23 13:12:07 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/07 13:29:56 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/07 14:29:49 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void		put_flatten(t_fdf *fdf)
 static void		plus_z(int key, t_fdf *fdf)
 {
 	t_pixel			*begin;
-	t_pixel  		*save;
+	t_pixel			*save;
 
 	save = copy_pixel(fdf->map.flatten);
 	begin = fdf->map.flatten;
@@ -57,7 +57,7 @@ static void		plus_z(int key, t_fdf *fdf)
 		fdf->map.flatten->z *= fdf->map.flatten->z == 0 ? 0 : fdf->map.change_z;
 		if (fdf->map.flatten->down)
 			fdf->map.flatten->down->z *= fdf->map.flatten->down->z == 0 ?
-			   0 : fdf->map.change_z;
+				0 : fdf->map.change_z;
 		fdf->map.flatten = fdf->map.flatten->right;
 	}
 	fdf->map.flatten = begin;

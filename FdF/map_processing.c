@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/06 15:02:09 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/07 13:05:06 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/07 14:21:09 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char		**map_to_arr(char *filename)
 
 	fd = open(filename, O_RDONLY);
 	line = ft_strnew(0);
-	while((ret = read(fd, buf, BUFF_SIZE)))
+	while ((ret = read(fd, buf, BUFF_SIZE)))
 	{
 		if (ret == -1)
 		{
@@ -92,10 +92,10 @@ static void		map_constructor(t_pixel **map, char *line,
 
 t_pixel			*read_map(char *name, t_pixel *pixel, int *width, int *height)
 {
-	char 	**lines;
-	int 	rows;
-	int 	colls;
-	int 	cur_colls;
+	char	**lines;
+	int		rows;
+	int		colls;
+	int		cur_colls;
 
 	cur_colls = 0;
 	colls = 0;

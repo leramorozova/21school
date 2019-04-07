@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 12:32:51 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/07 13:20:19 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/07 14:46:09 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void			put_color(t_pixel **pixel, double min, double max)
 		{
 			(*pixel)->z == max ? (*pixel)->color = 0xFE4900 : 0;
 			if ((*pixel)->z == min)
-		 		(*pixel)->color = 0x00FE7A;
+				(*pixel)->color = 0x00FE7A;
 			else
 				(*pixel)->color = count_color(percent(min, max, (*pixel)->z));
 		}
@@ -58,7 +58,7 @@ void			put_color(t_pixel **pixel, double min, double max)
 		{
 			(*pixel)->down->z == max ? (*pixel)->down->color = 0xFE4900 : 0;
 			if ((*pixel)->down->z == min)
-			 	(*pixel)->down->color = 0x00FE7A;
+				(*pixel)->down->color = 0x00FE7A;
 			else
 				(*pixel)->down->color =
 					count_color(percent(min, max, (*pixel)->down->z));
@@ -71,17 +71,17 @@ void			put_color(t_pixel **pixel, double min, double max)
 int				get_color(t_pixel dot_curr, t_pixel dot0, t_pixel dot1,
 		t_pixel delta)
 {
-	int     red;
-	int     green;
-	int     blue;
-	double  percentage;
+	int		red;
+	int		green;
+	int		blue;
+	double	percentage;
 
 	if (dot_curr.color == dot1.color)
-        return (dot_curr.color);
+		return (dot_curr.color);
 	if (delta.x > delta.y)
 		percentage = percent(dot0.x, dot1.x, dot_curr.x);
 	else
-        percentage = percent(dot0.y, dot1.y, dot_curr.y);
+		percentage = percent(dot0.y, dot1.y, dot_curr.y);
 	red = get_light((dot0.color >> 16) & 0xFF, (dot1.color >> 16) & 0xFF,
 			percentage);
 	green = get_light((dot0.color >> 8) & 0xFF, (dot1.color >> 8) & 0xFF,

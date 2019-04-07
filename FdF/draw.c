@@ -6,25 +6,21 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 18:56:17 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/06 15:10:18 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/07 14:27:34 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "draw.h"
-//#include "isometry.h"
-//#include "pixel.h"
 #include "fdf.h"
-#define MARGIN_ERROR 1
 
 static int	barely_equals(double c, double b)
 {
 	double a;
 
 	a = c - b;
-	return (((a < 0.) ? -a : a) < MARGIN_ERROR);
+	return (((a < 0.) ? -a : a) < 1);
 }
 
-void	draw_line(t_pixel a, t_pixel b, t_fdf *fdf)
+void		draw_line(t_pixel a, t_pixel b, t_fdf *fdf)
 {
 	t_pixel	delta;
 	t_pixel	sign;
@@ -46,11 +42,8 @@ void	draw_line(t_pixel a, t_pixel b, t_fdf *fdf)
 			error[0] -= delta.y;
 			cur.x += sign.x;
 		}
-		if (error[1] < delta.x)
-		{
+		if (error[1] < delta.x && (cur.y += sign.y))
 			error[0] += delta.x;
-			cur.y += sign.y;
-		}
 	}
 }
 
@@ -65,8 +58,8 @@ static int	make_offset(t_fdf *fdf, t_map *map, int count)
 				map->pixel->y * map->scale + map->offset_y,
 				map->pixel->down->z, map->pixel->down->color);
 		dot1 = init_pixel(map->pixel->down->x * map->scale + map->offset_x,
-			 map->pixel->down->y * map->scale + map->offset_y,
-			 map->pixel->down->z, map->pixel->down->color);
+				map->pixel->down->y * map->scale + map->offset_y,
+				map->pixel->down->z, map->pixel->down->color);
 		draw_line(dot0, dot1, fdf);
 		map->pixel = map->pixel->right;
 		count = 1;
@@ -76,34 +69,40 @@ static int	make_offset(t_fdf *fdf, t_map *map, int count)
 	return (count);
 }
 
-void	put_map(t_map *map, t_fdf *fdf)
+static void	put_map_processing(t_map *map, t_fdf *fdf)
 {
-	t_pixel		*begin;
 	t_pixel		dot0;
 	t_pixel		dot1;
+
+	dot0 = init_pixel(map->pixel->x * map->scale + map->offset_x,
+				map->pixel->y * map->scale + map->offset_y, map->pixel->z,
+				map->pixel->color);
+	dot1 = init_pixel(map->pixel->right->x * map->scale + map->offset_x,
+			map->pixel->right->y * map->scale + map->offset_y,
+				map->pixel->right->z, map->pixel->right->color);
+	draw_line(dot0, dot1, fdf);
+	if (map->pixel->down)
+	{
+		dot1 = init_pixel(map->pixel->down->x * map->scale + map->offset_x,
+				map->pixel->down->y * map->scale + map->offset_y,
+				map->pixel->down->z, map->pixel->down->color);
+		draw_line(dot0, dot1, fdf);
+	}
+}
+
+void		put_map(t_map *map, t_fdf *fdf)
+{
+	t_pixel		*begin;
 	int			count;
 
 	begin = map->pixel;
 	offset_x(map);
 	offset_y(map);
 	count = 0;
-	while(map->pixel->right)
+	while (map->pixel->right)
 	{
 		count = make_offset(fdf, map, count);
-		dot0 = init_pixel(map->pixel->x * map->scale + map->offset_x,
-				map->pixel->y * map->scale + map->offset_y, map->pixel->z,
-				map->pixel->color);
-		dot1 = init_pixel(map->pixel->right->x * map->scale + map->offset_x,
-			map->pixel->right->y * map->scale + map->offset_y, map->pixel->right->z,
-				map->pixel->right->color);
-		draw_line(dot0, dot1, fdf);
-		if (map->pixel->down)
-		{
-			dot1 = init_pixel(map->pixel->down->x * map->scale + map->offset_x,
-				 map->pixel->down->y * map->scale + map->offset_y,
-				 map->pixel->down->z, map->pixel->down->color);
-			draw_line(dot0, dot1, fdf);
-		}
+		put_map_processing(map, fdf);
 		map->pixel = map->pixel->right;
 	}
 	map->pixel = begin;

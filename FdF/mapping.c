@@ -6,21 +6,21 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/06 15:11:03 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/07 13:21:46 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/07 14:17:25 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_map   	init_map(char *name)
+t_map			init_map(char *name)
 {
-    t_map   map;
+	t_map	map;
 
-    map.name = name;
-    map.width= 0;
-    map.height = 0;
+	map.name = name;
+	map.width = 0;
+	map.height = 0;
 	map.pixel = 0;
-    map.scale = 0;
+	map.scale = 0;
 	map.offset_x = 0;
 	map.offset_y = 0;
 	map.move_x = 0;
@@ -29,10 +29,10 @@ t_map   	init_map(char *name)
 	map.min_volume = 0;
 	map.max_volume = 0;
 	map.flatten = 0;
-    return (map);
+	return (map);
 }
 
-void		offset_x(t_map *map)
+void			offset_x(t_map *map)
 {
 	t_pixel *save;
 	float	min;
@@ -85,15 +85,15 @@ static int		autoscaling(t_map *map)
 	while (map->pixel)
 	{
 		map->min_volume = map->pixel->z < map->min_volume ? map->pixel->z :
-			 map->min_volume;
+			map->min_volume;
 		map->max_volume = map->pixel->z > map->max_volume ? map->pixel->z :
-			 map->max_volume;
+			map->max_volume;
 		map->pixel = map->pixel->right;
 	}
 	map->pixel = begin;
 	scale = (WIN_H / (map->width * 2));
 	scale += scale < 3 ? 2 : 0;
-	return scale;
+	return (scale);
 }
 
 void			fill_map(t_fdf *fdf, char *name)

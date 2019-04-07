@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/06 15:07:34 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/07 13:23:06 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/07 14:19:45 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,24 @@
 
 t_img		init_img(void *mlx, void *win, int width, int height)
 {
-    t_img   img;
+	t_img	img;
 
-    img.width = width;
-    img.height = height;
-    img.img = mlx_new_image(mlx, img.width, img.height);
-    if(!img.img)
-    {
-        img.data = NULL;
-        return (img);
-    }
-    img.data = (unsigned int *)mlx_get_data_addr(img.img, &img.bits_per_pixel,
-                                                &img.size_line, &img.end);
-	return(img);
+	img.width = width;
+	img.height = height;
+	img.img = mlx_new_image(mlx, img.width, img.height);
+	if (!img.img)
+	{
+		img.data = NULL;
+		return (img);
+	}
+	img.data = (unsigned int *)mlx_get_data_addr(img.img, &img.bits_per_pixel,
+			&img.size_line, &img.end);
+	return (img);
 }
 
 int			draw_img(void *mlx, void *win, t_img img)
 {
-    mlx_put_image_to_window(mlx, win, img.img, 0, 0);
+	mlx_put_image_to_window(mlx, win, img.img, 0, 0);
 	mlx_string_put(mlx, win, 10, 5, 0xFFFFFF, "press `esc` or [x] to leave\n");
 	mlx_string_put(mlx, win, 10, 30, 0xFFFFFF, "mouse scroll: zoom\n");
 	mlx_string_put(mlx, win, 10, 55, 0xFFFFFF,
@@ -42,15 +42,50 @@ int			draw_img(void *mlx, void *win, t_img img)
 	return (0);
 }
 
-int 	put_pix_img(void *mlx, void *mx, t_pixel p)
+t_pixel		init_pixel(double x, double y, double z, unsigned int color)
 {
-    t_mlx			*m;
-    t_img			*img;
-    unsigned int	color;
+	t_pixel	pix;
 
-    m = (t_mlx *)mx;
-    img = &(m->img);
-	if ((p.y < img->height) &&  (p.y > 0) && (p.x < img->width) &&  (p.x > 0))
-        img->data[(int)p.y * img->width + (int)p.x] = p.color;
-    return (1);
+	pix.x = x;
+	pix.y = y;
+	pix.z = z;
+	pix.color = color;
+	return (pix);
+}
+
+void		copy_point(t_pixel *source, t_pixel *copy)
+{
+	copy->x = source->x;
+	copy->y = source->y;
+	copy->z = source->z;
+	copy->color = source->color;
+}
+
+t_pixel		*copy_pixel(t_pixel *source)
+{
+	t_pixel		*begin_source;
+	t_pixel		*begin_copy;
+	t_pixel		*copy;
+
+	begin_source = source;
+	copy = (t_pixel *)malloc(sizeof(t_pixel));
+	begin_copy = copy;
+	copy_point(source, copy);
+	while (source)
+	{
+		if (source->right)
+		{
+			copy->right = (t_pixel *)malloc(sizeof(t_pixel));
+			copy_point(source->right, copy->right);
+		}
+		if (source->down)
+		{
+			copy->down = (t_pixel *)malloc(sizeof(t_pixel));
+			copy_point(source->down, copy->down);
+		}
+		copy = copy->right;
+		source = source->right;
+	}
+	source = begin_source;
+	return (begin_copy);
 }
