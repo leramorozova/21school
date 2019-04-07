@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 18:56:17 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/07 14:27:34 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/07 15:47:38 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void		draw_line(t_pixel a, t_pixel b, t_fdf *fdf)
 			error[0] -= delta.y;
 			cur.x += sign.x;
 		}
-		if (error[1] < delta.x && (cur.y += sign.y))
-			error[0] += delta.x;
+		error[1] < delta.x ? cur.y += sign.y : 0;
+		error[1] < delta.x ? error[0] += delta.x : 0;
 	}
 }
 
@@ -94,11 +94,19 @@ void		put_map(t_map *map, t_fdf *fdf)
 {
 	t_pixel		*begin;
 	int			count;
+	t_pixel		single;
 
 	begin = map->pixel;
 	offset_x(map);
 	offset_y(map);
 	count = 0;
+	if (!map->pixel->right)
+	{
+		single = init_pixel(map->pixel->x * map->scale + map->offset_x,
+				map->pixel->y * map->scale + map->offset_y, map->pixel->z,
+				0x00FE7A);
+		put_pix_img(fdf->mlx.mlx_init, fdf, single);
+	}
 	while (map->pixel->right)
 	{
 		count = make_offset(fdf, map, count);
