@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/06 15:07:34 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/08 16:45:31 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/08 18:49:18 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ t_pixel		*copy_pixel(t_pixel *source)
 	copy_point(source, copy);
 	while (source)
 	{
-		if (source->right)
+		if (source->right && !(copy->down = NULL))
 		{
 			copy->right = (t_pixel *)malloc(sizeof(t_pixel));
 			copy_point(source->right, copy->right);
