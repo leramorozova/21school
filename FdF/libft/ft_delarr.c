@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/02 17:03:43 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/08 14:32:45 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/08 14:59:25 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,15 @@
 void		ft_delarr(char ***arr)
 {
 	int		t;
+	char	**str;
 
 	t = 0;
-	while ((*arr)[t])
+	str = *arr;
+	while (*str)
 	{
-		ft_strdel(&((*arr)[t]));
+		ft_strdel(str);
 		t++;
+		str = &(*arr)[t];
 	}
-	if (*arr)
-		free(**arr);
-	arr = NULL;
+	ft_memdel((void **)arr);
 }

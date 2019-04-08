@@ -6,7 +6,7 @@
 /*   By: rstracke <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 20:13:05 by rstracke          #+#    #+#             */
-/*   Updated: 2019/03/20 17:16:13 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/08 17:16:41 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ static char	*ft_getword(char const *s, char **strt, char **nd)
 {
 	char	*str;
 
-	if (!(str = ft_strnew(*nd - *strt)))
-		return (NULL);
 	str = ft_strsub(s, *strt - s, *nd - *strt);
 	*strt = NULL;
 	*nd = NULL;

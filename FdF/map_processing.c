@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/06 15:02:09 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/08 14:31:57 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/08 17:13:35 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,8 @@ static void		map_to_arr(char *filename, char ***lines)
 			exit(ft_putstr("ERROR: map is invalid\n"));
 		buf[ret] = '\0';
 		tmp = line;
-		ft_strdel(&line);
 		line = ft_strjoin(tmp, buf);
-	//	ft_strdel(&tmp);
+		ft_strdel(&tmp);
 	}
 	ft_strlen(line) == 0 ? exit(ft_putstr("ERROR: Is map empty?\n")) : 0;
 	*lines = ft_strsplit(line, '\n');
@@ -66,15 +65,16 @@ static void		map_constructor(t_pixel **map, char *line,
 	int		counter;
 	t_pixel	*end;
 
-	counter = 0;
+	counter = -1;
 	row = ft_strsplit(line, ' ');
 	row_next = line_next ? ft_strsplit(line_next, ' ') : NULL;
-	while (row[counter])
+	while (row[++counter])
 	{
 		end = add_dot(map);
 		end->x = counter;
 		end->y = y;
 		define_colour(end, row[counter]);
+		end->down = NULL;
 		if (line_next)
 		{
 			end->down = (t_pixel *)malloc(sizeof(t_pixel));
@@ -82,9 +82,6 @@ static void		map_constructor(t_pixel **map, char *line,
 			end->down->y = y + 1.0;
 			define_colour(end->down, row_next[counter]);
 		}
-		else
-			end->down = NULL;
-		counter++;
 	}
 	ft_delarr(&row);
 	row_next ? ft_delarr(&row_next) : 0;

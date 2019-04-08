@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 14:37:13 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/07 15:20:01 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/08 16:44:33 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void			define_colour(t_pixel *pixel, char *str)
 		row = ft_strsplit(str, ',');
 		pixel->z = ft_atoi(row[0]);
 		pixel->color = ft_atoi_base(row[1], 16);
+		ft_delarr(&row);
 	}
 	else
 		pixel->z = ft_atoi(str);
