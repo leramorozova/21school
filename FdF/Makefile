@@ -6,7 +6,7 @@
 #    By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/07 14:53:13 by sdurgan           #+#    #+#              #
-#    Updated: 2019/04/07 14:53:20 by sdurgan          ###   ########.fr        #
+#    Updated: 2019/04/08 18:27:00 by sdurgan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,11 @@
 
 NAME = fdf
 
-SRCS = *.c
+SRCS = srcs/colours.c srcs/draw.c srcs/isometry.c srcs/main.c \
+	   srcs/mlx_graphics.c srcs/mlx_img.c srcs/mapping.c srcs/keyboard.c \
+	   srcs/map_processing.c
 INCS = /usr/local/include
-LFTDIR = /libft
+LFTDIR = /srcs/libft
 LFTFLAGS = -lft
 LMATHFLAG = -lmath
 MLXFLAGS = -lmlx -framework OpenGL -framework AppKit
@@ -26,14 +28,14 @@ GCC = gcc
 all: $(NAME)
 
 $(NAME): $(SRCS)
-	cd libft && $(MAKE)
-	$(GCC) $(SRCS) -L.$(MLXDIR) $(MLXFLAGS)  -L.$(LFTDIR) $(LFTFLAGS) -o $(NAME)
+	cd srcs/libft && $(MAKE)
+	$(GCC) $(SRCS) -L.$(MLXDIR) $(MLXFLAGS) -L.$(LFTDIR) $(LFTFLAGS) -o $(NAME)
 
 clean:
-	cd libft && make clean
+	cd srcs/libft && make clean
 
 fclean: clean
 	rm -f $(NAME)
-	cd libft && make fclean
+	cd srcs/libft && make fclean
 
 re: fclean all
