@@ -6,13 +6,13 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/06 15:02:09 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/07 14:21:09 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/08 14:31:57 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static char		**map_to_arr(char *filename)
+static void		map_to_arr(char *filename, char ***lines)
 {
 	char	*line;
 	int		ret;
@@ -25,18 +25,16 @@ static char		**map_to_arr(char *filename)
 	while ((ret = read(fd, buf, BUFF_SIZE)))
 	{
 		if (ret == -1)
-		{
-			perror("ERROR map is nor valid");
-			exit(0);
-		}
+			exit(ft_putstr("ERROR: map is invalid\n"));
 		buf[ret] = '\0';
 		tmp = line;
+		ft_strdel(&line);
 		line = ft_strjoin(tmp, buf);
-		free(tmp);
+	//	ft_strdel(&tmp);
 	}
-	if (ft_strlen(line) == 0)
-		exit(ft_putstr("Programm has been aborted!\nIs map empty?\n"));
-	return (ft_strsplit(line, '\n'));
+	ft_strlen(line) == 0 ? exit(ft_putstr("ERROR: Is map empty?\n")) : 0;
+	*lines = ft_strsplit(line, '\n');
+	ft_strdel(&line);
 }
 
 static t_pixel	*add_dot(t_pixel **map)
@@ -88,6 +86,8 @@ static void		map_constructor(t_pixel **map, char *line,
 			end->down = NULL;
 		counter++;
 	}
+	ft_delarr(&row);
+	row_next ? ft_delarr(&row_next) : 0;
 }
 
 t_pixel			*read_map(char *name, t_pixel *pixel, int *width, int *height)
@@ -100,19 +100,19 @@ t_pixel			*read_map(char *name, t_pixel *pixel, int *width, int *height)
 	cur_colls = 0;
 	colls = 0;
 	rows = -1;
-	lines = map_to_arr(name);
+	map_to_arr(name, &lines);
 	while (lines[++rows])
 	{
 		cur_colls = ft_wordscnt(lines[rows], ' ');
 		colls = colls == 0 ? cur_colls : colls;
 		if (colls != cur_colls || (lines[rows + 1] &&
 				ft_wordscnt(lines[rows + 1], ' ') != cur_colls))
-			exit(ft_putstr(
-				"Program has been aborted!\nSorry! Map seems to be invalid\n"));
+			exit(ft_putstr("ERROR: map is invalid\n"));
 		lines[rows + 1] ? map_constructor(&pixel, lines[rows],
 				lines[rows + 1], rows)
 			: map_constructor(&pixel, lines[rows], NULL, rows);
 	}
+	ft_delarr(&lines);
 	*width = colls;
 	*height = rows;
 	return (pixel);

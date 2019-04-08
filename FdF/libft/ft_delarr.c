@@ -6,13 +6,13 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/02 17:03:43 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/03/09 13:45:28 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/08 14:32:45 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_delarr(char ***arr)
+void		ft_delarr(char ***arr)
 {
 	int		t;
 
@@ -25,5 +25,4 @@ int		ft_delarr(char ***arr)
 	if (*arr)
 		free(**arr);
 	arr = NULL;
-	return (0);
 }

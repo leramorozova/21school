@@ -1,0 +1,682 @@
+==10213== Memcheck, a memory error detector
+==10213== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==10213== Using Valgrind-3.14.0-353a3587bb-20181007X and LibVEX; rerun with -h for copyright info
+==10213== Command: ./fdf maps/42.fdf
+==10213== Parent PID: 1976
+==10213== 
+--10213-- 
+--10213-- Valgrind options:
+--10213--    --tool=memcheck
+--10213--    --leak-check=full
+--10213--    --show-leak-kinds=all
+--10213--    --show-reachable=yes
+--10213--    --track-origins=yes
+--10213--    --verbose
+--10213--    -v
+--10213--    --log-file=valgrind-out.txt
+--10213--    --suppressions=/Users/sdurgan/leak1.supp
+--10213-- Output from sysctl({CTL_KERN,KERN_VERSION}):
+--10213--   Darwin Kernel Version 16.7.0: Thu Jun 21 20:07:39 PDT 2018; root:xnu-3789.73.14~1/RELEASE_X86_64
+--10213-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-avx-avx2-bmi
+--10213-- Page sizes: currently 4096, max supported 4096
+--10213-- Valgrind library directory: /Users/sdurgan/.brew/Cellar/valgrind/3.14.0/lib/valgrind
+--10213-- TT/TC: VG_(init_tt_tc) (startup of code management)
+--10213-- TT/TC: cache: ignoring --avg-transtab-entry-size=0, using tool provided default 640
+--10213-- TT/TC: cache: 32 sectors of 27,597,024 bytes each = 883,104,768 total TC
+--10213-- TT/TC: table: 32 tables[42588] of C 4,769,856 + H 1,362,816 bytes each = 196,245,504 total TT
+--10213-- TT/TC: table: 42588 tt entries each = 1,362,816 total tt entries
+--10213-- TT/TC: table: 32 htt[65521] of 131,042 bytes each = 4,193,344 total HTT (htt[65521] 65% max occup)
+--10213-- ./fdf (rx at 0x100000000, rw at 0x100020000)
+--10213--    reading syms   from primary file (91 61)
+--10213--    dSYM= ./fdf.dSYM/Contents/Resources/DWARF/fdf
+--10213--    dSYM does not have correct UUID (out of date?)
+--10213-- run: /usr/bin/dsymutil "./fdf"
+--10213--    dsyms= ./fdf.dSYM/Contents/Resources/DWARF/fdf
+--10213-- /usr/lib/dyld (rx at 0x100025000, rw at 0x100063000)
+--10213--    reading syms   from primary file (6 1223)
+==10213== Adding active redirection:
+--10213--     new: 0x100044f40 (strcpy              ) R-> (0000.0) 0x25805769d ???
+==10213== Adding active redirection:
+--10213--     new: 0x100044fe0 (strlen              ) R-> (0000.0) 0x258057650 ???
+==10213== Adding active redirection:
+--10213--     new: 0x100045130 (arc4random          ) R-> (0000.0) 0x25805771f ???
+==10213== Adding active redirection:
+--10213--     new: 0x1000487dd (strcat              ) R-> (0000.0) 0x258057661 ???
+==10213== Adding active redirection:
+--10213--     new: 0x10004881b (strlcat             ) R-> (0000.0) 0x2580576ba ???
+==10213== Adding active redirection:
+--10213--     new: 0x10004b620 (strcmp              ) R-> (0000.0) 0x258057681 ???
+--10213-- Scheduler: using generic scheduler lock implementation.
+--10213-- Reading suppressions file: /Users/sdurgan/leak1.supp
+--10213-- Reading suppressions file: /Users/sdurgan/.brew/Cellar/valgrind/3.14.0/lib/valgrind/default.supp
+==10213== embedded gdbserver: reading from /var/folders/zz/zyxvpxvq6csfxvn_n0000xh80007c2/T//vgdb-pipe-from-vgdb-to-10213-by-sdurgan-on-???
+==10213== embedded gdbserver: writing to   /var/folders/zz/zyxvpxvq6csfxvn_n0000xh80007c2/T//vgdb-pipe-to-vgdb-from-10213-by-sdurgan-on-???
+==10213== embedded gdbserver: shared mem   /var/folders/zz/zyxvpxvq6csfxvn_n0000xh80007c2/T//vgdb-pipe-shared-mem-vgdb-10213-by-sdurgan-on-???
+==10213== 
+==10213== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==10213== don't want to do, unless you know exactly what you're doing,
+==10213== or are doing some strange experiment):
+==10213==   /Users/sdurgan/.brew/Cellar/valgrind/3.14.0/lib/valgrind/../../bin/vgdb --pid=10213 ...command...
+==10213== 
+==10213== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==10213==   /path/to/gdb ./fdf
+==10213== and then give GDB the following command
+==10213==   target remote | /Users/sdurgan/.brew/Cellar/valgrind/3.14.0/lib/valgrind/../../bin/vgdb --pid=10213
+==10213== --pid is optional if only one valgrind process is running
+==10213== 
+--10213-- TT/TC: initialise sector 0
+--10213-- REDIR: 0x10004b620 (dyld:strcmp) redirected to 0x258057681 (???)
+--10213-- REDIR: 0x100045130 (dyld:arc4random) redirected to 0x25805771f (???)
+--10213-- REDIR: 0x100044fe0 (dyld:strlen) redirected to 0x258057650 (???)
+--10213-- REDIR: 0x100044f40 (dyld:strcpy) redirected to 0x25805769d (???)
+--10213-- REDIR: 0x1000487dd (dyld:strcat) redirected to 0x258057661 (???)
+--10213-- REDIR: 0x10004881b (dyld:strlcat) redirected to 0x2580576ba (???)
+--10213-- /Users/sdurgan/.brew/Cellar/valgrind/3.14.0/lib/valgrind/vgpreload_core-amd64-darwin.so (rx at 0x1000b0000, rw at 0x1000b6000)
+--10213--    reading syms   from primary file (3 88)
+--10213--    dSYM= /Users/sdurgan/.brew/Cellar/valgrind/3.14.0/lib/valgrind/vgpreload_core-amd64-darwin.so.dSYM/Contents/Resources/DWARF/vgpreload_core-amd64-darwin.so
+--10213-- /Users/sdurgan/.brew/Cellar/valgrind/3.14.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so (rx at 0x1000ba000, rw at 0x1000c3000)
+--10213--    reading syms   from primary file (72 96)
+--10213--    dSYM= /Users/sdurgan/.brew/Cellar/valgrind/3.14.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so.dSYM/Contents/Resources/DWARF/vgpreload_memcheck-amd64-darwin.so
+==10213== Adding active redirection:
+--10213--     new: 0x10004b480 (memchr              ) R-> (2017.0) 0x1000bd10a memchr
+--10213-- /System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL (rx at 0x1000c9000, rw at 0x1000d8000)
+--10213--    reading syms   from primary file (78 1)
+--10213-- /System/Library/Frameworks/AppKit.framework/Versions/C/AppKit (rx at 0x1000e1000, rw at 0x100ebb000)
+--10213--    reading syms   from primary file (6882 79746)
+--10213-- /usr/lib/libSystem.B.dylib (rx at 0x101904000, rw at 0x101906000)
+--10213--    reading syms   from primary file (31 5)
+--10213-- /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation (rx at 0x10190f000, rw at 0x101da9000)
+--10213--    reading syms   from primary file (2787 8416)
+--10213-- /System/Library/Frameworks/Foundation.framework/Versions/C/Foundation (rx at 0x102047000, rw at 0x1023ee000)
+--10213--    reading syms   from primary file (2334 24242)
+--10213-- /usr/lib/libobjc.A.dylib (rx at 0x1026e4000, rw at 0x102ab7000)
+--10213--    reading syms   from primary file (368 886)
+--10213-- /System/Library/Frameworks/IOKit.framework/Versions/A/IOKit (rx at 0x102b94000, rw at 0x102c2b000)
+--10213--    reading syms   from primary file (1563 992)
+--10213-- /System/Library/Frameworks/Security.framework/Versions/A/Security (rx at 0x102c6e000, rw at 0x102f71000)
+--10213--    reading syms   from primary file (3152 17951)
+--10213-- /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGLU.dylib (rx at 0x10311c000, rw at 0x10315e000)
+--10213--    reading syms   from primary file (78 722)
+--10213-- /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGFXShared.dylib (rx at 0x10316d000, rw at 0x103177000)
+--10213--    reading syms   from primary file (79 40)
+--10213-- /usr/lib/libbsm.0.dylib (rx at 0x10317e000, rw at 0x10318f000)
+--10213--    reading syms   from primary file (175 80)
+--10213-- /System/Library/Frameworks/IOSurface.framework/Versions/A/IOSurface (rx at 0x1031b8000, rw at 0x1031bf000)
+--10213--    reading syms   from primary file (242 92)
+--10213-- /usr/lib/libc++.1.dylib (rx at 0x1031cb000, rw at 0x103222000)
+--10213--    reading syms   from primary file (1979 1610)
+--10213-- /System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics (rx at 0x10327f000, rw at 0x103902000)
+--10213--    reading syms   from primary file (3400 9385)
+--10213-- /System/Library/Frameworks/CoreText.framework/Versions/A/CoreText (rx at 0x103a12000, rw at 0x103b60000)
+--10213--    reading syms   from primary file (707 5400)
+--10213-- /System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO (rx at 0x103c21000, rw at 0x103d82000)
+--10213--    reading syms   from primary file (630 5916)
+--10213-- /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/ATS (rx at 0x103e1a000, rw at 0x103e89000)
+--10213--    reading syms   from primary file (415 1469)
+--10213-- /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ColorSync.framework/Versions/A/ColorSync (rx at 0x103eb6000, rw at 0x103f61000)
+--10213--    reading syms   from primary file (390 2881)
+--10213-- /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/HIServices.framework/Versions/A/HIServices (rx at 0x103fad000, rw at 0x103fff000)
+--10213--    reading syms   from primary file (529 1258)
+--10213-- /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/LangAnalysis.framework/Versions/A/LangAnalysis (rx at 0x104036000, rw at 0x104046000)
+--10213--    reading syms   from primary file (90 273)
+--10213-- /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/PrintCore.framework/Versions/A/PrintCore (rx at 0x104054000, rw at 0x1048fe000)
+--10213--    reading syms   from primary file (498 1129)
+--10213-- Discarding syms at 0x104054000-0x1040a2000 in /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/PrintCore.framework/Versions/A/PrintCore (have_dinfo 1)
+--10213-- /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/QD.framework/Versions/A/QD (rx at 0x104054000, rw at 0x104967000)
+--10213--    reading syms   from primary file (1061 517)
+--10213-- Discarding syms at 0x104054000-0x104090000 in /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/QD.framework/Versions/A/QD (have_dinfo 1)
+--10213-- /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/SpeechSynthesis.framework/Versions/A/SpeechSynthesis (rx at 0x104054000, rw at 0x104060000)
+--10213--    reading syms   from primary file (169 365)
+--10213-- /System/Library/Frameworks/CFNetwork.framework/Versions/A/CFNetwork (rx at 0x104073000, rw at 0x104d6b000)
+--10213--    reading syms   from primary file (2143 22462)
+--10213-- Discarding syms at 0x104073000-0x104450000 in /System/Library/Frameworks/CFNetwork.framework/Versions/A/CFNetwork (have_dinfo 1)
+--10213-- /usr/lib/libz.1.dylib (rx at 0x104077000, rw at 0x104089000)
+--10213--    reading syms   from primary file (71 1)
+--10213-- /usr/lib/libauto.dylib (rx at 0x10408e000, rw at 0x10408f000)
+--10213--    reading syms   from primary file (65 1)
+--10213-- /System/Library/Frameworks/SystemConfiguration.framework/Versions/A/SystemConfiguration (rx at 0x104094000, rw at 0x1050fd000)
+--10213--    reading syms   from primary file (997 928)
+--10213-- Discarding syms at 0x104094000-0x104104000 in /System/Library/Frameworks/SystemConfiguration.framework/Versions/A/SystemConfiguration (have_dinfo 1)
+--10213-- /usr/lib/libsqlite3.dylib (rx at 0x104094000, rw at 0x105283000)
+--10213--    reading syms   from primary file (242 1151)
+--10213-- Discarding syms at 0x104094000-0x1041db000 in /usr/lib/libsqlite3.dylib (have_dinfo 1)
+--10213-- /usr/lib/libxml2.2.dylib (rx at 0x104094000, rw at 0x105392000)
+--10213--    reading syms   from primary file (1766 1194)
+--10213-- Discarding syms at 0x104094000-0x104184000 in /usr/lib/libxml2.2.dylib (have_dinfo 1)
+--10213-- /usr/lib/libicucore.A.dylib (rx at 0x104094000, rw at 0x1055f0000)
+--10213--    reading syms   from primary file (6763 1)
+--10213-- Discarding syms at 0x104094000-0x1042ba000 in /usr/lib/libicucore.A.dylib (have_dinfo 1)
+--10213-- /usr/lib/libnetwork.dylib (rx at 0x104094000, rw at 0x10573a000)
+--10213--    reading syms   from primary file (566 1293)
+--10213-- Discarding syms at 0x104094000-0x10410f000 in /usr/lib/libnetwork.dylib (have_dinfo 1)
+--10213-- /usr/lib/libc++abi.dylib (rx at 0x104094000, rw at 0x10579e000)
+--10213--    reading syms   from primary file (339 188)
+--10213-- Discarding syms at 0x104094000-0x1040be000 in /usr/lib/libc++abi.dylib (have_dinfo 1)
+--10213-- /usr/lib/system/libcache.dylib (rx at 0x104094000, rw at 0x104099000)
+--10213--    reading syms   from primary file (32 29)
+--10213-- /usr/lib/system/libcommonCrypto.dylib (rx at 0x10409e000, rw at 0x1057b8000)
+--10213--    reading syms   from primary file (214 167)
+--10213-- Discarding syms at 0x10409e000-0x1040a9000 in /usr/lib/system/libcommonCrypto.dylib (have_dinfo 1)
+--10213-- /usr/lib/system/libcompiler_rt.dylib (rx at 0x10409e000, rw at 0x1057cd000)
+--10213--    reading syms   from primary file (510 8)
+--10213-- Discarding syms at 0x10409e000-0x1040a6000 in /usr/lib/system/libcompiler_rt.dylib (have_dinfo 1)
+--10213-- /usr/lib/system/libcopyfile.dylib (rx at 0x10409e000, rw at 0x1040a7000)
+--10213--    reading syms   from primary file (13 35)
+--10213-- /usr/lib/system/libcorecrypto.dylib (rx at 0x1040ad000, rw at 0x10585e000)
+--10213--    reading syms   from primary file (479 678)
+--10213-- Discarding syms at 0x1040ad000-0x104131000 in /usr/lib/system/libcorecrypto.dylib (have_dinfo 1)
+--10213-- /usr/lib/system/libdispatch.dylib (rx at 0x1040ad000, rw at 0x1058ab000)
+--10213--    reading syms   from primary file (258 910)
+--10213-- Discarding syms at 0x1040ad000-0x1040df000 in /usr/lib/system/libdispatch.dylib (have_dinfo 1)
+--10213-- /usr/lib/system/libdyld.dylib (rx at 0x1040ad000, rw at 0x1058ea000)
+--10213--    reading syms   from primary file (98 130)
+--10213-- Discarding syms at 0x1040ad000-0x1040b3000 in /usr/lib/system/libdyld.dylib (have_dinfo 1)
+--10213-- /usr/lib/system/libkeymgr.dylib (rx at 0x1040ad000, rw at 0x1058f3000)
+--10213--    reading syms   from primary file (12 3)
+--10213-- Discarding syms at 0x1040ad000-0x1040ae000 in /usr/lib/system/libkeymgr.dylib (have_dinfo 1)
+--10213-- /usr/lib/system/liblaunch.dylib (rx at 0x1040ad000, rw at 0x1058f8000)
+--10213--    reading syms   from primary file (113 3)
+--10213-- Discarding syms at 0x1040ad000-0x1040ae000 in /usr/lib/system/liblaunch.dylib (have_dinfo 1)
+--10213-- /usr/lib/system/libmacho.dylib (rx at 0x1040ad000, rw at 0x105905000)
+--10213--    reading syms   from primary file (102 1)
+--10213-- Discarding syms at 0x1040ad000-0x1040b3000 in /usr/lib/system/libmacho.dylib (have_dinfo 1)
+--10213-- /usr/lib/system/libquarantine.dylib (rx at 0x1040ad000, rw at 0x10590e000)
+--10213--    reading syms   from primary file (67 32)
+--10213-- Discarding syms at 0x1040ad000-0x1040b0000 in /usr/lib/system/libquarantine.dylib (have_dinfo 1)
+--10213-- /usr/lib/system/libremovefile.dylib (rx at 0x1040ad000, rw at 0x105916000)
+--10213--    reading syms   from primary file (15 4)
+--10213-- Discarding syms at 0x1040ad000-0x1040af000 in /usr/lib/system/libremovefile.dylib (have_dinfo 1)
+--10213-- /usr/lib/system/libsystem_asl.dylib (rx at 0x1040ad000, rw at 0x105934000)
+--10213--    reading syms   from primary file (222 224)
+--10213-- Discarding syms at 0x1040ad000-0x1040c6000 in /usr/lib/system/libsystem_asl.dylib (have_dinfo 1)
+--10213-- /usr/lib/system/libsystem_blocks.dylib (rx at 0x1040ad000, rw at 0x105942000)
+--10213--    reading syms   from primary file (21 6)
+--10213-- Discarding syms at 0x1040ad000-0x1040ae000 in /usr/lib/system/libsystem_blocks.dylib (have_dinfo 1)
+--10213-- /usr/lib/system/libsystem_c.dylib (rx at 0x1040ad000, rw at 0x1059d4000)
+--10213--    reading syms   from primary file (1331 777)
+==10213== WARNING: redirection from-address is in non-executable area
+--10213--     new: 0x1040aeb40 (???                 ) R-> (2007.0) 0x1000bcce6 strlen
+==10213== WARNING: redirection from-address is in non-executable area
+--10213--     new: 0x1040aeba0 (???                 ) R-> (2009.0) 0x1000bce63 strncpy
+==10213== Adding active redirection:
+--10213--     new: 0x104109d6a (???                 ) R-> (2001.0) 0x1000bcb50 strrchr
+--10213-- Discarding syms at 0x1040ad000-0x10413b000 in /usr/lib/system/libsystem_c.dylib (have_dinfo 1)
+--10213-- /usr/lib/system/libsystem_configuration.dylib (rx at 0x1040ad000, rw at 0x1059ff000)
+--10213--    reading syms   from primary file (38 75)
+--10213-- Discarding syms at 0x1040ad000-0x1040b1000 in /usr/lib/system/libsystem_configuration.dylib (have_dinfo 1)
+--10213-- /usr/lib/system/libsystem_coreservices.dylib (rx at 0x1040ad000, rw at 0x105a0a000)
+--10213--    reading syms   from primary file (14 36)
+--10213-- Discarding syms at 0x1040ad000-0x1040b1000 in /usr/lib/system/libsystem_coreservices.dylib (have_dinfo 1)
+--10213-- /usr/lib/system/libsystem_coretls.dylib (rx at 0x1040ad000, rw at 0x105a28000)
+--10213--    reading syms   from primary file (130 250)
+--10213-- Discarding syms at 0x1040ad000-0x1040c6000 in /usr/lib/system/libsystem_coretls.dylib (have_dinfo 1)
+--10213-- /usr/lib/system/libsystem_dnssd.dylib (rx at 0x1040ad000, rw at 0x105a3a000)
+--10213--    reading syms   from primary file (49 24)
+--10213-- Discarding syms at 0x1040ad000-0x1040b4000 in /usr/lib/system/libsystem_dnssd.dylib (have_dinfo 1)
+--10213-- /usr/lib/system/libsystem_info.dylib (rx at 0x1040ad000, rw at 0x105a69000)
+--10213--    reading syms   from primary file (523 519)
+--10213-- Discarding syms at 0x1040ad000-0x1040d7000 in /usr/lib/system/libsystem_info.dylib (have_dinfo 1)
+--10213-- /usr/lib/system/libsystem_kernel.dylib (rx at 0x1040ad000, rw at 0x105aa1000)
+--10213--    reading syms   from primary file (1179 98)
+--10213-- Discarding syms at 0x1040ad000-0x1040d0000 in /usr/lib/system/libsystem_kernel.dylib (have_dinfo 1)
+--10213-- /usr/lib/system/libsystem_m.dylib (rx at 0x1040ad000, rw at 0x105b00000)
+--10213--    reading syms   from primary file (605 1)
+--10213-- Discarding syms at 0x1040ad000-0x1040f5000 in /usr/lib/system/libsystem_m.dylib (have_dinfo 1)
+--10213-- /usr/lib/system/libsystem_malloc.dylib (rx at 0x1040ad000, rw at 0x105b2b000)
+--10213--    reading syms   from primary file (117 253)
+==10213== WARNING: redirection from-address is in non-executable area
+--10213--     new: 0x1040ae1e8 (???                 ) R-> (1001.0) 0x1000bb5b0 malloc
+==10213== WARNING: redirection from-address is in non-executable area
+--10213--     new: 0x1040af13e (???                 ) R-> (1027.0) 0x1000bc9c2 malloc_set_zone_name
+==10213== WARNING: redirection from-address is in non-executable area
+--10213--     new: 0x1040af217 (???                 ) R-> (1002.0) 0x1000bb81b malloc_zone_malloc
+==10213== Adding active redirection:
+--10213--     new: 0x1040b0dd5 (???                 ) R-> (1005.0) 0x1000bb991 free
+==10213== Adding active redirection:
+--10213--     new: 0x1040b13dc (???                 ) R-> (1021.0) 0x1000bc911 malloc_default_zone
+==10213== Adding active redirection:
+--10213--     new: 0x1040b13e7 (???                 ) R-> (1006.0) 0x1000bbdbd malloc_zone_calloc
+==10213== Adding active redirection:
+--10213--     new: 0x1040b14af (???                 ) R-> (1023.0) 0x1000bc952 malloc_zone_from_ptr
+==10213== Adding active redirection:
+--10213--     new: 0x1040b1d61 (???                 ) R-> (1007.0) 0x1000bbbcf calloc
+==10213== Adding active redirection:
+--10213--     new: 0x1040b1f10 (???                 ) R-> (1009.0) 0x1000bbf51 realloc
+==10213== Adding active redirection:
+--10213--     new: 0x1040b20ae (???                 ) R-> (1008.0) 0x1000bc135 malloc_zone_realloc
+==10213== Adding active redirection:
+--10213--     new: 0x1040b2f1a (???                 ) R-> (1010.0) 0x1000bc4d3 malloc_zone_memalign
+==10213== Adding active redirection:
+--10213--     new: 0x1040b3716 (???                 ) R-> (1022.0) 0x1000bc945 malloc_create_zone
+==10213== Adding active redirection:
+--10213--     new: 0x1040b376e (???                 ) R-> (1004.0) 0x1000bbaa1 malloc_zone_free
+==10213== Adding active redirection:
+--10213--     new: 0x1040b380f (???                 ) R-> (1017.0) 0x1000bc769 malloc_size
+==10213== Adding active redirection:
+--10213--     new: 0x1040b38bf (???                 ) R-> (1025.0) 0x1000bc996 malloc_zone_register
+==10213== Adding active redirection:
+--10213--     new: 0x1040b3921 (???                 ) R-> (1012.0) 0x1000bc693 valloc
+==10213== Adding active redirection:
+--10213--     new: 0x1040b3959 (???                 ) R-> (1013.0) 0x1000bc6f1 malloc_zone_valloc
+==10213== Adding active redirection:
+--10213--     new: 0x1040b5877 (???                 ) R-> (1021.0) 0x1000bc92b malloc_default_purgeable_zone
+==10213== Adding active redirection:
+--10213--     new: 0x1040bf10f (???                 ) R-> (1024.0) 0x1000bc96c malloc_zone_check
+==10213== Adding active redirection:
+--10213--     new: 0x1040bf929 (???                 ) R-> (1026.0) 0x1000bc9ac malloc_zone_unregister
+==10213== Adding active redirection:
+--10213--     new: 0x1040bfcab (???                 ) R-> (1028.0) 0x1000bc9d8 malloc_get_zone_name
+--10213-- Discarding syms at 0x1040ad000-0x1040cc000 in /usr/lib/system/libsystem_malloc.dylib (have_dinfo 1)
+--10213-- /usr/lib/system/libsystem_network.dylib (rx at 0x1040ad000, rw at 0x105b91000)
+--10213--    reading syms   from primary file (730 584)
+--10213-- Discarding syms at 0x1040ad000-0x104107000 in /usr/lib/system/libsystem_network.dylib (have_dinfo 1)
+--10213-- /usr/lib/system/libsystem_networkextension.dylib (rx at 0x1040ad000, rw at 0x105bbd000)
+--10213--    reading syms   from primary file (89 229)
+--10213-- Discarding syms at 0x1040ad000-0x1040b7000 in /usr/lib/system/libsystem_networkextension.dylib (have_dinfo 1)
+--10213-- /usr/lib/system/libsystem_notify.dylib (rx at 0x1040ad000, rw at 0x105bd2000)
+--10213--    reading syms   from primary file (113 54)
+--10213-- Discarding syms at 0x1040ad000-0x1040b7000 in /usr/lib/system/libsystem_notify.dylib (have_dinfo 1)
+--10213-- /usr/lib/system/libsystem_platform.dylib (rx at 0x1040ad000, rw at 0x105be2000)
+--10213--    reading syms   from primary file (158 105)
+==10213== WARNING: redirection from-address is in non-executable area
+--10213--     new: 0x1040ae680 (???                 ) R-> (2017.0) 0x1000bd154 _platform_memchr$VARIANT$Haswell
+==10213== WARNING: redirection from-address is in non-executable area
+--10213--     new: 0x1040ae760 (???                 ) R-> (2019.0) 0x1000bd849 _platform_memcmp
+==10213== WARNING: redirection from-address is in non-executable area
+--10213--     new: 0x1040aecc0 (???                 ) R-> (2011.0) 0x1000bd055 _platform_strncmp
+==10213== WARNING: redirection from-address is in non-executable area
+--10213--     new: 0x1040aeea0 (???                 ) R-> (2002.0) 0x1000bcbb6 _platform_strchr$VARIANT$Haswell
+==10213== WARNING: redirection from-address is in non-executable area
+--10213--     new: 0x1040aefa0 (???                 ) R-> (2018.1) 0x1000bdf83 _platform_memmove$VARIANT$Ivybridge
+==10213== WARNING: redirection from-address is in non-executable area
+--10213--     new: 0x1040af280 (???                 ) R-> (2016.0) 0x1000bd0d1 _platform_strcmp
+--10213-- Discarding syms at 0x1040ad000-0x1040b6000 in /usr/lib/system/libsystem_platform.dylib (have_dinfo 1)
+--10213-- /usr/lib/system/libsystem_pthread.dylib (rx at 0x1040ad000, rw at 0x105bf5000)
+--10213--    reading syms   from primary file (174 79)
+--10213-- Discarding syms at 0x1040ad000-0x1040b8000 in /usr/lib/system/libsystem_pthread.dylib (have_dinfo 1)
+--10213-- /usr/lib/system/libsystem_sandbox.dylib (rx at 0x1040ad000, rw at 0x105c05000)
+--10213--    reading syms   from primary file (85 9)
+--10213-- Discarding syms at 0x1040ad000-0x1040b1000 in /usr/lib/system/libsystem_sandbox.dylib (have_dinfo 1)
+--10213-- /usr/lib/system/libsystem_secinit.dylib (rx at 0x1040ad000, rw at 0x105c0d000)
+--10213--    reading syms   from primary file (1 7)
+--10213-- Discarding syms at 0x1040ad000-0x1040af000 in /usr/lib/system/libsystem_secinit.dylib (have_dinfo 1)
+--10213-- /usr/lib/system/libsystem_symptoms.dylib (rx at 0x1040ad000, rw at 0x105c1a000)
+--10213--    reading syms   from primary file (8 66)
+--10213-- Discarding syms at 0x1040ad000-0x1040b5000 in /usr/lib/system/libsystem_symptoms.dylib (have_dinfo 1)
+--10213-- /usr/lib/system/libsystem_trace.dylib (rx at 0x1040ad000, rw at 0x105c34000)
+--10213--    reading syms   from primary file (101 236)
+--10213-- Discarding syms at 0x1040ad000-0x1040c1000 in /usr/lib/system/libsystem_trace.dylib (have_dinfo 1)
+--10213-- /usr/lib/system/libunwind.dylib (rx at 0x1040ad000, rw at 0x105c48000)
+--10213--    reading syms   from primary file (102 52)
+--10213-- Discarding syms at 0x1040ad000-0x1040b3000 in /usr/lib/system/libunwind.dylib (have_dinfo 1)
+--10213-- /usr/lib/system/libxpc.dylib (rx at 0x1040ad000, rw at 0x105c79000)
+--10213--    reading syms   from primary file (515 825)
+--10213-- Discarding syms at 0x1040ad000-0x1040d7000 in /usr/lib/system/libxpc.dylib (have_dinfo 1)
+--10213-- /usr/lib/libenergytrace.dylib (rx at 0x1040ad000, rw at 0x105c99000)
+--10213--    reading syms   from primary file (8 1)
+--10213-- Discarding syms at 0x1040ad000-0x1040ae000 in /usr/lib/libenergytrace.dylib (have_dinfo 1)
+--10213-- /usr/lib/system/libkxld.dylib (rx at 0x1040ad000, rw at 0x105caa000)
+--10213--    reading syms   from primary file (13 1)
+--10213-- Discarding syms at 0x1040ad000-0x1040ba000 in /usr/lib/system/libkxld.dylib (have_dinfo 1)
+--10213-- /usr/lib/libDiagnosticMessagesClient.dylib (rx at 0x1040ad000, rw at 0x105cb1000)
+--10213--    reading syms   from primary file (24 14)
+--10213-- Discarding syms at 0x1040ad000-0x1040af000 in /usr/lib/libDiagnosticMessagesClient.dylib (have_dinfo 1)
+--10213-- /usr/lib/libpcap.A.dylib (rx at 0x1040ad000, rw at 0x105ce8000)
+--10213--    reading syms   from primary file (293 180)
+--10213-- Discarding syms at 0x1040ad000-0x1040df000 in /usr/lib/libpcap.A.dylib (have_dinfo 1)
+--10213-- Discarding syms at 0x0-0x0 in /usr/lib/libcoretls.dylib (have_dinfo 0)
+--10213-- /usr/lib/libcoretls_cfhelpers.dylib (rx at 0x1040ad000, rw at 0x105d00000)
+--10213--    reading syms   from primary file (21 5)
+--10213-- Discarding syms at 0x1040ad000-0x1040af000 in /usr/lib/libcoretls_cfhelpers.dylib (have_dinfo 1)
+--10213-- /usr/lib/libOpenScriptingUtil.dylib (rx at 0x1040ad000, rw at 0x105d06000)
+--10213--    reading syms   from primary file (1 1)
+--10213-- Discarding syms at 0x1040ad000-0x1040ae000 in /usr/lib/libOpenScriptingUtil.dylib (have_dinfo 1)
+--10213-- /usr/lib/libpam.2.dylib (rx at 0x1040ad000, rw at 0x105d0f000)
+--10213--    reading syms   from primary file (52 20)
+--10213-- Discarding syms at 0x1040ad000-0x1040b2000 in /usr/lib/libpam.2.dylib (have_dinfo 1)
+--10213-- /usr/lib/libxar.1.dylib (rx at 0x1040ad000, rw at 0x105d22000)
+--10213--    reading syms   from primary file (191 16)
+--10213-- Discarding syms at 0x1040ad000-0x1040bb000 in /usr/lib/libxar.1.dylib (have_dinfo 1)
+--10213-- /usr/lib/libbz2.1.0.dylib (rx at 0x1040ad000, rw at 0x105d3a000)
+--10213--    reading syms   from primary file (38 1)
+--10213-- Discarding syms at 0x1040ad000-0x1040bc000 in /usr/lib/libbz2.1.0.dylib (have_dinfo 1)
+--10213-- /usr/lib/liblzma.5.dylib (rx at 0x1040ad000, rw at 0x105d59000)
+--10213--    reading syms   from primary file (187 98)
+--10213-- Discarding syms at 0x1040ad000-0x1040c7000 in /usr/lib/liblzma.5.dylib (have_dinfo 1)
+--10213-- /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vImage.framework/Versions/A/vImage (rx at 0x1040ad000, rw at 0x10627b000)
+--10213--    reading syms   from primary file (569 4938)
+--10213-- Discarding syms at 0x1040ad000-0x1046ee000 in /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vImage.framework/Versions/A/vImage (have_dinfo 1)
+--10213-- Discarding syms at 0x0-0x0 in /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/vecLib (have_dinfo 0)
+--10213-- /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libvDSP.dylib (rx at 0x1040ad000, rw at 0x106468000)
+--10213--    reading syms   from primary file (456 4)
+--10213-- Discarding syms at 0x1040ad000-0x1041fb000 in /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libvDSP.dylib (have_dinfo 1)
+--10213-- /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBNNS.dylib (rx at 0x1040ad000, rw at 0x10648b000)
+--10213--    reading syms   from primary file (6 150)
+--10213-- Discarding syms at 0x1040ad000-0x1040c5000 in /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBNNS.dylib (have_dinfo 1)
+--10213-- /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libQuadrature.dylib (rx at 0x1040ad000, rw at 0x106498000)
+--10213--    reading syms   from primary file (1 13)
+--10213-- Discarding syms at 0x1040ad000-0x1040b4000 in /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libQuadrature.dylib (have_dinfo 1)
+--10213-- /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libvMisc.dylib (rx at 0x1040ad000, rw at 0x10654f000)
+--10213--    reading syms   from primary file (594 1)
+--10213-- Discarding syms at 0x1040ad000-0x104165000 in /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libvMisc.dylib (have_dinfo 1)
+--10213-- /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libLAPACK.dylib (rx at 0x1040ad000, rw at 0x106952000)
+--10213--    reading syms   from primary file (5890 2910)
+--10213-- Discarding syms at 0x1040ad000-0x1044b9000 in /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libLAPACK.dylib (have_dinfo 1)
+--10213-- /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBLAS.dylib (rx at 0x1040ad000, rw at 0x106b24000)
+--10213--    reading syms   from primary file (804 1965)
+--10213-- Discarding syms at 0x1040ad000-0x104275000 in /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBLAS.dylib (have_dinfo 1)
+--10213-- /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libLinearAlgebra.dylib (rx at 0x1040ad000, rw at 0x106b5c000)
+--10213--    reading syms   from primary file (42 157)
+--10213-- Discarding syms at 0x1040ad000-0x1040c4000 in /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libLinearAlgebra.dylib (have_dinfo 1)
+--10213-- /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libSparseBLAS.dylib (rx at 0x1040ad000, rw at 0x106b79000)
+--10213--    reading syms   from primary file (69 103)
+--10213-- Discarding syms at 0x1040ad000-0x1040c1000 in /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libSparseBLAS.dylib (have_dinfo 1)
+--10213-- /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/FSEvents.framework/Versions/A/FSEvents (rx at 0x1040ad000, rw at 0x106b89000)
+--10213--    reading syms   from primary file (22 59)
+--10213-- Discarding syms at 0x1040ad000-0x1040b6000 in /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/FSEvents.framework/Versions/A/FSEvents (have_dinfo 1)
+--10213-- /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/CarbonCore.framework/Versions/A/CarbonCore (rx at 0x1040ad000, rw at 0x106e6c000)
+--10213--    reading syms   from primary file (1817 3427)
+--10213-- Discarding syms at 0x1040ad000-0x104389000 in /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/CarbonCore.framework/Versions/A/CarbonCore (have_dinfo 1)
+--10213-- /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/Metadata.framework/Versions/A/Metadata (rx at 0x1040ad000, rw at 0x106f93000)
+--10213--    reading syms   from primary file (1044 3124)
+--10213-- Discarding syms at 0x1040ad000-0x10415e000 in /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/Metadata.framework/Versions/A/Metadata (have_dinfo 1)
+--10213-- /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/OSServices.framework/Versions/A/OSServices (rx at 0x1040ad000, rw at 0x10706f000)
+--10213--    reading syms   from primary file (414 2359)
+--10213-- Discarding syms at 0x1040ad000-0x10410d000 in /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/OSServices.framework/Versions/A/OSServices (have_dinfo 1)
+--10213-- /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/SearchKit.framework/Versions/A/SearchKit (rx at 0x1040ad000, rw at 0x107129000)
+--10213--    reading syms   from primary file (324 3628)
+--10213-- Discarding syms at 0x1040ad000-0x10411e000 in /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/SearchKit.framework/Versions/A/SearchKit (have_dinfo 1)
+--10213-- /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/AE.framework/Versions/A/AE (rx at 0x1040ad000, rw at 0x1071be000)
+--10213--    reading syms   from primary file (176 1496)
+--10213-- Discarding syms at 0x1040ad000-0x1040ff000 in /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/AE.framework/Versions/A/AE (have_dinfo 1)
+--10213-- /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/LaunchServices (rx at 0x1040ad000, rw at 0x107359000)
+--10213--    reading syms   from primary file (851 9033)
+--10213-- Discarding syms at 0x1040ad000-0x10421a000 in /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/LaunchServices (have_dinfo 1)
+--10213-- /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/DictionaryServices.framework/Versions/A/DictionaryServices (rx at 0x1040ad000, rw at 0x107480000)
+--10213--    reading syms   from primary file (119 1227)
+--10213-- Discarding syms at 0x1040ad000-0x1040e1000 in /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/DictionaryServices.framework/Versions/A/DictionaryServices (have_dinfo 1)
+--10213-- /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/SharedFileList.framework/Versions/A/SharedFileList (rx at 0x1040ad000, rw at 0x1074f1000)
+--10213--    reading syms   from primary file (215 1637)
+--10213-- Discarding syms at 0x1040ad000-0x1040f3000 in /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/SharedFileList.framework/Versions/A/SharedFileList (have_dinfo 1)
+--10213-- /System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration (rx at 0x1040ad000, rw at 0x107529000)
+--10213--    reading syms   from primary file (90 109)
+--10213-- Discarding syms at 0x1040ad000-0x1040b3000 in /System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration (have_dinfo 1)
+--10213-- /System/Library/Frameworks/NetFS.framework/Versions/A/NetFS (rx at 0x1040ad000, rw at 0x10753c000)
+--10213--    reading syms   from primary file (55 43)
+--10213-- Discarding syms at 0x1040ad000-0x1040b6000 in /System/Library/Frameworks/NetFS.framework/Versions/A/NetFS (have_dinfo 1)
+--10213-- /System/Library/PrivateFrameworks/NetAuth.framework/Versions/A/NetAuth (rx at 0x1040ad000, rw at 0x107550000)
+--10213--    reading syms   from primary file (145 245)
+--10213-- Discarding syms at 0x1040ad000-0x1040b9000 in /System/Library/PrivateFrameworks/NetAuth.framework/Versions/A/NetAuth (have_dinfo 1)
+--10213-- /System/Library/PrivateFrameworks/login.framework/Versions/A/Frameworks/loginsupport.framework/Versions/A/loginsupport (rx at 0x1040ad000, rw at 0x10755f000)
+--10213--    reading syms   from primary file (13 30)
+--10213-- Discarding syms at 0x1040ad000-0x1040b0000 in /System/Library/PrivateFrameworks/login.framework/Versions/A/Frameworks/loginsupport.framework/Versions/A/loginsupport (have_dinfo 1)
+--10213-- /usr/lib/libarchive.2.dylib (rx at 0x1040ad000, rw at 0x107590000)
+--10213--    reading syms   from primary file (269 1)
+--10213-- Discarding syms at 0x1040ad000-0x1040d9000 in /usr/lib/libarchive.2.dylib (have_dinfo 1)
+--10213-- /usr/lib/liblangid.dylib (rx at 0x1040ad000, rw at 0x10759c000)
+--10213--    reading syms   from primary file (20 1)
+--10213-- Discarding syms at 0x1040ad000-0x1040af000 in /usr/lib/liblangid.dylib (have_dinfo 1)
+--10213-- /usr/lib/libCRFSuite.dylib (rx at 0x1040ad000, rw at 0x1075bc000)
+--10213--    reading syms   from primary file (106 398)
+--10213-- Discarding syms at 0x1040ad000-0x1040c9000 in /usr/lib/libCRFSuite.dylib (have_dinfo 1)
+--10213-- /System/Library/PrivateFrameworks/TCC.framework/Versions/A/TCC (rx at 0x1040ad000, rw at 0x1075cd000)
+--10213--    reading syms   from primary file (45 153)
+--10213-- Discarding syms at 0x1040ad000-0x1040b4000 in /System/Library/PrivateFrameworks/TCC.framework/Versions/A/TCC (have_dinfo 1)
+--10213-- /usr/lib/libmecabra.dylib (rx at 0x1040ad000, rw at 0x10787e000)
+--10213--    reading syms   from primary file (184 1)
+--10213-- Discarding syms at 0x1040ad000-0x104356000 in /usr/lib/libmecabra.dylib (have_dinfo 1)
+--10213-- /System/Library/PrivateFrameworks/LanguageModeling.framework/Versions/A/LanguageModeling (rx at 0x1040ad000, rw at 0x107a99000)
+--10213--    reading syms   from primary file (251 1)
+--10213-- Discarding syms at 0x1040ad000-0x104265000 in /System/Library/PrivateFrameworks/LanguageModeling.framework/Versions/A/LanguageModeling (have_dinfo 1)
+--10213-- /usr/lib/libmarisa.dylib (rx at 0x1040ad000, rw at 0x107adf000)
+--10213--    reading syms   from primary file (152 240)
+--10213-- Discarding syms at 0x1040ad000-0x1040c4000 in /usr/lib/libmarisa.dylib (have_dinfo 1)
+--10213-- /usr/lib/libChineseTokenizer.dylib (rx at 0x1040ad000, rw at 0x107af7000)
+--10213--    reading syms   from primary file (12 297)
+--10213-- Discarding syms at 0x1040ad000-0x1040b9000 in /usr/lib/libChineseTokenizer.dylib (have_dinfo 1)
+--10213-- /usr/lib/libcmph.dylib (rx at 0x1040ad000, rw at 0x107b16000)
+--10213--    reading syms   from primary file (263 35)
+--10213-- Discarding syms at 0x1040ad000-0x1040be000 in /usr/lib/libcmph.dylib (have_dinfo 1)
+--10213-- /usr/lib/libiconv.2.dylib (rx at 0x1040ad000, rw at 0x107c11000)
+--10213--    reading syms   from primary file (17 997)
+--10213-- Discarding syms at 0x1040ad000-0x1041a0000 in /usr/lib/libiconv.2.dylib (have_dinfo 1)
+--10213-- /System/Library/Frameworks/CoreData.framework/Versions/A/CoreData (rx at 0x1040ad000, rw at 0x107f1d000)
+--10213--    reading syms   from primary file (212 11650)
+--10213-- Discarding syms at 0x1040ad000-0x1043ad000 in /System/Library/Frameworks/CoreData.framework/Versions/A/CoreData (have_dinfo 1)
+--10213-- /System/Library/PrivateFrameworks/CoreEmoji.framework/Versions/A/CoreEmoji (rx at 0x1040ad000, rw at 0x10809d000)
+--10213--    reading syms   from primary file (30 660)
+--10213-- Discarding syms at 0x1040ad000-0x1040be000 in /System/Library/PrivateFrameworks/CoreEmoji.framework/Versions/A/CoreEmoji (have_dinfo 1)
+--10213-- /usr/lib/libcompression.dylib (rx at 0x1040ad000, rw at 0x1080cd000)
+--10213--    reading syms   from primary file (13 184)
+--10213-- Discarding syms at 0x1040ad000-0x1040c4000 in /usr/lib/libcompression.dylib (have_dinfo 1)
+--10213-- /System/Library/Frameworks/OpenDirectory.framework/Versions/A/Frameworks/CFOpenDirectory.framework/Versions/A/CFOpenDirectory (rx at 0x1040ad000, rw at 0x1080ee000)
+--10213--    reading syms   from primary file (512 641)
+--10213-- Discarding syms at 0x1040ad000-0x1040c7000 in /System/Library/Frameworks/OpenDirectory.framework/Versions/A/Frameworks/CFOpenDirectory.framework/Versions/A/CFOpenDirectory (have_dinfo 1)
+--10213-- /System/Library/Frameworks/ServiceManagement.framework/Versions/A/ServiceManagement (rx at 0x1040ad000, rw at 0x108113000)
+--10213--    reading syms   from primary file (17 41)
+--10213-- Discarding syms at 0x1040ad000-0x1040b1000 in /System/Library/Frameworks/ServiceManagement.framework/Versions/A/ServiceManagement (have_dinfo 1)
+--10213-- /usr/lib/libxslt.1.dylib (rx at 0x1040ad000, rw at 0x108144000)
+--10213--    reading syms   from primary file (248 115)
+--10213-- Discarding syms at 0x1040ad000-0x1040d7000 in /usr/lib/libxslt.1.dylib (have_dinfo 1)
+--10213-- /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/Resources/libFontParser.dylib (rx at 0x1040ad000, rw at 0x108281000)
+--10213--    reading syms   from primary file (482 3794)
+--10213-- Discarding syms at 0x1040ad000-0x1041dd000 in /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/Resources/libFontParser.dylib (have_dinfo 1)
+--10213-- /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/Resources/libFontRegistry.dylib (rx at 0x1040ad000, rw at 0x108356000)
+--10213--    reading syms   from primary file (148 1674)
+--10213-- Discarding syms at 0x1040ad000-0x1040f8000 in /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/Resources/libFontRegistry.dylib (have_dinfo 1)
+--10213-- /System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libJPEG.dylib (rx at 0x1040ad000, rw at 0x1083aa000)
+--10213--    reading syms   from primary file (95 253)
+--10213-- Discarding syms at 0x1040ad000-0x1040d1000 in /System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libJPEG.dylib (have_dinfo 1)
+--10213-- /System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libTIFF.dylib (rx at 0x1040ad000, rw at 0x108401000)
+--10213--    reading syms   from primary file (32 687)
+--10213-- Discarding syms at 0x1040ad000-0x1040fc000 in /System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libTIFF.dylib (have_dinfo 1)
+--10213-- /System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libPng.dylib (rx at 0x1040ad000, rw at 0x108438000)
+--10213--    reading syms   from primary file (85 470)
+--10213-- Discarding syms at 0x1040ad000-0x1040d4000 in /System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libPng.dylib (have_dinfo 1)
+--10213-- /System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libGIF.dylib (rx at 0x1040ad000, rw at 0x108448000)
+--10213--    reading syms   from primary file (35 31)
+--10213-- Discarding syms at 0x1040ad000-0x1040b2000 in /System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libGIF.dylib (have_dinfo 1)
+--10213-- /System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libJP2.dylib (rx at 0x1040ad000, rw at 0x10853e000)
+--10213--    reading syms   from primary file (16 2418)
+--10213-- Discarding syms at 0x1040ad000-0x10419f000 in /System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libJP2.dylib (have_dinfo 1)
+--10213-- /System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libRadiance.dylib (rx at 0x1040ad000, rw at 0x10856a000)
+--10213--    reading syms   from primary file (4 13)
+--10213-- Discarding syms at 0x1040ad000-0x1040b0000 in /System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libRadiance.dylib (have_dinfo 1)
+--10213-- /System/Library/PrivateFrameworks/AppleJPEG.framework/Versions/A/AppleJPEG (rx at 0x1040ad000, rw at 0x1085fa000)
+--10213--    reading syms   from primary file (111 529)
+--10213-- Discarding syms at 0x1040ad000-0x104139000 in /System/Library/PrivateFrameworks/AppleJPEG.framework/Versions/A/AppleJPEG (have_dinfo 1)
+--10213-- /System/Library/PrivateFrameworks/MultitouchSupport.framework/Versions/A/MultitouchSupport (rx at 0x1040ad000, rw at 0x108685000)
+--10213--    reading syms   from primary file (535 81)
+--10213-- Discarding syms at 0x1040ad000-0x1040d6000 in /System/Library/PrivateFrameworks/MultitouchSupport.framework/Versions/A/MultitouchSupport (have_dinfo 1)
+--10213-- /usr/lib/libcups.2.dylib (rx at 0x1040ad000, rw at 0x1086ec000)
+--10213--    reading syms   from primary file (563 1)
+--10213-- Discarding syms at 0x1040ad000-0x104101000 in /usr/lib/libcups.2.dylib (have_dinfo 1)
+--10213-- /System/Library/Frameworks/Kerberos.framework/Versions/A/Kerberos (rx at 0x1040ad000, rw at 0x10871e000)
+--10213--    reading syms   from primary file (785 503)
+--10213-- Discarding syms at 0x1040ad000-0x1040c7000 in /System/Library/Frameworks/Kerberos.framework/Versions/A/Kerberos (have_dinfo 1)
+--10213-- /System/Library/Frameworks/GSS.framework/Versions/A/GSS (rx at 0x1040ad000, rw at 0x108769000)
+--10213--    reading syms   from primary file (269 805)
+--10213-- Discarding syms at 0x1040ad000-0x1040df000 in /System/Library/Frameworks/GSS.framework/Versions/A/GSS (have_dinfo 1)
+--10213-- /usr/lib/libresolv.9.dylib (rx at 0x1040ad000, rw at 0x1087a7000)
+--10213--    reading syms   from primary file (200 93)
+--10213-- Discarding syms at 0x1040ad000-0x1040ca000 in /usr/lib/libresolv.9.dylib (have_dinfo 1)
+--10213-- /System/Library/PrivateFrameworks/Heimdal.framework/Versions/A/Heimdal (rx at 0x1040ad000, rw at 0x108829000)
+--10213--    reading syms   from primary file (1239 1)
+--10213-- Discarding syms at 0x1040ad000-0x104124000 in /System/Library/PrivateFrameworks/Heimdal.framework/Versions/A/Heimdal (have_dinfo 1)
+--10213-- /usr/lib/libheimdal-asn1.dylib (rx at 0x1040ad000, rw at 0x108860000)
+--10213--    reading syms   from primary file (143 17)
+--10213-- Discarding syms at 0x1040ad000-0x1040b3000 in /usr/lib/libheimdal-asn1.dylib (have_dinfo 1)
+--10213-- /System/Library/Frameworks/OpenDirectory.framework/Versions/A/OpenDirectory (rx at 0x1040ad000, rw at 0x108872000)
+--10213--    reading syms   from primary file (29 484)
+--10213-- Discarding syms at 0x1040ad000-0x1040b9000 in /System/Library/Frameworks/OpenDirectory.framework/Versions/A/OpenDirectory (have_dinfo 1)
+--10213-- /System/Library/PrivateFrameworks/CommonAuth.framework/Versions/A/CommonAuth (rx at 0x1040ad000, rw at 0x108890000)
+--10213--    reading syms   from primary file (76 127)
+--10213-- Discarding syms at 0x1040ad000-0x1040b7000 in /System/Library/PrivateFrameworks/CommonAuth.framework/Versions/A/CommonAuth (have_dinfo 1)
+--10213-- /System/Library/Frameworks/SecurityFoundation.framework/Versions/A/SecurityFoundation (rx at 0x1040ad000, rw at 0x10890d000)
+--10213--    reading syms   from primary file (89 1839)
+--10213-- Discarding syms at 0x1040ad000-0x104123000 in /System/Library/Frameworks/SecurityFoundation.framework/Versions/A/SecurityFoundation (have_dinfo 1)
+--10213-- /System/Library/Frameworks/CoreAudio.framework/Versions/A/CoreAudio (rx at 0x1040ad000, rw at 0x1089dd000)
+--10213--    reading syms   from primary file (68 1731)
+--10213-- Discarding syms at 0x1040ad000-0x10413b000 in /System/Library/Frameworks/CoreAudio.framework/Versions/A/CoreAudio (have_dinfo 1)
+--10213-- /System/Library/Frameworks/AudioToolbox.framework/Versions/A/AudioToolbox (rx at 0x1040ad000, rw at 0x108c14000)
+--10213--    reading syms   from primary file (840 11526)
+--10213-- Discarding syms at 0x1040ad000-0x1042ba000 in /System/Library/Frameworks/AudioToolbox.framework/Versions/A/AudioToolbox (have_dinfo 1)
+--10213-- /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGLImage.dylib (rx at 0x1040ad000, rw at 0x108d64000)
+--10213--    reading syms   from primary file (22 155)
+--10213-- Discarding syms at 0x1040ad000-0x1040ea000 in /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGLImage.dylib (have_dinfo 1)
+--10213-- /System/Library/PrivateFrameworks/IOAccelerator.framework/Versions/A/IOAccelerator (rx at 0x1040ad000, rw at 0x108d74000)
+--10213--    reading syms   from primary file (184 79)
+--10213-- Discarding syms at 0x1040ad000-0x1040b5000 in /System/Library/PrivateFrameworks/IOAccelerator.framework/Versions/A/IOAccelerator (have_dinfo 1)
+--10213-- /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libCVMSPluginSupport.dylib (rx at 0x1040ad000, rw at 0x108d81000)
+--10213--    reading syms   from primary file (33 31)
+--10213-- Discarding syms at 0x1040ad000-0x1040b0000 in /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libCVMSPluginSupport.dylib (have_dinfo 1)
+--10213-- /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libCoreVMClient.dylib (rx at 0x1040ad000, rw at 0x108d8b000)
+--10213--    reading syms   from primary file (36 71)
+--10213-- Discarding syms at 0x1040ad000-0x1040b2000 in /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libCoreVMClient.dylib (have_dinfo 1)
+--10213-- /System/Library/PrivateFrameworks/RemoteViewServices.framework/Versions/A/RemoteViewServices (rx at 0x1040ad000, rw at 0x108db6000)
+--10213--    reading syms   from primary file (244 752)
+--10213-- Discarding syms at 0x1040ad000-0x1040d1000 in /System/Library/PrivateFrameworks/RemoteViewServices.framework/Versions/A/RemoteViewServices (have_dinfo 1)
+--10213-- /System/Library/PrivateFrameworks/UIFoundation.framework/Versions/A/UIFoundation (rx at 0x1040ad000, rw at 0x108f6e000)
+--10213--    reading syms   from primary file (998 5249)
+--10213-- Discarding syms at 0x1040ad000-0x10423e000 in /System/Library/PrivateFrameworks/UIFoundation.framework/Versions/A/UIFoundation (have_dinfo 1)
+--10213-- /System/Library/PrivateFrameworks/DFRFoundation.framework/Versions/A/DFRFoundation (rx at 0x1040ad000, rw at 0x109045000)
+--10213--    reading syms   from primary file (139 246)
+--10213-- Discarding syms at 0x1040ad000-0x1040b8000 in /System/Library/PrivateFrameworks/DFRFoundation.framework/Versions/A/DFRFoundation (have_dinfo 1)
+--10213-- /System/Library/PrivateFrameworks/SkyLight.framework/Versions/A/SkyLight (rx at 0x1040ad000, rw at 0x1092be000)
+--10213--    reading syms   from primary file (1325 7245)
+--10213-- Discarding syms at 0x1040ad000-0x104323000 in /System/Library/PrivateFrameworks/SkyLight.framework/Versions/A/SkyLight (have_dinfo 1)
+--10213-- /usr/lib/libScreenReader.dylib (rx at 0x1040ad000, rw at 0x10938b000)
+--10213--    reading syms   from primary file (23 44)
+--10213-- Discarding syms at 0x1040ad000-0x1040b2000 in /usr/lib/libScreenReader.dylib (have_dinfo 1)
+--10213-- Discarding syms at 0x0-0x0 in /System/Library/Frameworks/AudioUnit.framework/Versions/A/AudioUnit (have_dinfo 0)
+--10213-- /System/Library/PrivateFrameworks/DataDetectorsCore.framework/Versions/A/DataDetectorsCore (rx at 0x1040ad000, rw at 0x109413000)
+--10213--    reading syms   from primary file (369 1522)
+--10213-- Discarding syms at 0x1040ad000-0x104123000 in /System/Library/PrivateFrameworks/DataDetectorsCore.framework/Versions/A/DataDetectorsCore (have_dinfo 1)
+--10213-- /System/Library/PrivateFrameworks/DesktopServicesPriv.framework/Versions/A/DesktopServicesPriv (rx at 0x1040ad000, rw at 0x109565000)
+--10213--    reading syms   from primary file (510 6322)
+--10213-- Discarding syms at 0x1040ad000-0x1041bf000 in /System/Library/PrivateFrameworks/DesktopServicesPriv.framework/Versions/A/DesktopServicesPriv (have_dinfo 1)
+--10213-- /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HIToolbox.framework/Versions/A/HIToolbox (rx at 0x1040ad000, rw at 0x109900000)
+--10213--    reading syms   from primary file (1186 16452)
+--10213-- Discarding syms at 0x1040ad000-0x1043b7000 in /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HIToolbox.framework/Versions/A/HIToolbox (have_dinfo 1)
+--10213-- /System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore (rx at 0x1040ad000, rw at 0x109c89000)
+--10213--    reading syms   from primary file (1117 9261)
+--10213-- Discarding syms at 0x1040ad000-0x1042ae000 in /System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore (have_dinfo 1)
+--10213-- /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/SpeechRecognition.framework/Versions/A/SpeechRecognition (rx at 0x1040ad000, rw at 0x109d88000)
+--10213--    reading syms   from primary file (95 96)
+--10213-- Discarding syms at 0x1040ad000-0x1040b4000 in /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/SpeechRecognition.framework/Versions/A/SpeechRecognition (have_dinfo 1)
+--10213-- /System/Library/PrivateFrameworks/CoreUI.framework/Versions/A/CoreUI (rx at 0x1040ad000, rw at 0x109ed1000)
+--10213--    reading syms   from primary file (1261 5718)
+--10213-- Discarding syms at 0x1040ad000-0x1041ed000 in /System/Library/PrivateFrameworks/CoreUI.framework/Versions/A/CoreUI (have_dinfo 1)
+--10213-- /System/Library/PrivateFrameworks/PerformanceAnalysis.framework/Versions/A/PerformanceAnalysis (rx at 0x1040ad000, rw at 0x10a0e1000)
+--10213--    reading syms   from primary file (388 1484)
+--10213-- Discarding syms at 0x1040ad000-0x1040ef000 in /System/Library/PrivateFrameworks/PerformanceAnalysis.framework/Versions/A/PerformanceAnalysis (have_dinfo 1)
+--10213-- /System/Library/PrivateFrameworks/GenerationalStorage.framework/Versions/A/GenerationalStorage (rx at 0x1040ad000, rw at 0x10a144000)
+--10213--    reading syms   from primary file (110 503)
+--10213-- Discarding syms at 0x1040ad000-0x1040ca000 in /System/Library/PrivateFrameworks/GenerationalStorage.framework/Versions/A/GenerationalStorage (have_dinfo 1)
+--10213-- /System/Library/Frameworks/CoreImage.framework/Versions/A/CoreImage (rx at 0x1040ad000, rw at 0x10a3a0000)
+--10213--    reading syms   from primary file (423 11360)
+--10213-- Discarding syms at 0x1040ad000-0x1042f1000 in /System/Library/Frameworks/CoreImage.framework/Versions/A/CoreImage (have_dinfo 1)
+--10213-- /System/Library/PrivateFrameworks/Backup.framework/Versions/A/Backup (rx at 0x1040ad000, rw at 0x10a59f000)
+--10213--    reading syms   from primary file (112 3736)
+--10213-- Discarding syms at 0x1040ad000-0x10412c000 in /System/Library/PrivateFrameworks/Backup.framework/Versions/A/Backup (have_dinfo 1)
+--10213-- /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/Ink.framework/Versions/A/Ink (rx at 0x1040ad000, rw at 0x10a69e000)
+--10213--    reading syms   from primary file (372 1684)
+--10213-- Discarding syms at 0x1040ad000-0x104145000 in /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/Ink.framework/Versions/A/Ink (have_dinfo 1)
+--10213-- /System/Library/PrivateFrameworks/TextureIO.framework/Versions/A/TextureIO (rx at 0x1040ad000, rw at 0x10a798000)
+--10213--    reading syms   from primary file (92 1456)
+--10213-- Discarding syms at 0x1040ad000-0x104174000 in /System/Library/PrivateFrameworks/TextureIO.framework/Versions/A/TextureIO (have_dinfo 1)
+--10213-- /System/Library/Frameworks/Metal.framework/Versions/A/Metal (rx at 0x1040ad000, rw at 0x10a812000)
+--10213--    reading syms   from primary file (379 10937)
+--10213-- Discarding syms at 0x1040ad000-0x104109000 in /System/Library/Frameworks/Metal.framework/Versions/A/Metal (have_dinfo 1)
+--10213-- /usr/lib/libate.dylib (rx at 0x1040ad000, rw at 0x10a939000)
+--10213--    reading syms   from primary file (17 389)
+--10213-- Discarding syms at 0x1040ad000-0x1041a3000 in /usr/lib/libate.dylib (have_dinfo 1)
+--10213-- Discarding syms at 0x0-0x0 in /System/Library/PrivateFrameworks/GPUCompiler.framework/libmetal_timestamp.dylib (have_dinfo 0)
+--10213-- /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libCoreFSCache.dylib (rx at 0x1040ad000, rw at 0x10a94a000)
+--10213--    reading syms   from primary file (14 21)
+--10213-- Discarding syms at 0x1040ad000-0x1040b1000 in /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libCoreFSCache.dylib (have_dinfo 1)
+--10213-- /System/Library/Frameworks/CoreVideo.framework/Versions/A/CoreVideo (rx at 0x1040ad000, rw at 0x10a985000)
+--10213--    reading syms   from primary file (320 1035)
+--10213-- Discarding syms at 0x1040ad000-0x1040e3000 in /System/Library/Frameworks/CoreVideo.framework/Versions/A/CoreVideo (have_dinfo 1)
+--10213-- /usr/lib/libFosl_dynamic.dylib (rx at 0x1040ad000, rw at 0x10abbf000)
+--10213--    reading syms   from primary file (74 1)
+--10213-- Discarding syms at 0x1040ad000-0x1042c1000 in /usr/lib/libFosl_dynamic.dylib (have_dinfo 1)
+--10213-- /System/Library/PrivateFrameworks/MetalPerformanceShaders.framework/Versions/A/MetalPerformanceShaders (rx at 0x1040ad000, rw at 0x10ac6f000)
+--10213--    reading syms   from primary file (113 1251)
+--10213-- Discarding syms at 0x1040ad000-0x104127000 in /System/Library/PrivateFrameworks/MetalPerformanceShaders.framework/Versions/A/MetalPerformanceShaders (have_dinfo 1)
+--10213-- /System/Library/PrivateFrameworks/FaceCore.framework/Versions/A/FaceCore (rx at 0x1040ad000, rw at 0x10b0eb000)
+--10213--    reading syms   from primary file (53 1)
+--10213-- Discarding syms at 0x1040ad000-0x1044df000 in /System/Library/PrivateFrameworks/FaceCore.framework/Versions/A/FaceCore (have_dinfo 1)
+--10213-- /System/Library/Frameworks/OpenCL.framework/Versions/A/OpenCL (rx at 0x1040ad000, rw at 0x10b356000)
+--10213--    reading syms   from primary file (159 7)
+--10213-- Discarding syms at 0x1040ad000-0x1040fc000 in /System/Library/Frameworks/OpenCL.framework/Versions/A/OpenCL (have_dinfo 1)
+--10213-- /System/Library/PrivateFrameworks/CrashReporterSupport.framework/Versions/A/CrashReporterSupport (rx at 0x1040ad000, rw at 0x10b37d000)
+--10213--    reading syms   from primary file (186 128)
+--10213-- Discarding syms at 0x1040ad000-0x1040bc000 in /System/Library/PrivateFrameworks/CrashReporterSupport.framework/Versions/A/CrashReporterSupport (have_dinfo 1)
+--10213-- /System/Library/PrivateFrameworks/Sharing.framework/Versions/A/Sharing (rx at 0x1040ad000, rw at 0x10b41c000)
+--10213--    reading syms   from primary file (713 4211)
+--10213-- Discarding syms at 0x1040ad000-0x10413b000 in /System/Library/PrivateFrameworks/Sharing.framework/Versions/A/Sharing (have_dinfo 1)
+--10213-- /System/Library/PrivateFrameworks/IconServices.framework/Versions/A/IconServices (rx at 0x1040ad000, rw at 0x10b4c6000)
+--10213--    reading syms   from primary file (35 1107)
+--10213-- Discarding syms at 0x1040ad000-0x1040d0000 in /System/Library/PrivateFrameworks/IconServices.framework/Versions/A/IconServices (have_dinfo 1)
+--10213-- /System/Library/PrivateFrameworks/ProtocolBuffer.framework/Versions/A/ProtocolBuffer (rx at 0x1040ad000, rw at 0x10b504000)
+--10213--    reading syms   from primary file (211 379)
+--10213-- Discarding syms at 0x1040ad000-0x1040c8000 in /System/Library/PrivateFrameworks/ProtocolBuffer.framework/Versions/A/ProtocolBuffer (have_dinfo 1)
+--10213-- /System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Apple80211 (rx at 0x1040ad000, rw at 0x10b53f000)
+--10213--    reading syms   from primary file (41 132)
+--10213-- Discarding syms at 0x1040ad000-0x1040d0000 in /System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Apple80211 (have_dinfo 1)
+--10213-- /System/Library/Frameworks/CoreWLAN.framework/Versions/A/CoreWLAN (rx at 0x1040ad000, rw at 0x10b5be000)
+--10213--    reading syms   from primary file (318 2279)
+--10213-- Discarding syms at 0x1040ad000-0x10411f000 in /System/Library/Frameworks/CoreWLAN.framework/Versions/A/CoreWLAN (have_dinfo 1)
+--10213-- /System/Library/PrivateFrameworks/CoreUtils.framework/Versions/A/CoreUtils (rx at 0x1040ad000, rw at 0x10b6db000)
+--10213--    reading syms   from primary file (934 2728)
+--10213-- Discarding syms at 0x1040ad000-0x10417e000 in /System/Library/PrivateFrameworks/CoreUtils.framework/Versions/A/CoreUtils (have_dinfo 1)
+--10213-- /System/Library/Frameworks/IOBluetooth.framework/Versions/A/IOBluetooth (rx at 0x1040ad000, rw at 0x10b7df000)
+--10213--    reading syms   from primary file (1148 2746)
+--10213-- Discarding syms at 0x1040ad000-0x104151000 in /System/Library/Frameworks/IOBluetooth.framework/Versions/A/IOBluetooth (have_dinfo 1)
+--10213-- /System/Library/PrivateFrameworks/CoreWiFi.framework/Versions/A/CoreWiFi (rx at 0x1040ad000, rw at 0x10b8c7000)
+--10213--    reading syms   from primary file (1484 1583)
+--10213-- Discarding syms at 0x1040ad000-0x104113000 in /System/Library/PrivateFrameworks/CoreWiFi.framework/Versions/A/CoreWiFi (have_dinfo 1)
+--10213-- /System/Library/Frameworks/CoreBluetooth.framework/Versions/A/CoreBluetooth (rx at 0x1040ad000, rw at 0x10b93c000)
+--10213--    reading syms   from primary file (150 420)
+--10213-- Discarding syms at 0x1040ad000-0x1040c1000 in /System/Library/Frameworks/CoreBluetooth.framework/Versions/A/CoreBluetooth (have_dinfo 1)
+--10213-- /System/Library/Frameworks/CoreDisplay.framework/Versions/A/CoreDisplay (rx at 0x1040ad000, rw at 0x10ba00000)
+--10213--    reading syms   from primary file (425 1612)
+--10213-- Discarding syms at 0x1040ad000-0x10415b000 in /System/Library/Frameworks/CoreDisplay.framework/Versions/A/CoreDisplay (have_dinfo 1)
+--10213-- /System/Library/PrivateFrameworks/IOPresentment.framework/Versions/A/IOPresentment (rx at 0x1040ad000, rw at 0x10ba51000)
+--10213--    reading syms   from primary file (524 47)
+--10213-- Discarding syms at 0x1040ad000-0x1040c2000 in /System/Library/PrivateFrameworks/IOPresentment.framework/Versions/A/IOPresentment (have_dinfo 1)
+--10213-- /System/Library/PrivateFrameworks/DSExternalDisplay.framework/Versions/A/DSExternalDisplay (rx at 0x1040ad000, rw at 0x10ba6e000)
+--10213--    reading syms   from primary file (15 31)
+--10213-- Discarding syms at 0x1040ad000-0x1040b2000 in /System/Library/PrivateFrameworks/DSExternalDisplay.framework/Versions/A/DSExternalDisplay (have_dinfo 1)
+--10213-- /System/Library/PrivateFrameworks/DebugSymbols.framework/Versions/A/DebugSymbols (rx at 0x1040ad000, rw at 0x10bab4000)
+--10213--    reading syms   from primary file (42 976)
+--10213-- Discarding syms at 0x1040ad000-0x1040ed000 in /System/Library/PrivateFrameworks/DebugSymbols.framework/Versions/A/DebugSymbols (have_dinfo 1)
+--10213-- /System/Library/PrivateFrameworks/CoreSymbolication.framework/Versions/A/CoreSymbolication (rx at 0x1040ad000, rw at 0x10bb62000)
+--10213--    reading syms   from primary file (284 2811)
+--10213-- Discarding syms at 0x1040ad000-0x10413d000 in /System/Library/PrivateFrameworks/CoreSymbolication.framework/Versions/A/CoreSymbolication (have_dinfo 1)
+--10213-- /System/Library/PrivateFrameworks/Symbolication.framework/Versions/A/Symbolication (rx at 0x1040ad000, rw at 0x10bc28000)
+--10213--    reading syms   from primary file (231 2369)
+--10213-- Discarding syms at 0x1040ad000-0x104122000 in /System/Library/PrivateFrameworks/Symbolication.framework/Versions/A/Symbolication (have_dinfo 1)
+--10213-- /System/Library/PrivateFrameworks/AppleFSCompression.framework/Versions/A/AppleFSCompression (rx at 0x1040ad000, rw at 0x10bc87000)
+--10213--    reading syms   from primary file (37 1)
+--10213-- Discarding syms at 0x1040ad000-0x1040bd000 in /System/Library/PrivateFrameworks/AppleFSCompression.framework/Versions/A/AppleFSCompression (have_dinfo 1)
+--10213-- /System/Library/PrivateFrameworks/SpeechRecognitionCore.framework/Versions/A/SpeechRecognitionCore (rx at 0x1040ad000, rw at 0x10bc9d000)
+--10213--    reading syms   from primary file (27 438)
+--10213-- Discarding syms at 0x1040ad000-0x1040ba000 in /System/Library/PrivateFrameworks/SpeechRecognitionCore.framework/Versions/A/SpeechRecognitionCore (have_dinfo 1)
+--10213-- /System/Library/PrivateFrameworks/ChunkingLibrary.framework/Versions/A/ChunkingLibrary (rx at 0x1040ad000, rw at 0x10bcd4000)
+--10213--    reading syms   from primary file (96 277)
+==10213== 
+==10213== HEAP SUMMARY:
+==10213==     in use at exit: 0 bytes in 0 blocks
+==10213==   total heap usage: 0 allocs, 0 frees, 0 bytes allocated
+==10213== 
+==10213== All heap blocks were freed -- no leaks are possible
+==10213== 
+==10213== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 19 from 4)
+--10213-- 
+--10213-- used_suppression:      4 OSX1012:dyld-5 /Users/sdurgan/.brew/Cellar/valgrind/3.14.0/lib/valgrind/default.supp:1283
+--10213-- used_suppression:      8 OSX1012:dyld-4 /Users/sdurgan/.brew/Cellar/valgrind/3.14.0/lib/valgrind/default.supp:1275
+--10213-- used_suppression:      7 OSX1012:dyld-3 /Users/sdurgan/.brew/Cellar/valgrind/3.14.0/lib/valgrind/default.supp:1267
+==10213== 
+==10213== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 19 from 4)

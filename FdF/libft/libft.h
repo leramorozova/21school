@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 16:42:47 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/07 13:01:25 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/08 14:19:59 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void				ft_lstadd_end(t_list **alst, t_list *new);
 void				print_list(t_list *start);
 void				ft_lstfreeone(t_list **alst);
 void				ft_lstfree(t_list **alst);
-int					ft_delarr(char ***arr);
+void				ft_delarr(char ***arr);
 void				ft_swap(int *a, int *b);
 int					ft_sqrt(int nb);
 int					ft_sign(float a);
