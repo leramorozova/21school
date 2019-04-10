@@ -6,17 +6,16 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 14:49:28 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/10 14:01:58 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/10 18:10:14 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int			put_pix_img(void *mlx, void *mx, t_pixel p)
+int			put_pix_img(void *mx, t_pixel p)
 {
 	t_mlx			*m;
 	t_img			*img;
-	unsigned int	color;
 
 	m = (t_mlx *)mx;
 	img = &(m->img);
@@ -28,7 +27,7 @@ int			put_pix_img(void *mlx, void *mx, t_pixel p)
 void		redraw_image(t_fdf *fdf)
 {
 	mlx_destroy_image(fdf->mlx.mlx_init, fdf->mlx.img.img);
-	fdf->mlx.img = init_img(fdf->mlx.mlx_init, fdf->mlx.win, fdf->mlx.width,
+	fdf->mlx.img = init_img(fdf->mlx.mlx_init, fdf->mlx.width,
 			fdf->mlx.height);
 	put_map(&(fdf->map), fdf);
 	draw_img(fdf->mlx.mlx_init, fdf->mlx.win, fdf->mlx.img);
@@ -36,6 +35,7 @@ void		redraw_image(t_fdf *fdf)
 
 static int	close_window(t_fdf *param)
 {
+	param = NULL;
 	exit(0);
 }
 
@@ -47,8 +47,8 @@ int			main(int argc, char **argv)
 	{
 		fill_map(&fdf, argv[1]);
 		fdf.mlx = init_mlx(mlx_init(), WIN_W, WIN_H);
-		init_win(&fdf.mlx, fdf.map.name, fdf.mlx.width, fdf.mlx.height);
-		fdf.mlx.img = init_img(fdf.mlx.mlx_init, fdf.mlx.win, fdf.mlx.width,
+		init_win(&fdf.mlx, fdf.map.name);
+		fdf.mlx.img = init_img(fdf.mlx.mlx_init, fdf.mlx.width,
 				fdf.mlx.height);
 		put_map(&fdf.map, &fdf);
 		draw_img(fdf.mlx.mlx_init, fdf.mlx.win, fdf.mlx.img);

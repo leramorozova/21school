@@ -6,13 +6,13 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/06 15:07:34 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/10 13:55:33 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/10 18:11:19 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_img		init_img(void *mlx, void *win, int width, int height)
+t_img		init_img(void *mlx, int width, int height)
 {
 	t_img	img;
 
@@ -41,7 +41,7 @@ int			draw_img(void *mlx, void *win, t_img img)
 	{
 		while (++y != 141)
 			y == 140 || x == 360 ? mlx_pixel_put(mlx, win, x, y, 0xFFFFFF) :
-				 mlx_pixel_put(mlx, win, x, y, 0x000000);
+				mlx_pixel_put(mlx, win, x, y, 0x000000);
 		y = -1;
 	}
 	mlx_string_put(mlx, win, 10, 5, 0xFFFFFF, "press `esc` or [x] to leave\n");

@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 14:37:13 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/10 14:05:26 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/10 18:03:26 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void			define_colour(t_pixel *pixel, char *str)
 	}
 }
 
-void			init_win(t_mlx *mlx, char *title, int width, int height)
+void			init_win(t_mlx *mlx, char *title)
 {
 	mlx->title = title;
 	mlx->win = mlx_new_window(mlx->mlx_init, mlx->width, mlx->height,
@@ -49,6 +49,8 @@ void			init_win(t_mlx *mlx, char *title, int width, int height)
 
 static void		zoom(int key, int x, int y, t_fdf *param)
 {
+	x += x;
+	y += y;
 	if (key == 4)
 	{
 		if (param->map.scale > 700)

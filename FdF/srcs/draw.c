@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 18:56:17 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/10 13:38:17 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/10 17:58:11 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void		draw_line(t_pixel a, t_pixel b, t_fdf *fdf)
 	while (!barely_equals(cur.x, b.x) || !barely_equals(cur.y, b.y))
 	{
 		cur.color = get_color(cur, a, b, delta);
-		put_pix_img(fdf->mlx.mlx_init, fdf, cur);
+		put_pix_img(fdf, cur);
 		if ((error[1] = error[0] << 2) > -delta.y)
 		{
 			error[0] -= delta.y;
@@ -105,7 +105,7 @@ void		put_map(t_map *map, t_fdf *fdf)
 		single = init_pixel(map->pixel->x * map->scale + map->offset_x,
 				map->pixel->y * map->scale + map->offset_y, map->pixel->z,
 				0x00FE7A);
-		put_pix_img(fdf->mlx.mlx_init, fdf, single);
+		put_pix_img(fdf, single);
 	}
 	while (map->pixel->right)
 	{
