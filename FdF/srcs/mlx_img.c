@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/06 15:07:34 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/08 18:49:18 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/10 13:55:33 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,19 @@ t_img		init_img(void *mlx, void *win, int width, int height)
 
 int			draw_img(void *mlx, void *win, t_img img)
 {
+	int		x;
+	int		y;
+
+	x = -1;
+	y = -1;
 	mlx_put_image_to_window(mlx, win, img.img, 0, 0);
+	while (++x != 361)
+	{
+		while (++y != 141)
+			y == 140 || x == 360 ? mlx_pixel_put(mlx, win, x, y, 0xFFFFFF) :
+				 mlx_pixel_put(mlx, win, x, y, 0x000000);
+		y = -1;
+	}
 	mlx_string_put(mlx, win, 10, 5, 0xFFFFFF, "press `esc` or [x] to leave\n");
 	mlx_string_put(mlx, win, 10, 30, 0xFFFFFF, "mouse scroll: zoom\n");
 	mlx_string_put(mlx, win, 10, 55, 0xFFFFFF,
@@ -59,6 +71,7 @@ void		copy_point(t_pixel *source, t_pixel *copy)
 	copy->y = source->y;
 	copy->z = source->z;
 	copy->color = source->color;
+	copy->right = NULL;
 }
 
 t_pixel		*copy_pixel(t_pixel *source)

@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 12:32:51 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/08 18:40:31 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/10 14:08:51 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,15 @@ void			put_color(t_pixel **pixel, double min, double max)
 	begin = *pixel;
 	while (*pixel)
 	{
-		(*pixel)->z == max ? (*pixel)->color = 0xFE4900 : 0;
-		if ((*pixel)->z == min)
-			(*pixel)->color = 0x00FE7A;
-		else
-			(*pixel)->color = count_color(percent(min, max, (*pixel)->z));
-		if ((*pixel)->down)
+		if ((*pixel)->color == -1)
+		{
+			(*pixel)->z == max ? (*pixel)->color = 0xFE4900 : 0;
+			if ((*pixel)->z == min)
+				(*pixel)->color = 0x00FE7A;
+			else
+				(*pixel)->color = count_color(percent(min, max, (*pixel)->z));
+		}
+		if ((*pixel)->down && (*pixel)->down->color == -1)
 		{
 			(*pixel)->down->z == max ? (*pixel)->down->color = 0xFE4900 : 0;
 			if ((*pixel)->down->z == min)

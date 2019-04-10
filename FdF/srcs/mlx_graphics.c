@@ -6,7 +6,7 @@
 /*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 14:37:13 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/08 18:41:19 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/10 14:05:26 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ void			define_colour(t_pixel *pixel, char *str)
 		ft_delarr(&row);
 	}
 	else
+	{
 		pixel->z = ft_atoi(str);
+		pixel->color = -1;
+	}
 }
 
 void			init_win(t_mlx *mlx, char *title, int width, int height)
