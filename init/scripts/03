@@ -1,0 +1,1 @@
+kill $(ps au | grep -e '^root' | awk '{print $2}')

@@ -1,0 +1,4 @@
+echo 'Broadcast adress is:'
+ifconfig | grep broadcast | sed "s/.*broadcast //g"
+echo '\nIP adresses in the same subnet:'
+ping $(ifconfig | grep broadcast | sed "s/.*broadcast //g") | arp -a | grep 21-school.ru | sed "s/.*(//g" | sed "s/).*//g"

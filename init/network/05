@@ -1,0 +1,1 @@
+host slash16.org | grep address | sed "s/.*address //g"
