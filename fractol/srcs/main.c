@@ -6,7 +6,7 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 13:43:28 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/17 16:31:19 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/18 13:17:04 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ void		init_mlx(t_fctl *fractol, char *name)
 	fractol->int_img = (unsigned int *)mlx_get_data_addr(fractol->img,
 					&bits_per_pixel, &size_line, &end);
 	fractol->img_limit = WIN_W * WIN_H;
+	fractol->max_iter = 120;
+	fractol->zoom = 1;
+	fractol->move_x = 0;
+	fractol->move_y = 0;
 }
 
 int			main(int argc, char **argv)

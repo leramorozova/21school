@@ -6,7 +6,7 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 13:50:43 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/18 13:13:03 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/18 13:20:29 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,10 @@ void	make_julia(t_fctl *fractol)
 {
 	int		x;
 	int		y;
-	int		i = 0;
-	int		maxIterations = 1200;
+	int		i;
 	double	cRe = -0.7;
 	double	cIm = 0.27015;         
 	double	newRe, newIm, oldRe, oldIm;
-	double	zoom = 1, moveX = 0, moveY = 0;
 
 	y = 0;
 	while (y < WIN_H)
@@ -29,9 +27,12 @@ void	make_julia(t_fctl *fractol)
 		x = 0;
 		while (x < WIN_W)
 		{
-			newRe = 1.5 * (x - WIN_W / 2) / (0.5 * zoom * WIN_W) + moveX;
-			newIm = (y - WIN_H / 2) / (0.5 * zoom * WIN_H) + moveY;
-			while (i < maxIterations)
+			newRe = 1.5 * (x - WIN_W / 2) / (0.5 * fractol->zoom * WIN_W) +
+				fractol->move_x;
+			newIm = (y - WIN_H / 2) / (0.5 * fractol->zoom * WIN_H) +
+				fractol->move_y;
+			i = 0;
+			while (i < fractol->max_iter)
 			{
 				oldRe = newRe;
 				oldIm = newIm;
@@ -42,7 +43,6 @@ void	make_julia(t_fctl *fractol)
 				i++;
 			}
 			put_pix_img(fractol, x, y, 265 * i);
-			i = 0;
 			printf("%d, %d\n", x, y);
 			x++;
 		}

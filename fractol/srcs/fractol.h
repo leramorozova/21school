@@ -6,7 +6,7 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 13:34:32 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/17 16:19:57 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/18 13:24:10 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "math.h"
 # include <stdlib.h>
 # include <stdio.h>
+#include <pthread.h>
 
 typedef struct		s_img
 {
@@ -39,12 +40,22 @@ typedef struct		s_fctl
 	unsigned int	*int_img;
 	int				img_limit;
 	int				zoom;
+	int				move_x;
+	int				move_y;
+	int				max_iter;
 }					t_fctl;
+
+typedef struct		s_thread
+{
+	/* data */
+}					t_thread;
+
 
 int					get_color(int red, int green, int blue);
 int					draw_img(t_fctl *frac);
 int					put_pix_img(t_fctl *fractol, double x, double y, int color);
 void				make_julia(t_fctl *fractol);
 int					keyboard(int key, t_fctl *fractol);
+
 
 #endif
