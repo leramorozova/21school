@@ -6,7 +6,7 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 13:50:43 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/17 18:27:41 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/18 13:13:03 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	make_julia(t_fctl *fractol)
 	int		y;
 	int		i = 0;
 	int		maxIterations = 1200;
-	int		color ;
 	double	cRe = -0.7;
 	double	cIm = 0.27015;         
 	double	newRe, newIm, oldRe, oldIm;
@@ -42,8 +41,7 @@ void	make_julia(t_fctl *fractol)
 					break ;
 				i++;
 			}
-			color = get_color(i % 256, 255, 255 * (i < maxIterations));
-			put_pix_img(fractol, x, y, color);
+			put_pix_img(fractol, x, y, 265 * i);
 			i = 0;
 			printf("%d, %d\n", x, y);
 			x++;
