@@ -6,7 +6,7 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:10:35 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/20 11:56:57 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/20 12:33:48 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,18 @@ int			draw_img(t_fctl *frac)
 	x = -1;
 	y = -1;
 	mlx_put_image_to_window(frac->mlx_init, frac->win, frac->img, 0, 0);
-	mlx_string_put(frac->mlx_init, frac->win, 10, 5, 0xFFFFFF,
-		"Clear: tab\n");
+	mlx_string_put(frac->mlx_init, frac->win, 5, 1, 0xFFFFFF,
+		"Clear: enter\n");
+	mlx_string_put(frac->mlx_init, frac->win, 5, 18, 0xFFFFFF,
+		"Fix: left mouse\n");
 	return (0);
 }
 
-t_thread		init_thread(void)
+t_thread	init_thread(void)
 {
 	t_thread	trd;
 
 	trd.size = WIN_H / THREADS_Q;
-	printf("%d\n", WIN_H / THREADS_Q);
 	return (trd);
 }
 

@@ -6,7 +6,7 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/20 09:25:48 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/20 11:23:27 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/20 12:31:14 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static void		zoom(int key, int x, int y, t_fctl *param)
 	y += y;
 	if (key == 5)
 	{
-		//if (param->zoom > 700)
 		param->zoom *= 1.2;
 		redraw_img(param);
 	}
@@ -29,14 +28,29 @@ static void		zoom(int key, int x, int y, t_fctl *param)
 	}
 }
 
-int		mouse_press(int key, int x, int y, void *param)
+int		mouse_press(int key, int x, int y, t_fctl *param)
 {
 	if (key == 4 || key == 5)
 		zoom(key, x, y, param);
+	if (key == 1)
+		param->fix_mouse = param->fix_mouse == 1 ? 0 : 1;
 	return (0);
 }
 
-int		mouse_move(int x, int y, void *param)
+int		mouse_move(int x, int y, t_fctl *param)
 {
-	return (0);
+	double	x_copy;
+	double	y_copy;
+
+	x_copy = (double)x;
+	y_copy = (double)y;
+	if (param->fix_mouse == 1)
+		return (0);
+	else
+	{
+		param->real_unit = -0.7 + x_copy / 1000;
+		param->im_unit = 0.27015 + y_copy / 1000;
+		redraw_img(param);
+		return (0);
+	}
 }

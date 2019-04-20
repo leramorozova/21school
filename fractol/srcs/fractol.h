@@ -6,7 +6,7 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 13:34:32 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/20 11:50:52 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/20 12:20:21 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct		s_fctl
 	double			s_i;
 	int				thread_start;
 	int				thread_end;
+	int				fix_mouse;
 }					t_fctl;
 
 typedef struct		s_thread
@@ -59,8 +60,8 @@ int					keyboard(int key, t_fctl *fractol);
 t_thread			init_thread(void);
 void				make_threads(t_fctl *fctl, t_thread thread,
 												void *func(void *));
-int					mouse_press(int button, int x, int y, void *param);
-int					mouse_move(int x, int y, void *param);
+int					mouse_press(int button, int x, int y, t_fctl *param);
+int					mouse_move(int x, int y, t_fctl *param);
 void				*julia(void *div);
 void				redraw_img(t_fctl *fctl);
 void				make_julia_default(t_fctl *fractol);

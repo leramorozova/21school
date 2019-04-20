@@ -6,7 +6,7 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 13:43:28 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/20 11:51:12 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/20 12:19:47 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void		init_mlx(t_fctl *fractol, char *name)
 	fractol->img = mlx_new_image(fractol->mlx_init, WIN_W, WIN_H);
 	fractol->int_img = (unsigned int *)mlx_get_data_addr(fractol->img,
 					&bits_per_pixel, &size_line, &end);
+	fractol->fix_mouse = 0;
 	make_julia_default(fractol);
 }
 
@@ -50,6 +51,7 @@ int			main(int argc, char **argv)
 		draw_img(&fractol);
 		mlx_hook(fractol.win, 2, 0, keyboard, &fractol);
 		mlx_hook(fractol.win, 4, 0, mouse_press, &fractol);
+		mlx_hook(fractol.win, 6, 0, mouse_move, &fractol);
 		mlx_hook(fractol.win, 17, 0, close_window, &fractol);
 		mlx_loop(fractol.mlx_init);
 	}
