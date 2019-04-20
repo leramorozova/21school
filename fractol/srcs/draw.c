@@ -6,7 +6,7 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:10:35 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/20 08:17:37 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/20 08:47:43 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,4 @@ int			draw_img(t_fctl *frac)
 	mlx_string_put(frac->mlx_init, frac->win, 10, 5, 0xFFFFFF,
 		"There will bw some signs later\n");*/
 	return (0);
-}
-
-int			get_color(int red, int green, int blue)
-{
-	return ((red << 16) | (green << 8) | blue);
 }

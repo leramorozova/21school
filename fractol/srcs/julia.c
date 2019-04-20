@@ -6,7 +6,7 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 13:50:43 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/20 08:40:10 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/20 08:48:01 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ void	make_julia(t_fctl *fractol)
 					break ;
 				i++;
 			}
-			put_pix_img(fractol, x, y, 265 * i);
-			//printf("%d, %d\n", x, y);
+			put_pix_img(fractol, x, y, 265 * i - 100);
 			y++;
 		}
 		x++;
