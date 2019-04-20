@@ -6,11 +6,19 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:10:35 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/17 18:26:23 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/20 08:17:37 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+t_thread		init_thread(void)
+{
+	t_thread	trd;
+
+	trd.size = WIN_H * WIN_W / THREADS_Q;
+	return (trd);
+}
 
 int			put_pix_img(t_fctl *fractol, double x, double y, int color)
 {

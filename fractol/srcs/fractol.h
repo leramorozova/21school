@@ -6,7 +6,7 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 13:34:32 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/18 13:24:10 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/20 08:40:41 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,14 @@
 # define FRACTOL_H
 # define WIN_W 1920
 # define WIN_H 1080
+# define THREADS_Q 20
 
 # include "mlx.h"
 # include "libft/libft.h"
 # include "math.h"
 # include <stdlib.h>
 # include <stdio.h>
-#include <pthread.h>
-
-typedef struct		s_img
-{
-	void			*img;
-	unsigned int	*int_data;
-	int				size_line;
-	int				end;
-	int				bits_per_pixel;
-}					t_img;
+# include <pthread.h>
 
 typedef struct		s_fctl
 {
@@ -43,19 +35,24 @@ typedef struct		s_fctl
 	int				move_x;
 	int				move_y;
 	int				max_iter;
+	int				thread_start;
+	int				thread_end;
 }					t_fctl;
 
 typedef struct		s_thread
 {
-	/* data */
+	int				size;
+	pthread_t		id[THREADS_Q];
 }					t_thread;
 
 
 int					get_color(int red, int green, int blue);
 int					draw_img(t_fctl *frac);
 int					put_pix_img(t_fctl *fractol, double x, double y, int color);
-void				make_julia(t_fctl *fractol);
+void				make_julia(t_fctl *fctl);
 int					keyboard(int key, t_fctl *fractol);
+t_thread			init_thread(void);
+void				julia_pthread(t_fctl *fctl, t_thread thread);
 
 
 #endif
