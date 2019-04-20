@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 16:42:47 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/08 15:18:38 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/20 08:58:40 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char				*ft_itoa(int n);
 void				ft_putendl(char const *s);
 void				ft_putendl_fd(char const *s, int fd);
 void				print_char_arr(char **arr);
-int					ft_power(int nb, int power);
+double				ft_power(double nb, int power);
 void				ft_lstadd_end(t_list **alst, t_list *new);
 void				print_list(t_list *start);
 void				ft_lstfreeone(t_list **alst);

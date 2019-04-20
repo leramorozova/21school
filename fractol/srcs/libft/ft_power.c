@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_power.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/02 11:26:49 by sdurgan           #+#    #+#             */
-/*   Updated: 2018/12/02 12:16:52 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/20 08:58:05 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_power(int nb, int power)
+double	ft_power(double nb, int power)
 {
 	if (power == 1)
 		return (nb);

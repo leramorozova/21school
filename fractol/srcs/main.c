@@ -6,7 +6,7 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 13:43:28 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/20 08:36:50 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/20 08:55:16 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,11 @@ void		init_mlx(t_fctl *fractol, char *name)
 					&bits_per_pixel, &size_line, &end);
 	fractol->img_limit = WIN_W * WIN_H;
 	fractol->max_iter = 1200;
-	fractol->zoom = 1;
+	fractol->zoom = 0.75;
 	fractol->move_x = 0;
 	fractol->move_y = 0;
+	fractol->real_unit = -0.7;
+	fractol->im_unit = 0.27015;
 }
 
 int			main(int argc, char **argv)
