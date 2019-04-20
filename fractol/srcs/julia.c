@@ -6,7 +6,7 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 13:50:43 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/20 09:17:57 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/20 09:32:20 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	*julia(void *div)
 	return (div);
 }
 
-void	julia_pthread(t_fctl *fctl, t_thread thread)
+void	make_threads(t_fctl *fctl, t_thread thread, void *func(void *))
 {
 	t_fctl		div_fctl[THREADS_Q];
 	int			i;
@@ -61,7 +61,7 @@ void	julia_pthread(t_fctl *fctl, t_thread thread)
 		ft_memcpy((void*)&div_fctl[i], (void*)fctl, sizeof(t_fctl));
 		div_fctl[i].thread_start = thread.size * i;
 		div_fctl[i].thread_end = thread.size * (i + 1);
-		pthread_create(&(thread.id[i]), NULL, julia, &div_fctl[i]);
+		pthread_create(&(thread.id[i]), NULL, func, &div_fctl[i]);
 		i++;
 	}
 	while (i--)

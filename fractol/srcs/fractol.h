@@ -6,7 +6,7 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 13:34:32 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/20 09:05:42 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/20 09:32:45 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,11 @@ int					put_pix_img(t_fctl *fractol, double x, double y, int color);
 void				make_julia(t_fctl *fctl);
 int					keyboard(int key, t_fctl *fractol);
 t_thread			init_thread(void);
-void				julia_pthread(t_fctl *fctl, t_thread thread);
+void				make_threads(t_fctl *fctl, t_thread thread,
+												void *func(void *));
+int					mouse_press(int button, int x, int y, void *param);
+int					mouse_move(int x, int y, void *param);
+void				*julia(void *div);
 
 
 #endif
