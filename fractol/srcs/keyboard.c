@@ -6,7 +6,7 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 16:17:42 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/20 11:32:18 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/20 11:53:15 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,10 @@ int				keyboard(int key, t_fctl *param)
 {
 	if (key == 126 || key == 125 || key == 124 || key == 123)
 		move_figure(key, param);
+	if (key == 36)
+	{
+		make_julia_default(param);
+		redraw_img(param);
+	}
 	return (0);
 }

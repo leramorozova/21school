@@ -6,15 +6,15 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 13:34:32 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/20 11:24:32 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/20 11:50:52 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 # define WIN_W 800
-# define WIN_H 800
-# define THREADS_Q 160
+# define WIN_H 600
+# define THREADS_Q 200
 
 # include "mlx.h"
 # include "libft/libft.h"
@@ -30,7 +30,6 @@ typedef struct		s_fctl
 	void			*win;
 	void			*img;
 	unsigned int	*int_img;
-	int				img_limit;
 	double			zoom;
 	double			move_x;
 	double			move_y;
@@ -64,6 +63,7 @@ int					mouse_press(int button, int x, int y, void *param);
 int					mouse_move(int x, int y, void *param);
 void				*julia(void *div);
 void				redraw_img(t_fctl *fctl);
+void				make_julia_default(t_fctl *fractol);
 
 
 #endif

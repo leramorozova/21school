@@ -6,7 +6,7 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 13:43:28 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/20 11:36:27 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/20 11:51:12 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,25 +31,7 @@ void		init_mlx(t_fctl *fractol, char *name)
 	fractol->img = mlx_new_image(fractol->mlx_init, WIN_W, WIN_H);
 	fractol->int_img = (unsigned int *)mlx_get_data_addr(fractol->img,
 					&bits_per_pixel, &size_line, &end);
-	fractol->img_limit = WIN_W * WIN_H;
-	fractol->max_iter = 250;
-	fractol->zoom = 0.75;
-	fractol->move_x = 0;
-	fractol->move_y = 0;
-	fractol->real_unit = -0.7;
-	fractol->im_unit = 0.27015;
-}
-
-void		redraw_img(t_fctl *fctl)
-{
-	t_thread	thread;
-
-	thread = init_thread();
-	mlx_destroy_image(fctl->mlx_init, fctl->img);
-	fctl->img = mlx_new_image(fctl->mlx_init, WIN_W, WIN_H);
-	if (!ft_strcmp(fctl->title, "Julia"))
-		make_threads(fctl, thread, julia);
-	draw_img(fctl);
+	make_julia_default(fractol);
 }
 
 int			main(int argc, char **argv)
