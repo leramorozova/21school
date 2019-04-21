@@ -6,7 +6,7 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 13:34:32 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/20 12:20:21 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/21 17:14:11 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ typedef struct		s_fctl
 	int				max_iter;
 	double			real_unit;
 	double			im_unit;
+	double			real_unit_change;
+	double			im_unit_change;
 	double			n_r;
 	double			s_r;
 	double			n_i;
@@ -43,6 +45,7 @@ typedef struct		s_fctl
 	int				thread_start;
 	int				thread_end;
 	int				fix_mouse;
+	int				change_color;
 }					t_fctl;
 
 typedef struct		s_thread
@@ -55,7 +58,6 @@ typedef struct		s_thread
 int					get_color(int red, int green, int blue);
 int					draw_img(t_fctl *frac);
 int					put_pix_img(t_fctl *fractol, double x, double y, int color);
-void				make_julia(t_fctl *fctl);
 int					keyboard(int key, t_fctl *fractol);
 t_thread			init_thread(void);
 void				make_threads(t_fctl *fctl, t_thread thread,
@@ -65,6 +67,8 @@ int					mouse_move(int x, int y, t_fctl *param);
 void				*julia(void *div);
 void				redraw_img(t_fctl *fctl);
 void				make_julia_default(t_fctl *fractol);
+void				*mandelbrot(void *div);
+void				make_mandelbrot(t_fctl *f);
 
 
 #endif

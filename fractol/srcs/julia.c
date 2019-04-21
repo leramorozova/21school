@@ -6,13 +6,30 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 13:50:43 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/20 11:51:02 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/21 17:16:12 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	make_julia(t_fctl *f)
+void		jul(t_fctl *f, int x, int y)
+{
+	f->n_r = 1.5 * (x - WIN_W / 2) / (f->zoom * WIN_W / 2) + f->move_x;
+	f->n_i = (y - WIN_H / 2) / (f->zoom * WIN_H / 2) + f->move_y;
+	f->real_unit = -0.7 + f->real_unit_change;
+	f->im_unit = 0.27015 + f->im_unit_change;
+}
+
+void		man(t_fctl *f, int x, int y)
+{
+	f->real_unit = 1.5 * (x - WIN_W / 2) / (f->zoom * WIN_W / 2) +
+														f->move_x - 0.5;
+	f->im_unit = (y - WIN_H / 2) / (f->zoom * WIN_H / 2) + f->move_y;
+	f->n_r = 0;
+	f->n_i = 0;
+}
+
+static void	make_julia(t_fctl *f)
 {
 	int		x;
 	int		y;
@@ -23,8 +40,7 @@ void	make_julia(t_fctl *f)
 	{
 		while (++y < f->thread_end && y < WIN_H)
 		{
-			f->n_r = 1.5 * (x - WIN_W / 2) / (f->zoom * WIN_W / 2) + f->move_x;
-			f->n_i = (y - WIN_H / 2) / (f->zoom * WIN_H / 2) + f->move_y;
+			!ft_strcmp(f->title, "Julia") ? jul(f, x, y) : man(f, x, y);
 			i = -1;
 			while (++i < f->max_iter)
 			{
@@ -52,10 +68,13 @@ void	*julia(void *div)
 
 void	make_julia_default(t_fctl *fractol)
 {
-	fractol->max_iter = 180;
+	fractol->n_r = 0.0;
+	fractol->n_i = 0.0;
+	fractol->max_iter = 150;
 	fractol->zoom = 0.75;
 	fractol->move_x = 0;
 	fractol->move_y = 0;
-	fractol->real_unit = -0.7;
-	fractol->im_unit = 0.27015;
+	fractol->real_unit_change = 0;
+	fractol->im_unit_change = 0;
+	fractol->change_color = 0;
 }

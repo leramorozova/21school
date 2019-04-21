@@ -6,7 +6,7 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/20 09:25:48 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/20 12:31:14 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/21 17:18:43 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ int		mouse_move(int x, int y, t_fctl *param)
 
 	x_copy = (double)x;
 	y_copy = (double)y;
-	if (param->fix_mouse == 1)
+	if (param->fix_mouse == 1 || !(ft_strcmp(param->title, "Mandelbrot")))
 		return (0);
 	else
 	{
-		param->real_unit = -0.7 + x_copy / 1000;
-		param->im_unit = 0.27015 + y_copy / 1000;
+		param->real_unit_change = x_copy / 1000;
+		param->im_unit_change = y_copy / 1000;
 		redraw_img(param);
 		return (0);
 	}
