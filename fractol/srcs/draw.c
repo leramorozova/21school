@@ -6,7 +6,7 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:10:35 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/21 17:42:51 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/21 19:24:46 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int			draw_img(t_fctl *frac)
 	mlx_string_put(frac->mlx_init, frac->win, 5, 35, 0xFFFFFF,
 		"Iterations:\n");
 	mlx_string_put(frac->mlx_init, frac->win, 125, 35, 0xFFFFFF,
-		ft_itoa(frac->max_iter));
+		ft_itoa(frac->max_i));
 	return (0);
 }
 

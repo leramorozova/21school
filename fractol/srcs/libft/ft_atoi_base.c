@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 14:30:06 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/07 14:30:11 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/21 19:27:11 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int				ft_atoi_base(char *nb, int base)
 	length = length_number(nb, base) - 1;
 	while (*nb && length >= 0 && convert(*nb, base) != -1)
 	{
-		res += convert(*nb, base) * ft_power(base, length);
+		res += convert(*nb, base) * ft_pow(base, length);
 		nb++;
 		length--;
 	}

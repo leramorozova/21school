@@ -3,22 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdurgan <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 14:29:01 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/07 14:29:06 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/21 19:26:46 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-int		ft_pow(int nb, int pow)
-{
-	if (pow == 0)
-		return (1);
-	else
-		return (nb * ft_pow(nb, pow - 1));
-}
 
 char	*ft_itoa_base(int value, int base)
 {

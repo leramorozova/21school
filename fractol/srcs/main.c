@@ -6,7 +6,7 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 13:43:28 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/21 19:16:13 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/21 19:18:30 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int			color_schema(t_fctl *f, int i)
 				(120 * i % 256));
 	else if (f->change_color == 0)
 		return (i * 256);
+	else
+		return (0);
 }
 
 void		init_mlx(t_fctl *fractol, char *name)

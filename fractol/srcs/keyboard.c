@@ -6,7 +6,7 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 16:17:42 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/21 17:15:03 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/21 19:25:02 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ static void		move_figure(int key, t_fctl *fctl)
 
 int				change_iterations(int key, t_fctl *fctl)
 {
-	if (fctl->max_iter >= 100)
+	if (fctl->max_i >= 100)
 	{
-		fctl->max_iter += key == 116 ? 10 : -10;
+		fctl->max_i += key == 116 ? 10 : -10;
 		redraw_img(fctl);
 	}
-	else if (fctl->max_iter <= 100 && key == 116)
-		fctl->max_iter += 10;
+	else if (fctl->max_i <= 100 && key == 116)
+		fctl->max_i += 10;
 	return (0);
 }
 

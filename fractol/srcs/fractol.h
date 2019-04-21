@@ -6,7 +6,7 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 13:34:32 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/21 19:00:52 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/21 19:23:40 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ typedef struct		s_fctl
 	double			zoom;
 	double			move_x;
 	double			move_y;
-	int				max_iter;
-	int				iter_limit;
+	int				max_i;
 	double			real_unit;
 	double			im_unit;
 	double			real_unit_change;

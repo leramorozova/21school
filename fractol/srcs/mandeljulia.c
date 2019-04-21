@@ -6,7 +6,7 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 13:50:43 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/21 19:16:42 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/21 19:27:28 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,13 @@ static void	make_mandeljulia(t_fctl *f)
 		{
 			!ft_strcmp(f->title, "Julia") ? julia(f, x, y) : mandelbro(f, x, y);
 			i = -1;
-			while (++i < f->max_iter)
+			while (ft_pow(f->n_r, 2) + ft_pow(f->n_i, 2) < 4 && ++i < f->max_i)
 			{
 				f->s_r = f->n_r;
 				f->s_i = f->n_i;
-				f->n_r = ft_power(f->s_r, 2) - ft_power(f->s_i, 2)
+				f->n_r = ft_pow(f->s_r, 2) - ft_pow(f->s_i, 2)
 					+ f->real_unit;
 				f->n_i = 2 * f->s_r * f->s_i + f->im_unit;
-				if ((ft_power(f->n_r, 2) + ft_power(f->n_i, 2)) > f->iter_limit)
-					break ;
 			}
 			put_pix_img(f, x, y, ((50 * i % 256) << 16) |
 					((80 * i % 256) << 8) | (120 * i % 256));
@@ -69,13 +67,9 @@ void		*mandeljulia(void *div)
 
 void		make_julia_default(t_fctl *fractol)
 {
-	if (!ft_strcmp(fractol->title, "Sheep"))
-		fractol->iter_limit = 16;
-	else
-		fractol->iter_limit = 4;
 	fractol->n_r = 0.0;
 	fractol->n_i = 0.0;
-	fractol->max_iter = 150;
+	fractol->max_i = 150;
 	fractol->zoom = 0.75;
 	fractol->move_x = 0;
 	fractol->move_y = 0;
