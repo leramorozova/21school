@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   julia.c                                            :+:      :+:    :+:   */
+/*   mandeljulia.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 13:50:43 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/21 17:27:43 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/21 19:16:42 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,11 @@ static void	make_mandeljulia(t_fctl *f)
 				f->n_r = ft_power(f->s_r, 2) - ft_power(f->s_i, 2)
 					+ f->real_unit;
 				f->n_i = 2 * f->s_r * f->s_i + f->im_unit;
-				if ((ft_power(f->n_r, 2) + ft_power(f->n_i, 2)) > 4)
+				if ((ft_power(f->n_r, 2) + ft_power(f->n_i, 2)) > f->iter_limit)
 					break ;
 			}
-			put_pix_img(f, x, y, 265 * i);
+			put_pix_img(f, x, y, ((50 * i % 256) << 16) |
+					((80 * i % 256) << 8) | (120 * i % 256));
 		}
 	}
 }
@@ -66,8 +67,12 @@ void		*mandeljulia(void *div)
 	return (div);
 }
 
-void	make_julia_default(t_fctl *fractol)
+void		make_julia_default(t_fctl *fractol)
 {
+	if (!ft_strcmp(fractol->title, "Sheep"))
+		fractol->iter_limit = 16;
+	else
+		fractol->iter_limit = 4;
 	fractol->n_r = 0.0;
 	fractol->n_i = 0.0;
 	fractol->max_iter = 150;

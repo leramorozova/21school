@@ -6,7 +6,7 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 13:34:32 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/21 17:23:06 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/21 19:00:52 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define FRACTOL_H
 # define WIN_W 800
 # define WIN_H 600
-# define THREADS_Q 200
+# define THREADS_Q 120
 
 # include "mlx.h"
 # include "libft/libft.h"
@@ -34,6 +34,7 @@ typedef struct		s_fctl
 	double			move_x;
 	double			move_y;
 	int				max_iter;
+	int				iter_limit;
 	double			real_unit;
 	double			im_unit;
 	double			real_unit_change;
@@ -69,6 +70,7 @@ void				redraw_img(t_fctl *fctl);
 void				make_julia_default(t_fctl *fractol);
 void				*mandelbrot(void *div);
 void				make_mandelbrot(t_fctl *f);
+void				make_burning_ship(t_fctl *f);
 
 
 #endif

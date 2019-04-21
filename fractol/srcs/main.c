@@ -6,7 +6,7 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 13:43:28 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/21 17:23:29 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/21 19:16:13 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,15 @@ static int	close_window(t_fctl *param)
 {
 	param = NULL;
 	exit(0);
+}
+
+int			color_schema(t_fctl *f, int i)
+{
+	if (f->change_color == 1)
+		return (((50 * i % 256) << 16) | ((80 * i % 256) << 8) |
+				(120 * i % 256));
+	else if (f->change_color == 0)
+		return (i * 256);
 }
 
 void		init_mlx(t_fctl *fractol, char *name)
@@ -46,6 +55,8 @@ int			main(int argc, char **argv)
 		thread = init_thread();
 		if (!ft_strcmp(argv[1], "Julia") || !ft_strcmp(argv[1], "Mandelbrot"))
 			make_threads(&fractol, thread, mandeljulia);
+		else if (!ft_strcmp(argv[1], "Sheep"))
+			make_burning_ship(&fractol);
 		else
 			exit(ft_putstr("Invalid fractol name!\n"));
 		draw_img(&fractol);

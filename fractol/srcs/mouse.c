@@ -6,7 +6,7 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/20 09:25:48 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/21 17:18:43 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/21 19:06:52 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		mouse_move(int x, int y, t_fctl *param)
 
 	x_copy = (double)x;
 	y_copy = (double)y;
-	if (param->fix_mouse == 1 || !(ft_strcmp(param->title, "Mandelbrot")))
+	if (param->fix_mouse == 1 || (ft_strcmp(param->title, "Julia")))
 		return (0);
 	else
 	{
