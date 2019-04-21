@@ -6,7 +6,7 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 13:34:32 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/21 17:14:11 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/21 17:23:06 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void				make_threads(t_fctl *fctl, t_thread thread,
 												void *func(void *));
 int					mouse_press(int button, int x, int y, t_fctl *param);
 int					mouse_move(int x, int y, t_fctl *param);
-void				*julia(void *div);
+void				*mandeljulia(void *div);
 void				redraw_img(t_fctl *fctl);
 void				make_julia_default(t_fctl *fractol);
 void				*mandelbrot(void *div);

@@ -6,7 +6,7 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 13:43:28 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/21 17:12:45 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/21 17:23:29 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int			main(int argc, char **argv)
 		init_mlx(&fractol, argv[1]);
 		thread = init_thread();
 		if (!ft_strcmp(argv[1], "Julia") || !ft_strcmp(argv[1], "Mandelbrot"))
-			make_threads(&fractol, thread, julia);
+			make_threads(&fractol, thread, mandeljulia);
 		else
 			exit(ft_putstr("Invalid fractol name!\n"));
 		draw_img(&fractol);

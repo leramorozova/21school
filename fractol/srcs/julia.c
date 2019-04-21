@@ -6,13 +6,13 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 13:50:43 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/21 17:16:12 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/21 17:27:43 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void		jul(t_fctl *f, int x, int y)
+static void	julia(t_fctl *f, int x, int y)
 {
 	f->n_r = 1.5 * (x - WIN_W / 2) / (f->zoom * WIN_W / 2) + f->move_x;
 	f->n_i = (y - WIN_H / 2) / (f->zoom * WIN_H / 2) + f->move_y;
@@ -20,7 +20,7 @@ void		jul(t_fctl *f, int x, int y)
 	f->im_unit = 0.27015 + f->im_unit_change;
 }
 
-void		man(t_fctl *f, int x, int y)
+static void	mandelbro(t_fctl *f, int x, int y)
 {
 	f->real_unit = 1.5 * (x - WIN_W / 2) / (f->zoom * WIN_W / 2) +
 														f->move_x - 0.5;
@@ -29,7 +29,7 @@ void		man(t_fctl *f, int x, int y)
 	f->n_i = 0;
 }
 
-static void	make_julia(t_fctl *f)
+static void	make_mandeljulia(t_fctl *f)
 {
 	int		x;
 	int		y;
@@ -40,7 +40,7 @@ static void	make_julia(t_fctl *f)
 	{
 		while (++y < f->thread_end && y < WIN_H)
 		{
-			!ft_strcmp(f->title, "Julia") ? jul(f, x, y) : man(f, x, y);
+			!ft_strcmp(f->title, "Julia") ? julia(f, x, y) : mandelbro(f, x, y);
 			i = -1;
 			while (++i < f->max_iter)
 			{
@@ -57,12 +57,12 @@ static void	make_julia(t_fctl *f)
 	}
 }
 
-void	*julia(void *div)
+void		*mandeljulia(void *div)
 {
 	t_fctl	*fctl;
 
 	fctl = (t_fctl *)div;
-	make_julia(fctl);
+	make_mandeljulia(fctl);
 	return (div);
 }
 
