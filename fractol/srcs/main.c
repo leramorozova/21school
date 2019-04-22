@@ -6,7 +6,7 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 13:43:28 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/21 19:18:30 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/22 14:08:16 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,17 @@ static int	close_window(t_fctl *param)
 	exit(0);
 }
 
-int			color_schema(t_fctl *f, int i)
+void		make_fractol_default(t_fctl *fractol)
 {
-	if (f->change_color == 1)
-		return (((50 * i % 256) << 16) | ((80 * i % 256) << 8) |
-				(120 * i % 256));
-	else if (f->change_color == 0)
-		return (i * 256);
-	else
-		return (0);
+	fractol->n_r = 0.0;
+	fractol->n_i = 0.0;
+	fractol->max_i = 150;
+	fractol->zoom = 0.75;
+	fractol->move_x = 0;
+	fractol->move_y = 0;
+	fractol->real_unit_change = 0;
+	fractol->im_unit_change = 0;
+	fractol->change_color = 0;
 }
 
 void		init_mlx(t_fctl *fractol, char *name)
@@ -43,30 +45,29 @@ void		init_mlx(t_fctl *fractol, char *name)
 	fractol->int_img = (unsigned int *)mlx_get_data_addr(fractol->img,
 					&bits_per_pixel, &size_line, &end);
 	fractol->fix_mouse = 0;
-	make_julia_default(fractol);
+	make_fractol_default(fractol);
 }
 
 int			main(int argc, char **argv)
 {
-	t_fctl		fractol;
+	t_fctl		f;
 	t_thread	thread;
 
 	if (argc == 2)
 	{
-		init_mlx(&fractol, argv[1]);
+		init_mlx(&f, argv[1]);
 		thread = init_thread();
-		if (!ft_strcmp(argv[1], "Julia") || !ft_strcmp(argv[1], "Mandelbrot"))
-			make_threads(&fractol, thread, mandeljulia);
-		else if (!ft_strcmp(argv[1], "Sheep"))
-			make_burning_ship(&fractol);
+		if (!ft_strcmp(argv[1], "Julia") || !ft_strcmp(argv[1], "Mandelbrot")
+					|| !ft_strcmp(argv[1], "Sheep"))
+			make_threads(&f, thread, fractol);
 		else
 			exit(ft_putstr("Invalid fractol name!\n"));
-		draw_img(&fractol);
-		mlx_hook(fractol.win, 2, 0, keyboard, &fractol);
-		mlx_hook(fractol.win, 4, 0, mouse_press, &fractol);
-		mlx_hook(fractol.win, 6, 0, mouse_move, &fractol);
-		mlx_hook(fractol.win, 17, 0, close_window, &fractol);
-		mlx_loop(fractol.mlx_init);
+		draw_img(&f);
+		mlx_hook(f.win, 2, 0, keyboard, &f);
+		mlx_hook(f.win, 4, 0, mouse_press, &f);
+		mlx_hook(f.win, 6, 0, mouse_move, &f);
+		mlx_hook(f.win, 17, 0, close_window, &f);
+		mlx_loop(f.mlx_init);
 	}
 	else
 		return (write(1, "Usage: ./fractol fractol_name (e.g Julia)\n", 42));

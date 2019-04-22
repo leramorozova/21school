@@ -6,7 +6,7 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:10:35 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/21 19:24:46 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/22 13:51:08 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@ void		redraw_img(t_fctl *fctl)
 	thread = init_thread();
 	mlx_destroy_image(fctl->mlx_init, fctl->img);
 	fctl->img = mlx_new_image(fctl->mlx_init, WIN_W, WIN_H);
-	if (!ft_strcmp(fctl->title, "Julia") ||
-				!ft_strcmp(fctl->title, "Mandelbrot"))
-		make_threads(fctl, thread, mandeljulia);
+	make_threads(fctl, thread, fractol);
 	draw_img(fctl);
 }
 

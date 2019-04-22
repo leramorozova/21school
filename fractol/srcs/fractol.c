@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandeljulia.c                                      :+:      :+:    :+:   */
+/*   fractol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 13:50:43 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/21 19:27:28 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/22 14:07:54 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,15 @@ static void	mandelbro(t_fctl *f, int x, int y)
 	f->n_i = 0;
 }
 
-static void	make_mandeljulia(t_fctl *f)
+static void	burning_sheep(t_fctl *f, int x, int y)
+{
+	f->real_unit = 0.007 * (x - WIN_W / 2) * f->zoom - 0.2 + f->move_x; // сюда зум и движение
+	f->im_unit = 0.007 * (y - WIN_H / 2) * f->zoom - 0.3 + f->move_y ; //
+	f->n_r = 0;
+	f->n_i = 0;
+}
+
+static void	make_fractol(t_fctl *f)
 {
 	int		x;
 	int		y;
@@ -40,7 +48,9 @@ static void	make_mandeljulia(t_fctl *f)
 	{
 		while (++y < f->thread_end && y < WIN_H)
 		{
-			!ft_strcmp(f->title, "Julia") ? julia(f, x, y) : mandelbro(f, x, y);
+			!ft_strcmp(f->title, "Julia") ? julia(f, x, y) : 0;
+			!ft_strcmp(f->title, "Mandelbrot") ? mandelbro(f, x, y) : 0;
+			!ft_strcmp(f->title, "Sheep") ? burning_sheep(f, x, y) : 0;
 			i = -1;
 			while (ft_pow(f->n_r, 2) + ft_pow(f->n_i, 2) < 4 && ++i < f->max_i)
 			{
@@ -48,7 +58,8 @@ static void	make_mandeljulia(t_fctl *f)
 				f->s_i = f->n_i;
 				f->n_r = ft_pow(f->s_r, 2) - ft_pow(f->s_i, 2)
 					+ f->real_unit;
-				f->n_i = 2 * f->s_r * f->s_i + f->im_unit;
+				f->n_i = f->im_unit + 2 * (!ft_strcmp(f->title,
+					"Sheep") ? ft_abs(f->s_r * f->s_i) : f->s_r * f->s_i);
 			}
 			put_pix_img(f, x, y, ((50 * i % 256) << 16) |
 					((80 * i % 256) << 8) | (120 * i % 256));
@@ -56,24 +67,11 @@ static void	make_mandeljulia(t_fctl *f)
 	}
 }
 
-void		*mandeljulia(void *div)
+void		*fractol(void *div)
 {
 	t_fctl	*fctl;
 
 	fctl = (t_fctl *)div;
-	make_mandeljulia(fctl);
+	make_fractol(fctl);
 	return (div);
-}
-
-void		make_julia_default(t_fctl *fractol)
-{
-	fractol->n_r = 0.0;
-	fractol->n_i = 0.0;
-	fractol->max_i = 150;
-	fractol->zoom = 0.75;
-	fractol->move_x = 0;
-	fractol->move_y = 0;
-	fractol->real_unit_change = 0;
-	fractol->im_unit_change = 0;
-	fractol->change_color = 0;
 }

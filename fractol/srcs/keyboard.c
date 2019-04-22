@@ -6,7 +6,7 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 16:17:42 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/21 19:25:02 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/22 14:08:22 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,24 @@ int				change_iterations(int key, t_fctl *fctl)
 	return (0);
 }
 
+int			color_schema(t_fctl *f, int i)
+{
+	if (f->change_color == 1)
+		return (((50 * i % 256) << 16) | ((80 * i % 256) << 8) |
+				(120 * i % 256));
+	else if (f->change_color == 0)
+		return (i * 256);
+	else
+		return (0);
+}
+
 int				keyboard(int key, t_fctl *param)
 {
 	if (key == 126 || key == 125 || key == 124 || key == 123)
 		move_figure(key, param);
 	if (key == 36)
 	{
-		make_julia_default(param);
+		make_fractol_default(param);
 		redraw_img(param);
 	}
 	if (key == 116 || key == 121)

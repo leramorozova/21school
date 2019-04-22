@@ -6,7 +6,7 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 13:34:32 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/21 19:23:40 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/22 14:02:18 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define FRACTOL_H
 # define WIN_W 800
 # define WIN_H 600
-# define THREADS_Q 120
+# define THREADS_Q 100
 
 # include "mlx.h"
 # include "libft/libft.h"
@@ -64,11 +64,10 @@ void				make_threads(t_fctl *fctl, t_thread thread,
 												void *func(void *));
 int					mouse_press(int button, int x, int y, t_fctl *param);
 int					mouse_move(int x, int y, t_fctl *param);
-void				*mandeljulia(void *div);
+void				*fractol(void *div);
 void				redraw_img(t_fctl *fctl);
-void				make_julia_default(t_fctl *fractol);
+void				make_fractol_default(t_fctl *fractol);
 void				*mandelbrot(void *div);
-void				make_mandelbrot(t_fctl *f);
 void				make_burning_ship(t_fctl *f);
 
 
