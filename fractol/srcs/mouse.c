@@ -6,7 +6,7 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/20 09:25:48 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/21 19:06:52 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/22 15:46:12 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void		zoom(int key, int x, int y, t_fctl *param)
 	}
 }
 
-int		mouse_press(int key, int x, int y, t_fctl *param)
+int				mouse_press(int key, int x, int y, t_fctl *param)
 {
 	if (key == 4 || key == 5)
 		zoom(key, x, y, param);
@@ -37,7 +37,7 @@ int		mouse_press(int key, int x, int y, t_fctl *param)
 	return (0);
 }
 
-int		mouse_move(int x, int y, t_fctl *param)
+int				mouse_move(int x, int y, t_fctl *param)
 {
 	double	x_copy;
 	double	y_copy;

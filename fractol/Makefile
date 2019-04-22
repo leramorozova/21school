@@ -6,7 +6,7 @@
 #    By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/07 14:53:13 by sdurgan           #+#    #+#              #
-#    Updated: 2019/04/18 13:32:35 by sdurgan          ###   ########.fr        #
+#    Updated: 2019/04/22 15:34:24 by sdurgan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ LFTFLAGS = -lft
 LMATHFLAG = -lmath
 MLXFLAGS = -lmlx -framework OpenGL -framework AppKit
 MLXDIR = /minilibx_macos
-GCC = gcc -std=c99 -lpthread #-Wall -Werror -Wextra 
+GCC = gcc -std=c99 -lpthread -Wall -Werror -Wextra 
 
 all: $(NAME)
 

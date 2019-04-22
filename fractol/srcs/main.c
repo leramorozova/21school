@@ -6,7 +6,7 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 13:43:28 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/22 14:27:02 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/22 15:40:52 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void		make_fractol_default(t_fctl *fractol)
 {
 	fractol->n_r = 0.0;
 	fractol->n_i = 0.0;
-	fractol->max_i = 150;
+	fractol->max_i = 100;
 	fractol->zoom = 0.75;
 	fractol->move_x = 0;
 	fractol->move_y = 0;

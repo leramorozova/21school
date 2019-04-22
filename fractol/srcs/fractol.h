@@ -6,7 +6,7 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 13:34:32 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/22 14:26:01 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/22 15:45:02 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ typedef struct		s_thread
 	pthread_t		id[THREADS_Q];
 }					t_thread;
 
-
 int					get_color(int red, int green, int blue);
 int					draw_img(t_fctl *frac);
 int					put_pix_img(t_fctl *fractol, double x, double y, int color);
@@ -68,6 +67,5 @@ void				*fractol(void *div);
 void				redraw_img(t_fctl *fctl);
 void				make_fractol_default(t_fctl *fractol);
 int					color_schema(t_fctl *f, int i);
-
 
 #endif

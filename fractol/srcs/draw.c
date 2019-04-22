@@ -6,7 +6,7 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:10:35 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/22 13:51:08 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/22 15:46:30 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,17 @@ int			draw_img(t_fctl *frac)
 {
 	int		x;
 	int		y;
+	char	*iterations;
 
 	x = -1;
 	y = -1;
 	mlx_put_image_to_window(frac->mlx_init, frac->win, frac->img, 0, 0);
 	mlx_string_put(frac->mlx_init, frac->win, 5, 1, 0xFFFFFF,
-		"Clear: enter\n");
-	mlx_string_put(frac->mlx_init, frac->win, 5, 18, 0xFFFFFF,
-		"Fix: left mouse\n");
-	mlx_string_put(frac->mlx_init, frac->win, 5, 35, 0xFFFFFF,
 		"Iterations:\n");
-	mlx_string_put(frac->mlx_init, frac->win, 125, 35, 0xFFFFFF,
-		ft_itoa(frac->max_i));
+	iterations = ft_gititoa(frac->max_i);
+	mlx_string_put(frac->mlx_init, frac->win, 125, 1, 0xFFFFFF,
+		iterations);
+	ft_strdel(&iterations);
 	return (0);
 }
 
