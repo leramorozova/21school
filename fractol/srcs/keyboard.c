@@ -6,7 +6,7 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 16:17:42 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/22 14:08:22 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/22 14:32:15 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,15 @@ int				change_iterations(int key, t_fctl *fctl)
 	return (0);
 }
 
-int			color_schema(t_fctl *f, int i)
+int				color_schema(t_fctl *f, int i)
 {
-	if (f->change_color == 1)
+	if (f->change_color == 0)
 		return (((50 * i % 256) << 16) | ((80 * i % 256) << 8) |
 				(120 * i % 256));
-	else if (f->change_color == 0)
+	else if (f->change_color == 1)
 		return (i * 256);
+	else if (f->change_color == 2)
+		return (i * 265);
 	else
 		return (0);
 }
@@ -59,5 +61,15 @@ int				keyboard(int key, t_fctl *param)
 	}
 	if (key == 116 || key == 121)
 		change_iterations(key, param);
+	if (key == 18)
+	{
+		param->change_color = 0;
+		redraw_img(param);
+	}
+	if (key == 19 || key == 18 || key == 20)
+	{
+		param->change_color = key - 18;
+		redraw_img(param);
+	}
 	return (0);
 }

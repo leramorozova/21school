@@ -6,7 +6,7 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 13:34:32 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/22 14:02:18 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/22 14:26:01 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,7 @@ int					mouse_move(int x, int y, t_fctl *param);
 void				*fractol(void *div);
 void				redraw_img(t_fctl *fctl);
 void				make_fractol_default(t_fctl *fractol);
-void				*mandelbrot(void *div);
-void				make_burning_ship(t_fctl *f);
+int					color_schema(t_fctl *f, int i);
 
 
 #endif
