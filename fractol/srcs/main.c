@@ -6,7 +6,7 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 13:43:28 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/22 15:40:52 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/22 17:35:39 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void		make_fractol_default(t_fctl *fractol)
 	fractol->real_unit_change = 0;
 	fractol->im_unit_change = 0;
 	fractol->change_color = 0;
+	fractol->mid_x = WIN_W / 2;
+	fractol->mid_y = WIN_H / 2;
 }
 
 void		init_mlx(t_fctl *fractol, char *name)
@@ -58,7 +60,7 @@ int			main(int argc, char **argv)
 		init_mlx(&f, argv[1]);
 		thread = init_thread();
 		if (!ft_strcmp(argv[1], "Julia") || !ft_strcmp(argv[1], "Mandelbrot")
-					|| !ft_strcmp(argv[1], "Sheep"))
+					|| !ft_strcmp(argv[1], "Ship"))
 			make_threads(&f, thread, fractol);
 		else
 			exit(ft_putstr("Invalid fractol name!\n"));

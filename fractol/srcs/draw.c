@@ -6,7 +6,7 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:10:35 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/22 15:46:30 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/22 17:46:59 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,15 @@ int			put_pix_img(t_fctl *fractol, double x, double y, int color)
 void		redraw_img(t_fctl *fctl)
 {
 	t_thread	thread;
+	int			size_line;
+	int			end;
+	int			bits_per_pixel;
 
 	thread = init_thread();
 	mlx_destroy_image(fctl->mlx_init, fctl->img);
 	fctl->img = mlx_new_image(fctl->mlx_init, WIN_W, WIN_H);
+	fctl->int_img = (unsigned int *)mlx_get_data_addr(fctl->img,
+					&bits_per_pixel, &size_line, &end);
 	make_threads(fctl, thread, fractol);
 	draw_img(fctl);
 }
@@ -41,7 +46,7 @@ int			draw_img(t_fctl *frac)
 	mlx_put_image_to_window(frac->mlx_init, frac->win, frac->img, 0, 0);
 	mlx_string_put(frac->mlx_init, frac->win, 5, 1, 0xFFFFFF,
 		"Iterations:\n");
-	iterations = ft_gititoa(frac->max_i);
+	iterations = ft_itoa(frac->max_i);
 	mlx_string_put(frac->mlx_init, frac->win, 125, 1, 0xFFFFFF,
 		iterations);
 	ft_strdel(&iterations);

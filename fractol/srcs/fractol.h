@@ -6,7 +6,7 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 13:34:32 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/22 15:45:02 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/22 17:35:30 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ typedef struct		s_fctl
 	int				thread_end;
 	int				fix_mouse;
 	int				change_color;
+	int				mid_x;
+	int				mid_y;
 }					t_fctl;
 
 typedef struct		s_thread

@@ -6,7 +6,7 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 16:17:42 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/22 15:36:14 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/22 17:08:40 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ static void		move_figure(int key, t_fctl *fctl)
 
 int				change_iterations(int key, t_fctl *fctl)
 {
-	if (fctl->max_i >= 100)
+	if (fctl->max_i >= 11)
 	{
 		fctl->max_i += key == 116 ? 10 : -10;
 		redraw_img(fctl);
 	}
-	else if (fctl->max_i <= 100 && key == 116)
+	else if (fctl->max_i <= 50 && key == 116)
 		fctl->max_i += 10;
 	return (0);
 }
@@ -46,6 +46,10 @@ int				color_schema(t_fctl *f, int i)
 		return (i * 256);
 	else if (f->change_color == 2)
 		return (i * 265);
+	else if (f->change_color == 3)
+		return (((unsigned int)((sin(0.3 * (double)i))) << 16) |
+			((unsigned int)(sin(0.3 * (double)i + 3) * 127 + 128) << 8) |
+			((unsigned int)(sin(0.3 * (double)i + 3) * 127 + 128)));
 	else
 		return (0);
 }
@@ -66,7 +70,7 @@ int				keyboard(int key, t_fctl *param)
 		param->change_color = 0;
 		redraw_img(param);
 	}
-	if (key == 19 || key == 18 || key == 20)
+	if (key == 19 || key == 18 || key == 20 || key == 21)
 	{
 		param->change_color = key - 18;
 		redraw_img(param);
