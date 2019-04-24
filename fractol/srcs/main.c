@@ -6,7 +6,7 @@
 /*   By: sdurgan <sdurgan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 13:43:28 by sdurgan           #+#    #+#             */
-/*   Updated: 2019/04/22 17:35:39 by sdurgan          ###   ########.fr       */
+/*   Updated: 2019/04/24 15:15:59 by sdurgan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ void		make_fractol_default(t_fctl *fractol)
 	fractol->real_unit_change = 0;
 	fractol->im_unit_change = 0;
 	fractol->change_color = 0;
-	fractol->mid_x = WIN_W / 2;
-	fractol->mid_y = WIN_H / 2;
 }
 
 void		init_mlx(t_fctl *fractol, char *name)
@@ -72,5 +70,5 @@ int			main(int argc, char **argv)
 		mlx_loop(f.mlx_init);
 	}
 	else
-		return (write(1, "Usage: ./fractol fractol_name (e.g Julia)\n", 42));
+		return (write(1, "Usage: ./fractol [Julia|Mandelbrot|Ship]\n", 41));
 }
