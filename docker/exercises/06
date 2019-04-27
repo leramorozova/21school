@@ -1,0 +1,5 @@
+docker pull nginx
+docker run --name overlord -p 80:5000 nginx
+#to see - docker ps -a
+#to remone sudo docker rm overlord
+#to stop docker stop overlord
