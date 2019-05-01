@@ -1,1 +1,1 @@
-docker-machine env Char | grep "HOST"
+docker-machine ip

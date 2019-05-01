@@ -1,5 +1,6 @@
 docker pull nginx
-docker run --name overlord -p 80:5000 nginx
+docker run --name overlord -p 5000:80 nginx
+# to connect http://192.168.99.100:5000/
 #to see - docker ps -a
 #to remone sudo docker rm overlord
 #to stop docker stop overlord
