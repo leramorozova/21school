@@ -1,0 +1,30 @@
+make  all-recursive
+make[1]: вход в каталог «/home/valeria/git_projects/21school/docker/01_dockerfiles/ex02/app/vendor/bundle/ruby/2.5.0/gems/nokogiri-1.10.3/ext/nokogiri/tmp/x86_64-pc-linux-gnu/ports/libxml2/2.9.9/libxml2-2.9.9»
+Making all in include
+make[2]: вход в каталог «/home/valeria/git_projects/21school/docker/01_dockerfiles/ex02/app/vendor/bundle/ruby/2.5.0/gems/nokogiri-1.10.3/ext/nokogiri/tmp/x86_64-pc-linux-gnu/ports/libxml2/2.9.9/libxml2-2.9.9/include»
+Making all in libxml
+make[3]: вход в каталог «/home/valeria/git_projects/21school/docker/01_dockerfiles/ex02/app/vendor/bundle/ruby/2.5.0/gems/nokogiri-1.10.3/ext/nokogiri/tmp/x86_64-pc-linux-gnu/ports/libxml2/2.9.9/libxml2-2.9.9/include/libxml»
+make[3]: Цель «all» не требует выполнения команд.
+make[3]: выход из каталога «/home/valeria/git_projects/21school/docker/01_dockerfiles/ex02/app/vendor/bundle/ruby/2.5.0/gems/nokogiri-1.10.3/ext/nokogiri/tmp/x86_64-pc-linux-gnu/ports/libxml2/2.9.9/libxml2-2.9.9/include/libxml»
+make[3]: вход в каталог «/home/valeria/git_projects/21school/docker/01_dockerfiles/ex02/app/vendor/bundle/ruby/2.5.0/gems/nokogiri-1.10.3/ext/nokogiri/tmp/x86_64-pc-linux-gnu/ports/libxml2/2.9.9/libxml2-2.9.9/include»
+make[3]: Цель «all-am» не требует выполнения команд.
+make[3]: выход из каталога «/home/valeria/git_projects/21school/docker/01_dockerfiles/ex02/app/vendor/bundle/ruby/2.5.0/gems/nokogiri-1.10.3/ext/nokogiri/tmp/x86_64-pc-linux-gnu/ports/libxml2/2.9.9/libxml2-2.9.9/include»
+make[2]: выход из каталога «/home/valeria/git_projects/21school/docker/01_dockerfiles/ex02/app/vendor/bundle/ruby/2.5.0/gems/nokogiri-1.10.3/ext/nokogiri/tmp/x86_64-pc-linux-gnu/ports/libxml2/2.9.9/libxml2-2.9.9/include»
+Making all in .
+make[2]: вход в каталог «/home/valeria/git_projects/21school/docker/01_dockerfiles/ex02/app/vendor/bundle/ruby/2.5.0/gems/nokogiri-1.10.3/ext/nokogiri/tmp/x86_64-pc-linux-gnu/ports/libxml2/2.9.9/libxml2-2.9.9»
+  CC       SAX.lo
+  CC       entities.lo
+entities.c: In function ‘xmlEncodeEntitiesInternal’:
+entities.c:561:68: warning: unused parameter ‘attr’ [-Wunused-parameter]
+ xmlEncodeEntitiesInternal(xmlDocPtr doc, const xmlChar *input, int attr) {
+                                                                    ^~~~
+  CC       encoding.lo
+  CC       error.lo
+  CC       parserInternals.lo
+  CC       parser.lo
+Makefile:1250: recipe for target 'parser.lo' failed
+make[2]: *** [parser.lo] Error 1
+Makefile:1442: recipe for target 'all-recursive' failed
+make[1]: *** [all-recursive] Прерывание
+Makefile:861: recipe for target 'all' failed
+make: *** [all] Прерывание
