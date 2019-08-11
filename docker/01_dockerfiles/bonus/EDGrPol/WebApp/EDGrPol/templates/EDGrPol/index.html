@@ -1,0 +1,98 @@
+{% extends 'EDGrPol/base.html' %}
+
+{% block content %}
+<br>
+      <center><h2 class="mt-5">Электронный словарь грецизмов и полонизмов XI-XVII вв.</h2></center>
+	<br>
+	<div class="btn-toolbar mb-2 mb-md-0 justify-content-center">
+		<div class="btn-group mr-2 justify-content-center">
+			<button type="button" class="btn btn-sm btn-outline-secondary" onClick='location.href="alphabet?letter=а"'>А</button>
+			<button type="button" class="btn btn-sm btn-outline-secondary" onClick='location.href="alphabet?letter=б"'>Б</button>
+			<button type="button" class="btn btn-sm btn-outline-secondary" onClick='location.href="alphabet?letter=в"'>В</button>
+			<button type="button" class="btn btn-sm btn-outline-secondary" onClick='location.href="alphabet?letter=г"'>Г</button>
+			<button type="button" class="btn btn-sm btn-outline-secondary" onClick='location.href="alphabet?letter=д"'>Д</button>
+			<button type="button" class="btn btn-sm btn-outline-secondary" onClick='location.href="alphabet?letter=е"'>Е</button>
+			<button type="button" class="btn btn-sm btn-outline-secondary" onClick='location.href="alphabet?letter=ѣ"'>Ѣ</button>
+			<button type="button" class="btn btn-sm btn-outline-secondary" onClick='location.href="alphabet?letter=ж"'>Ж</button>
+			<button type="button" class="btn btn-sm btn-outline-secondary" onClick='location.href="alphabet?letter=з"'>З</button>
+			<button type="button" class="btn btn-sm btn-outline-secondary" onClick='location.href="alphabet?letter=и"'>И</button>
+			<button type="button" class="btn btn-sm btn-outline-secondary" onClick='location.href="alphabet?letter=й"'>Й</button>
+			<button type="button" class="btn btn-sm btn-outline-secondary" onClick='location.href="alphabet?letter=к"'>К</button>
+			<button type="button" class="btn btn-sm btn-outline-secondary" onClick='location.href="alphabet?letter=л"'>Л</button>
+			<button type="button" class="btn btn-sm btn-outline-secondary" onClick='location.href="alphabet?letter=м"'>М</button>
+			<button type="button" class="btn btn-sm btn-outline-secondary" onClick='location.href="alphabet?letter=н"'>Н</button>
+			<button type="button" class="btn btn-sm btn-outline-secondary" onClick='location.href="alphabet?letter=о"'>О</button>
+			<button type="button" class="btn btn-sm btn-outline-secondary" onClick='location.href="alphabet?letter=п"'>П</button>
+			<button type="button" class="btn btn-sm btn-outline-secondary" onClick='location.href="alphabet?letter=р"'>Р</button>
+			<button type="button" class="btn btn-sm btn-outline-secondary" onClick='location.href="alphabet?letter=с"'>С</button>
+			<button type="button" class="btn btn-sm btn-outline-secondary" onClick='location.href="alphabet?letter=т"'>Т</button>
+			<button type="button" class="btn btn-sm btn-outline-secondary" onClick='location.href="alphabet?letter=у"'>У</button>
+			<button type="button" class="btn btn-sm btn-outline-secondary" onClick='location.href="alphabet?letter=ѫ"'>Ѫ</button>
+			<button type="button" class="btn btn-sm btn-outline-secondary" onClick='location.href="alphabet?letter=ф"'>Ф</button>
+			<button type="button" class="btn btn-sm btn-outline-secondary" onClick='location.href="alphabet?letter=ѳ"'>Ѳ</button>
+			<button type="button" class="btn btn-sm btn-outline-secondary" onClick='location.href="alphabet?letter=ѵ"'>Ѵ</button>
+			<button type="button" class="btn btn-sm btn-outline-secondary" onClick='location.href="alphabet?letter=х"'>Х</button>
+			<button type="button" class="btn btn-sm btn-outline-secondary" onClick='location.href="alphabet?letter=ц"'>Ц</button>
+			<button type="button" class="btn btn-sm btn-outline-secondary" onClick='location.href="alphabet?letter=ч"'>Ч</button>
+			<button type="button" class="btn btn-sm btn-outline-secondary" onClick='location.href="alphabet?letter=ш"'>Ш</button>
+			<button type="button" class="btn btn-sm btn-outline-secondary" onClick='location.href="alphabet?letter=щ"'>Щ</button>
+			<button type="button" class="btn btn-sm btn-outline-secondary" onClick='location.href="alphabet?letter=э"'>Э</button>
+			<button type="button" class="btn btn-sm btn-outline-secondary" onClick='location.href="alphabet?letter=ю"'>Ю</button>
+			<button type="button" class="btn btn-sm btn-outline-secondary" onClick='location.href="alphabet?letter=ѭ"'>Ѭ</button>
+			<button type="button" class="btn btn-sm btn-outline-secondary" onClick='location.href="alphabet?letter=я"'>Я</button>
+			<button type="button" class="btn btn-sm btn-outline-secondary" onClick='location.href="alphabet?letter=ꙗ"'>Ꙗ</button>			<button type="button" class="btn btn-sm btn-outline-secondary" onClick='location.href="alphabet?letter=ѩ"'>Ѩ</button>
+		</div>
+        </div>
+<br>
+<br>
+	<form action="/search_result" method="get" required>
+	<div class="tabs">
+    	<input id="lemma" type="radio" name="tabs" value="lemma" checked>
+    	<label for="lemma" title="Поиск по лемме">Лемма</label>
+ 
+    	<input id="cit" type="radio" name="tabs" value="cit">
+    	<label for="cit" title="Поиск по цитате">Цитата</label>
+ 
+    	<input id="date" type="radio" name="tabs" value="date">
+    	<label for="date" title="Поиск по дате">Дата</label>
+ 
+    	<input id="source" type="radio" name="tabs" value="source">
+    	<label for="source" title="Поиск по источнику">Источник</label>
+ 
+    	<section id="content-lemma">
+        <p>
+		<small class="text-muted">Поиск словарной статьи по лемме или ее фонетическому и морфологическому варианту.</small>
+        </p>
+    	</section>  
+    	<section id="content-cit">
+        <p>
+		<small class="text-muted">Поиск соответствий в цитатах, включенных в словарные статьи.</small>
+        </p>
+    	</section> 
+    	<section id="content-date">
+        <p>
+		<small class="text-muted">Поиск соответствий по датам, упомянутым в словарных статьях.</small>
+	</p>
+    	</section> 
+    	<section id="content-source">
+        <p>
+		<small class="text-muted">Поиск информации по источникам, упомянутым с ловарных статьях.</small>
+        </p>
+    	</section>    
+</div>
+  	<div class="form-group">
+    	<input type="text" name="lemma" class="form-control" placeholder="Введите слово...">
+  	</div>
+	<br>
+      	<center><button class="btn btn-lg btn-primary b1" type="submit">Поиск</button></center>
+	</form>
+	
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+{% endblock %}
