@@ -5,4 +5,4 @@ COPY EDGrPol /opt/EDGrPol
 WORKDIR /opt/EDGrPol
 RUN pip3 install --upgrade pip
 RUN pip3 install -r requirements.txt
-CMD python3 /opt/EDGrPol/WebApp/manage.py runserver
+CMD python3 /opt/EDGrPol/WebApp/manage.py runserver 0.0.0.0:8000
