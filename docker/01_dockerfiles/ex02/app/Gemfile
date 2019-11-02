@@ -25,7 +25,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'acts-as-taggable-on', '~> 3.5.0'
 gem 'acts_as_follower', '~> 0.2.1'
-gem 'devise', '~> 4.2.0'
+gem 'devise', '~> 4.7.1'
 gem 'jwt', '~> 1.5.4'
 gem 'rack-cors', '~> 0.4.0'
 gem 'puma'
